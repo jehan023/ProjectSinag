@@ -2,4 +2,4 @@ test commit by jehan.
 hello world.
 test
 test ulit ako ng merging
-test 12345
+>>>>>>>>> Temporary merge branch 2
