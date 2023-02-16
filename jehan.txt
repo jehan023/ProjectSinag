@@ -4,4 +4,3 @@ test
 test ulit ako ng merging
 test 12345678910
 test ako commit 1234
-add ako
