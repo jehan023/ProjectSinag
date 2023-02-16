@@ -1,0 +1,110 @@
+* {
+  box-sizing: border-box;
+}
+.App {
+  background-color: #f8f8f8;
+  position: relative;
+  height: 100vh;
+}
+
+.hidden {
+  display: none !important;
+}
+
+
+.top-navbar {
+  background-color: #0f1b2a;
+  height: 80px;
+  width: 100%;
+  padding: 10px 50px 0px 50px;
+  justify-content: space-between;
+  color: #faf8f5;
+  position: fixed;
+  top: 0;
+  //z-index: 10;
+  align-items: center;
+  .link-btn {
+    border: none;
+    margin-right: 15px;
+    color: #faf8f5;
+    background-color: #0f1b2a;
+    font-family: "Gotham Medium";
+  }
+  .link-active {
+    color: #f5cf45;
+    //border-bottom: 3px solid #ff9c07;
+    font-family: "Gotham Medium";
+    font-weight: bold;
+  }
+
+  .hamburger-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    //height: 21px;
+  }
+
+  .hamburger-button .hamburger {
+    height: 5px;
+    width: 100%;
+    background-color: #faf8f5;
+    border-radius: 10px;
+  }
+
+  .hamburger-button .hamburger:nth-child(2) {
+    margin: 5px 0px;
+  }
+
+  .nav-close {
+    color: #faf8f5;
+    width: 30px;
+    //height: 21px;
+    font-size: 25px;
+  }
+}
+
+.bottom-navbar {
+  background-color: #0f1b2a;
+  height: auto;
+  width: 100%;
+  padding: 0px 50px 10px 50px;
+  justify-content: space-between;
+  margin-top: 80px;
+  color: #faf8f5;
+  position: fixed;
+  top: 0;
+  //z-index: 10;
+  align-items: center;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+
+  .nav-section {
+    color: #f5cf45;
+    font-family: "Gotham Medium";
+    font-weight: bold;
+  }
+  .link-btn {
+    border: none;
+    margin-right: 15px;
+    color: #faf8f5;
+    background-color: #0f1b2a;
+    font-family: "Gotham Medium";
+  }
+  .link-active {
+    color: #f5cf45;
+    //border-bottom: 3px solid #f5cf45;
+    font-family: "Gotham Medium";
+    font-weight: bold;
+  }
+}
+
+.content-container {
+  //background-color: #F8F8F8;
+  padding-top: 200px;
+  padding-left: 50px;
+  padding-right: 50px;
+}
