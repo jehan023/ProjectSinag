@@ -2,9 +2,9 @@
   box-sizing: border-box;
 }
 .App {
-  background-color: #f8f8f8;
+  background-color: #eaeaea;
   position: relative;
-  height: 100vh;
+  height: 100%;
 }
 
 .hidden {
@@ -103,8 +103,97 @@
 }
 
 .content-container {
-  //background-color: #F8F8F8;
-  padding-top: 200px;
-  padding-left: 50px;
-  padding-right: 50px;
+  //border: 5px solid red;
+  padding: 180px 50px 30px 50px;
+}
+
+////////////////////////////////////////// OVERVIEW ////////////////////
+.overview-container {
+  .sl-overview {
+    width: 60%;
+    padding-right: 100px;
+    .sl-overview-card {
+      background-color: #f5cf45;
+      padding: 30px;
+      border-radius: 20px;
+      width: 100%;
+      height: auto;
+      text-align: center;
+
+      .overview-icon {
+        font-size: 100px;
+      }
+    }
+    .temp-time {
+      //border: 1px solid blue;
+      background-color: #f8f8f8;
+      border-radius: 20px;
+      
+      .tt-item {
+        text-align: center;
+        //border: 1px dashed red;
+        width: 100%;
+      }
+    }
+    
+  }
+  .sl-devices {
+    width: 40%;
+    background-color: #f8f8f8;
+    border-radius: 20px;
+    height: max-content;
+
+    .energy-balance-chart {
+      background-color: #eaeaea;
+      height: 150px;
+    }
+    .sl-status {
+      background-color: #27b376;
+      height: 20px;
+      width: 20px;
+      border-radius: 20px;
+      color: transparent;
+    }
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+  }
+
+  p {
+    color:#0f1b2a;
+    margin: 0;
+  }
+}
+
+.sl-dropdown {
+  border: none;
+  background-color: inherit;
+  font-size: 1.5em;
+  font-family: "Gotham Bold";
+  color:#f8f8f8
+}
+.dropdown-options {
+  color: #0f1b2a;
+  padding: 5px;
+}
+
+
+////////////////////////////////////////// PROFILE ////////////////////
+.profile-container {
+  height: 100vh;
+  .profile-card {
+    background-color: #f8f8f8;
+    width: 50%;
+    border-radius: 20px;
+
+    .line-break {
+      border-bottom: 2px solid #0f1b2a;
+    }
+    p {
+      color:#0f1b2a;
+      margin-bottom: 5px;
+      font-size: 1em;
+    }
+  }
 }
