@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './App.scss';
-import NavBar from './components/navbar';
 import Logo from './images/Sinag-Logo.png';
 import Clock from 'react-live-clock';
 import Overview from './components/overview.js';
@@ -32,7 +31,33 @@ function App() {
   }, [page]);
 
   const [isActive, setIsActive] = useState(false);
-  const [isDashActive, setIsDashActive] = useState(false);
+
+  const options = [
+    {
+      list: 'SL1', value: 'SL1', label: 'Streetlight 1', location: 'Narra St., Brgy BF International Village, Las Piñas City | 1740',
+      battCapacity: '20Ah', pvPanel: '65Watts', lamp: '100Watts', status: 'Active'
+    },
+    {
+      list: 'SL2', value: 'SL2', label: 'Streetlight 2', location: 'Narra St., Brgy BF International Village, Las Piñas City | 1740',
+      battCapacity: '30Ah', pvPanel: '65Watts', lamp: '120Watts', status: 'Inactive'
+    },
+    {
+      list: 'SL3', value: 'SL3', label: 'Streetlight 3', location: 'Patola St., Brgy BF International Village, Las Piñas City | 1740',
+      battCapacity: '36Ah', pvPanel: '80Watts', lamp: '150Watts', status: 'Active'
+    },
+  ];
+
+  const [selectedValue, setSelectedValue] = useState(options[0].value);
+
+  const getObjectByValue = (value) => {
+    return options.find((obj) => obj.value === value);
+  };
+
+  const streetlight = getObjectByValue(selectedValue);
+
+  const handleChange = (event) => {
+    setSelectedValue(event.target.value);
+  };
 
 
   return (
@@ -53,18 +78,32 @@ function App() {
         </div>
 
         <div className='bottom-navbar'>
-          <h4 className='nav-section'>{page}</h4>
+          <div className='d-flex align-items-center gap-2 mb-2'>
+            <h4 className='nav-section my-0'>{page}</h4>
+
+            <div className={page === 'Dashboard' ? 'd-flex align-items-center gap-2' : 'hidden'}>
+              <h4 className='my-0'> | </h4>
+              <select className='sl-dropdown' value={selectedValue} onChange={handleChange}>
+                {options.map((option) => (
+                  <option className='dropdown-options' key={option.value} value={option.value}>
+                    {option.list}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
           <div className='d-flex justify-content-between'>
             <div className={page === 'Dashboard' ? 'links-nav-container d-flex' : 'links-nav-container d-flex invisible'}>
-              <button className={dashboard === 'overview' ? 'link-btn link-active' : 'link-btn'} onClick={() => { setDashboard('overview'); setIsDashActive(false) }}>Overview</button>
-              <button className={dashboard === 'profile' ? 'link-btn link-active' : 'link-btn'} onClick={() => { setDashboard('profile'); setIsDashActive(false) }}>Profile</button>
-              <button className={dashboard === 'status' ? 'link-btn link-active' : 'link-btn'} onClick={() => { setDashboard('status'); setIsDashActive(false) }}>Status</button>
-              <button className={dashboard === 'analysis' ? 'link-btn link-active' : 'link-btn'} onClick={() => { setDashboard('analysis'); setIsDashActive(false) }}>Analysis</button>
+              <button className={dashboard === 'overview' ? 'link-btn link-active' : 'link-btn'} onClick={() => { setDashboard('overview') }}>Overview</button>
+              <button className={dashboard === 'profile' ? 'link-btn link-active' : 'link-btn'} onClick={() => { setDashboard('profile') }}>Profile</button>
+              <button className={dashboard === 'status' ? 'link-btn link-active' : 'link-btn'} onClick={() => { setDashboard('status') }}>Status</button>
+              <button className={dashboard === 'analysis' ? 'link-btn link-active' : 'link-btn'} onClick={() => { setDashboard('analysis') }}>Analysis</button>
 
             </div>
             <Clock
               className='clock-text'
-              ticking={true} timezone={'PH/Pacific'}
+              ticking={true} timezone={'Asia/Manila'}
               format={'h:mm:ss A | MMM DD YYYY'} />
           </div>
         </div>
@@ -73,13 +112,13 @@ function App() {
           {(() => {
             switch (dashboard) {
               case 'overview':
-                return <Overview />
+                return <Overview selectedSL={streetlight} />
               case 'profile':
-                return <Profile />
+                return <Profile selectedSL={streetlight} />
               case 'status':
-                return <Status />
+                return <Status selectedSL={streetlight} />
               case 'analysis':
-                return <Analysis />
+                return <Analysis selectedSL={streetlight} />
               default:
                 return <Overview />
             }

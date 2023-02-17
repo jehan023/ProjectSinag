@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react';
 
 function Status() {
   return (
     <div className='status-container'>
-        <h1>STATUS</h1>
+      <div className='d-flex align-items-center my-0'>
+        <h3 className='my-0'>System Status</h3>
+      
+      </div>
     </div>
   )
 }
