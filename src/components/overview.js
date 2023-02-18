@@ -7,18 +7,14 @@ import { ImPower } from "react-icons/im";
 import { TbBulb } from "react-icons/tb";
 
 
-function Overview() {
+function Overview(props) {
+  const streetlight = props.selectedSL;
   const devices = [
     { list: 'SL1', value: 'SL1', label: 'Streetlight 1' },
     { list: 'SL2', value: 'SL2', label: 'Streetlight 2' },
     { list: 'SL3', value: 'SL3', label: 'Streetlight 3' },
   ];
 
-  const [selectedValue, setSelectedValue] = useState(devices[0].value);
-
-  const handleChange = (event) => {
-    setSelectedValue(event.target.value);
-  };
   return (
     <div className='overview-container'>
       <div className='d-flex align-items-center my-0'>
@@ -51,14 +47,14 @@ function Overview() {
             <div className='sl-overview-card d-flex align-items-center'>
               <FaCarBattery className='overview-icon w-100' />
               <div className='w-100'>
-                <h2>24 Ah</h2>
+                <h2>{streetlight.battCapacity}</h2>
                 <p>Battery Capacity</p>
               </div>
             </div>
             <div className='sl-overview-card d-flex align-items-center'>
               <TbBulb className='overview-icon w-100' />
               <div className='w-100'>
-                <h2>100W</h2>
+                <h2>{streetlight.lamp}</h2>
                 <p>LED Lamp</p>
               </div>
             </div>
@@ -67,17 +63,17 @@ function Overview() {
           {/** Details for temp and time section*/}
           <div className='temp-time d-flex justify-content-between align-items-center p-3'>
             <div className='current-temp tt-item'>
-              <h1>26°C</h1>
+              <h2>26°C</h2>
               <h5>Cloudy</h5>
               <p>Temperature</p>
             </div>
             <div className='sunrise-time tt-item'>
-              <h1>6:25 AM</h1>
+              <h2>6:25 AM</h2>
               <h5>(GMT+8)</h5>
               <p>Sunrise</p>
             </div>
             <div className='sunset-time tt-item'>
-              <h1>5:53 PM</h1>
+              <h2>5:53 PM</h2>
               <h5>(GMT+8)</h5>
               <p>Sunset</p>
             </div>
@@ -91,7 +87,7 @@ function Overview() {
             <h2 className='mb-3'>Devices</h2>
             <div className='devices-list'>
               {devices.map((option) => (
-                <div className='d-flex align-items-center gap-2 mb-1'>
+                <div className='d-flex align-items-center gap-2 mb-1 mx-3'>
                   <div className='sl-status'> - </div>
                   <p>{option.label} ({option.list})</p>
                 </div>
@@ -106,7 +102,7 @@ function Overview() {
           </div>
           <div>
             <h2 className='my-3'>Location</h2>
-            <p>Narra St. and  Patola St., Brgy. BF International
+            <p className='mx-3'>Narra St. and  Patola St., Brgy. BF International
               Village, Las Piñas City | 1740</p>
           </div>
         </div>
