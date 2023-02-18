@@ -6,6 +6,8 @@ import Overview from './components/overview.js';
 import Profile from './components/profile.js';
 import Status from './components/status.js';
 import Analysis from './components/analysis.js';
+import Home from './components/home.js';
+import Reports from './components/reports.js';
 
 function App() {
   const [page, setPage] = useState(() => {
@@ -35,15 +37,15 @@ function App() {
   const options = [
     {
       list: 'SL1', value: 'SL1', label: 'Streetlight 1', location: 'Narra St., Brgy BF International Village, Las Piñas City | 1740',
-      battCapacity: '20Ah', pvPanel: '65Watts', lamp: '100Watts', status: 'Active'
+      battCapacity: '20Ah', pvPanel: '65W', lamp: '100W', status: 'Active'
     },
     {
       list: 'SL2', value: 'SL2', label: 'Streetlight 2', location: 'Narra St., Brgy BF International Village, Las Piñas City | 1740',
-      battCapacity: '30Ah', pvPanel: '65Watts', lamp: '120Watts', status: 'Inactive'
+      battCapacity: '30Ah', pvPanel: '65W', lamp: '120W', status: 'Inactive'
     },
     {
       list: 'SL3', value: 'SL3', label: 'Streetlight 3', location: 'Patola St., Brgy BF International Village, Las Piñas City | 1740',
-      battCapacity: '36Ah', pvPanel: '80Watts', lamp: '150Watts', status: 'Active'
+      battCapacity: '36Ah', pvPanel: '80W', lamp: '150W', status: 'Active'
     },
   ];
 
@@ -70,7 +72,7 @@ function App() {
           </div>
 
 
-          <div className={isActive ? 'links-nav-container d-flex' : 'links-nav-container d-flex hidden'}>
+          <div className='links-nav-container d-flex'>
             <button className={page === 'Home' ? 'link-btn link-active' : 'link-btn'} onClick={() => { setPage('Home'); setIsActive(false) }}>Home</button>
             <button className={page === 'Dashboard' ? 'link-btn link-active' : 'link-btn'} onClick={() => { setPage('Dashboard'); setIsActive(false) }}>Dashboard</button>
             <button className={page === 'Reports' ? 'link-btn link-active' : 'link-btn'} onClick={() => { setPage('Reports'); setIsActive(false) }}>Reports</button>
@@ -109,7 +111,7 @@ function App() {
         </div>
 
         <div className='content-container h-100'>
-          {(() => {
+          {page === 'Dashboard' ? (() => {
             switch (dashboard) {
               case 'overview':
                 return <Overview selectedSL={streetlight} />
@@ -120,9 +122,19 @@ function App() {
               case 'analysis':
                 return <Analysis selectedSL={streetlight} />
               default:
-                return <Overview />
+                return <Status selectedSL={streetlight} />
             }
-          })()}
+          })() :
+            (() => {
+              switch (page) {
+                case 'Home':
+                  return <Home />
+                case 'Reports':
+                  return <Reports />
+                default:
+                  return <Home />
+              }
+            })()}
         </div>
         <div className='footer-container'>
 

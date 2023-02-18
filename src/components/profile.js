@@ -30,7 +30,7 @@ function Profile(props) {
   };*/
   return (
     <div className='profile-container'>
-      <div className='d-flex align-items-center my-0'>
+      <div className='d-flex align-items-center justify-content-center my-0'>
         <h3 className='my-0'>System Profile</h3>
       </div>
 

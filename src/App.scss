@@ -1,16 +1,19 @@
 * {
   box-sizing: border-box;
 }
+::-webkit-scrollbar {display:none;}
+body {
+  background-color: #eaeaea !important;
+}
 .App {
   background-color: #eaeaea;
   position: relative;
-  height: 100%;
+  height: 100% !important;
 }
 
 .hidden {
   display: none !important;
 }
-
 
 .top-navbar {
   background-color: #0f1b2a;
@@ -109,6 +112,7 @@
 
 ////////////////////////////////////////// OVERVIEW ////////////////////
 .overview-container {
+  height: 100vh;
   .sl-overview {
     width: 60%;
     padding-right: 100px;
@@ -128,14 +132,13 @@
       //border: 1px solid blue;
       background-color: #f8f8f8;
       border-radius: 20px;
-      
+
       .tt-item {
         text-align: center;
         //border: 1px dashed red;
         width: 100%;
       }
     }
-    
   }
   .sl-devices {
     width: 40%;
@@ -147,41 +150,46 @@
       background-color: #eaeaea;
       height: 150px;
     }
-    .sl-status {
-      background-color: #27b376;
-      height: 20px;
-      width: 20px;
-      border-radius: 20px;
-      color: transparent;
-    }
   }
-  
-  h1, h2, h3, h4, h5, h6 {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     margin: 0;
   }
 
   p {
-    color:#0f1b2a;
+    color: #0f1b2a;
     margin: 0;
+    font-family: "Gotham Book";
   }
 }
 
+.sl-status {
+  background-color: #27b376;
+  height: 20px;
+  width: 20px;
+  border-radius: 20px;
+  color: transparent;
+}
 .sl-dropdown {
   border: none;
   background-color: inherit;
   font-size: 1.5em;
   font-family: "Gotham Bold";
-  color:#f8f8f8
+  color: #f8f8f8;
 }
 .dropdown-options {
   color: #0f1b2a;
   padding: 5px;
 }
 
-
 ////////////////////////////////////////// PROFILE ////////////////////
 .profile-container {
-  height: 100vh;
+  //height: 100vh;
   .profile-card {
     background-color: #f8f8f8;
     width: 50%;
@@ -191,9 +199,63 @@
       border-bottom: 2px solid #0f1b2a;
     }
     p {
-      color:#0f1b2a;
+      color: #0f1b2a;
       margin-bottom: 5px;
       font-size: 1em;
     }
+  }
+}
+
+////////////////////////////////////////// STATUS ////////////////////
+.status-container {
+  //height: 100vh !important;
+  overflow-y: hidden;
+  .status-card {
+    background-color: #f5cf45;
+    padding: 20px;
+    border-radius: 20px;
+    width: 100%;
+    //text-align: center;
+    height: 180px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .status-icon {
+    font-size: 60px;
+  }
+  .battery-card {
+    background-color: #27b376;
+  }
+  .lamp-card {
+    background-color: #BF212F;
+    color: #eaeaea;
+  }
+}
+
+////////////////////////////////////////// ANALYSIS ////////////////////
+.analysis-container {
+  height: 100vh;
+  .analysis-date-picker {
+    border: 1px solid red;  
+  }
+  .analysis-date-type {
+    border: 1px solid red;
+  }
+  .date-type-btn {
+    background-color: #0f1b2a;
+    color: #f5cf45;
+    border-radius: 20px;
+    text-align: center;
+    width: 130px;
+    font-family: "Gotham Bold";
+  }
+  .date-type-btn:hover {
+    background-color: #f5cf45;
+    color: #0f1b2a;
+  }
+  .analysis-section {
+    border: 1px solid red;
   }
 }
