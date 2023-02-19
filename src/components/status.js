@@ -1,9 +1,23 @@
 import React, { useState } from 'react';
-import { FaSolarPanel, FaBatteryFull, FaSignal, FaPlug } from "react-icons/fa";
+import { FaSolarPanel, FaBatteryFull, FaSignal } from "react-icons/fa";
 import { BsLightningChargeFill, BsThermometerSun, BsSunFill, BsFillMoonStarsFill } from "react-icons/bs";
 import { TbBulbOff, TbBulb, TbPlugConnected } from "react-icons/tb";
 import { WiHumidity } from "react-icons/wi";
 import { GiSoundWaves } from "react-icons/gi";
+import { IoBatteryCharging } from "react-icons/io5";
+// Direct Sunlight: IoMdSunny
+// Ambient Daylight: WiDaySunny
+// Overcast Daylight:WiDayCloudy
+// Sunset & Sunrise: BsSunsetFill BsSunriseFill
+// Moonlight (Full moon): BsFillMoonStarsFill
+// Cloudy Night: IoCloudyNight
+
+//Battery Charging: IoBatteryCharging
+//Battery 100%: FaBatteryFull
+//Battery 75% FaBatteryThreeQuarters
+//Battery 50%: FaBatteryHalf
+//Battery 25%: FaBatteryQuarter
+//Battery 0%: FaBatteryEmpty
 
 function Status() {
   return (
@@ -37,7 +51,7 @@ function Status() {
               <h5>Consumption</h5>
             </div>
             <div className='status-card battery-card'>
-              <FaBatteryFull className='status-icon'/>
+              <IoBatteryCharging className='status-icon'/>
               <h2>100%</h2>
               <h5>Battery</h5>
             </div>

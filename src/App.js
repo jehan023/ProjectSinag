@@ -32,7 +32,7 @@ function App() {
     window.sessionStorage.setItem("page", page);
   }, [page]);
 
-  const [isActive, setIsActive] = useState(false);
+  //const [isActive, setIsActive] = useState(false);
 
   const options = [
     {
@@ -64,82 +64,84 @@ function App() {
 
   return (
     <div className="App">
-      <div>
-        <div className='top-navbar d-flex'>
-          <div className='title-nav-container d-flex align-items-center'>
-            <img src={Logo} alt='Logo' height={40} />
-            <h3 className='my-0 mx-2'>Project Sinag</h3>
-          </div>
-
-
-          <div className='links-nav-container d-flex'>
-            <button className={page === 'Home' ? 'link-btn link-active' : 'link-btn'} onClick={() => { setPage('Home'); setIsActive(false) }}>Home</button>
-            <button className={page === 'Dashboard' ? 'link-btn link-active' : 'link-btn'} onClick={() => { setPage('Dashboard'); setIsActive(false) }}>Dashboard</button>
-            <button className={page === 'Reports' ? 'link-btn link-active' : 'link-btn'} onClick={() => { setPage('Reports'); setIsActive(false) }}>Reports</button>
-          </div>
+      {/******* NAVIGATION BAR ***************************************************/}
+      <div className='top-navbar d-flex'>
+        <div className='title-nav-container d-flex align-items-center'>
+          <img src={Logo} alt='Logo' height={40} />
+          <h3 className='my-0 mx-2'>Project Sinag</h3>
         </div>
 
-        <div className='bottom-navbar'>
-          <div className='d-flex align-items-center gap-2 mb-2'>
-            <h4 className='nav-section my-0'>{page}</h4>
-
-            <div className={page === 'Dashboard' ? 'd-flex align-items-center gap-2' : 'hidden'}>
-              <h4 className='my-0'> | </h4>
-              <select className='sl-dropdown' value={selectedValue} onChange={handleChange}>
-                {options.map((option) => (
-                  <option className='dropdown-options' key={option.value} value={option.value}>
-                    {option.list}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-
-          <div className='d-flex justify-content-between'>
-            <div className={page === 'Dashboard' ? 'links-nav-container d-flex' : 'links-nav-container d-flex invisible'}>
-              <button className={dashboard === 'overview' ? 'link-btn link-active' : 'link-btn'} onClick={() => { setDashboard('overview') }}>Overview</button>
-              <button className={dashboard === 'profile' ? 'link-btn link-active' : 'link-btn'} onClick={() => { setDashboard('profile') }}>Profile</button>
-              <button className={dashboard === 'status' ? 'link-btn link-active' : 'link-btn'} onClick={() => { setDashboard('status') }}>Status</button>
-              <button className={dashboard === 'analysis' ? 'link-btn link-active' : 'link-btn'} onClick={() => { setDashboard('analysis') }}>Analysis</button>
-
-            </div>
-            <Clock
-              className='clock-text'
-              ticking={true} timezone={'Asia/Manila'}
-              format={'h:mm:ss A | MMM DD YYYY'} />
-          </div>
-        </div>
-
-        <div className='content-container h-100'>
-          {page === 'Dashboard' ? (() => {
-            switch (dashboard) {
-              case 'overview':
-                return <Overview selectedSL={streetlight} />
-              case 'profile':
-                return <Profile selectedSL={streetlight} />
-              case 'status':
-                return <Status selectedSL={streetlight} />
-              case 'analysis':
-                return <Analysis selectedSL={streetlight} />
-              default:
-                return <Status selectedSL={streetlight} />
-            }
-          })() :
-            (() => {
-              switch (page) {
-                case 'Home':
-                  return <Home />
-                case 'Reports':
-                  return <Reports />
-                default:
-                  return <Home />
-              }
-            })()}
-        </div>
-        <div className='footer-container'>
-
+        <div className='links-nav-container d-flex'>
+          <button className={page === 'Home' ? 'link-btn link-active' : 'link-btn'} onClick={() => { setPage('Home') }}>Home</button>
+          <button className={page === 'Dashboard' ? 'link-btn link-active' : 'link-btn'} onClick={() => { setPage('Dashboard')}}>Dashboard</button>
+          <button className={page === 'Reports' ? 'link-btn link-active' : 'link-btn'} onClick={() => { setPage('Reports')}}>Reports</button>
         </div>
       </div>
+
+      <div className='bottom-navbar'>
+        <div className='d-flex align-items-center gap-2 mb-2'>
+          <h4 className={page === 'Dashboard' ? 'nav-section my-0': 'hidden'}>{page}</h4>
+
+          <div className={page === 'Dashboard' ? 'd-flex align-items-center gap-2' : 'hidden'}>
+            <h4 className='my-0'> | </h4>
+            <select className='sl-dropdown' value={selectedValue} onChange={handleChange}>
+              {options.map((option) => (
+                <option className='dropdown-options' key={option.value} value={option.value}>
+                  {option.list}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        <div className='d-flex justify-content-between'>
+          <div className={page === 'Dashboard' ? 'links-nav-container d-flex' : 'links-nav-container d-flex invisible'}>
+            <button className={dashboard === 'overview' ? 'link-btn link-active' : 'link-btn'} onClick={() => { setDashboard('overview') }}>Overview</button>
+            <button className={dashboard === 'profile' ? 'link-btn link-active' : 'link-btn'} onClick={() => { setDashboard('profile') }}>Profile</button>
+            <button className={dashboard === 'status' ? 'link-btn link-active' : 'link-btn'} onClick={() => { setDashboard('status') }}>Status</button>
+            <button className={dashboard === 'analysis' ? 'link-btn link-active' : 'link-btn'} onClick={() => { setDashboard('analysis') }}>Analysis</button>
+
+          </div>
+          <Clock
+            className='clock-text'
+            ticking={true} timezone={'Asia/Manila'}
+            format={'h:mm:ss A | MMM DD YYYY'} />
+        </div>
+      </div>
+      
+      {/******* CONTENT SECTION ***************************************************/}
+      <div className='content-container h-100'>
+        {page === 'Dashboard' ? (() => {
+          switch (dashboard) {
+            case 'overview':
+              return <Overview selectedSL={streetlight} />
+            case 'profile':
+              return <Profile selectedSL={streetlight} />
+            case 'status':
+              return <Status selectedSL={streetlight} />
+            case 'analysis':
+              return <Analysis selectedSL={streetlight} />
+            default:
+              return <Status selectedSL={streetlight} />
+          }
+        })() :
+          (() => {
+            switch (page) {
+              case 'Home':
+                return <Home />
+              case 'Reports':
+                return <Reports />
+              default:
+                return <Home />
+            }
+          })()}
+      </div>
+
+      {/******* FOOTER BAR ***************************************************/}
+      <div className='footer-container'>
+
+      </div>
+
     </div>
   );
 }

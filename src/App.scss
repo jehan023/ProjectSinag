@@ -1,7 +1,9 @@
 * {
   box-sizing: border-box;
 }
-::-webkit-scrollbar {display:none;}
+::-webkit-scrollbar {
+  display: none;
+}
 body {
   background-color: #eaeaea !important;
 }
@@ -24,7 +26,7 @@ body {
   color: #faf8f5;
   position: fixed;
   top: 0;
-  //z-index: 10;
+  z-index: 10;
   align-items: center;
   .link-btn {
     border: none;
@@ -80,7 +82,7 @@ body {
   color: #faf8f5;
   position: fixed;
   top: 0;
-  //z-index: 10;
+  z-index: 10;
   align-items: center;
   border-bottom-left-radius: 30px;
   border-bottom-right-radius: 30px;
@@ -229,7 +231,7 @@ body {
     background-color: #27b376;
   }
   .lamp-card {
-    background-color: #BF212F;
+    background-color: #bf212f;
     color: #eaeaea;
   }
 }
@@ -238,10 +240,13 @@ body {
 .analysis-container {
   height: 100vh;
   .analysis-date-picker {
-    border: 1px solid red;  
+    //border: 1px solid red;
+    .date-picker-icon {
+      font-size: 1.55em;
+    }
   }
   .analysis-date-type {
-    border: 1px solid red;
+    //border: 1px solid red;
   }
   .date-type-btn {
     background-color: #0f1b2a;
@@ -251,11 +256,33 @@ body {
     width: 130px;
     font-family: "Gotham Bold";
   }
-  .date-type-btn:hover {
+  .date-type-btn-active {
     background-color: #f5cf45;
     color: #0f1b2a;
   }
+  .date-type-btn:hover { 
+    background-color: #f9a73e;
+    color: #0f1b2a;
+  }
   .analysis-section {
-    border: 1px solid red;
+    p {
+      font-size: 1em;
+      color: #0f1b2a;
+      font-family: "Gotham Medium";
+    }
+
+    .energy-analysis-section,
+    .battery-analysis-section {
+      background-color: #f8f8f8;
+      border: 1px solid black;
+      height: 150px;
+    }
+
+    .energy-chart,
+    .charging-chart {
+      background-color: #f8f8f8;
+      border: 1px solid black;
+      height: 50px;
+    }
   }
 }
