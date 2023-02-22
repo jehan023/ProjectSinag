@@ -34,8 +34,6 @@ function Analysis() {
   const options = dateFormat;
   const formattedDate = selectedDate.toLocaleDateString('en-US', options);
 
-  console.log(formattedDate); // Output: February 19, 2023
-
   return (
     <div className='analysis-container'>
       <div className='d-flex align-items-center my-0'>
