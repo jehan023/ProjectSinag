@@ -8,6 +8,8 @@ import Status from './components/status.js';
 import Analysis from './components/analysis.js';
 import Home from './components/home.js';
 import Reports from './components/reports.js';
+import LoadDataFromSheet from './loadDataFromSheet';
+import axios from 'axios';
 
 function App() {
   const [page, setPage] = useState(() => {
@@ -32,7 +34,7 @@ function App() {
     window.sessionStorage.setItem("page", page);
   }, [page]);
 
-  //const [isActive, setIsActive] = useState(false);
+
 
   const options = [
     {
@@ -61,6 +63,30 @@ function App() {
     setSelectedValue(event.target.value);
   };
 
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetchData()
+  });
+
+  const fetchData = () => {
+    try {
+      axios.get(`https://sheets.googleapis.com/v4/spreadsheets/1yg8ET-05HTyTipGyvNVDZ1T3WuOBc1vNwwz4N8ifPRA/values/${selectedValue}!A2:K`, {
+        params: {
+          key: 'AIzaSyDfmsbf3ilW3D0fXotyabO1pFLX8CrsKws'
+        }
+      }).then(response => {
+        setData(response.data.values);
+      }).catch(error => {
+        console.error(error);
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  //const filteredData = data.filter(item => item[0]);
+
 
   return (
     <div className="App">
@@ -73,14 +99,14 @@ function App() {
 
         <div className='links-nav-container d-flex'>
           <button className={page === 'Home' ? 'link-btn link-active' : 'link-btn'} onClick={() => { setPage('Home') }}>Home</button>
-          <button className={page === 'Dashboard' ? 'link-btn link-active' : 'link-btn'} onClick={() => { setPage('Dashboard')}}>Dashboard</button>
-          <button className={page === 'Reports' ? 'link-btn link-active' : 'link-btn'} onClick={() => { setPage('Reports')}}>Reports</button>
+          <button className={page === 'Dashboard' ? 'link-btn link-active' : 'link-btn'} onClick={() => { setPage('Dashboard') }}>Dashboard</button>
+          <button className={page === 'Reports' ? 'link-btn link-active' : 'link-btn'} onClick={() => { setPage('Reports') }}>Reports</button>
         </div>
       </div>
 
       <div className='bottom-navbar'>
         <div className='d-flex align-items-center gap-2 mb-2'>
-          <h4 className={page === 'Dashboard' ? 'nav-section my-0': 'hidden'}>{page}</h4>
+          <h4 className={page === 'Dashboard' ? 'nav-section my-0' : 'hidden'}>{page}</h4>
 
           <div className={page === 'Dashboard' ? 'd-flex align-items-center gap-2' : 'hidden'}>
             <h4 className='my-0'> | </h4>
@@ -108,7 +134,7 @@ function App() {
             format={'h:mm:ss A | MMM DD YYYY'} />
         </div>
       </div>
-      
+
       {/******* CONTENT SECTION ***************************************************/}
       <div className='content-container h-100'>
         {page === 'Dashboard' ? (() => {
@@ -138,6 +164,7 @@ function App() {
       </div>
 
       {/******* FOOTER BAR ***************************************************/}
+      <LoadDataFromSheet selectedSL={data} />
       <div className='footer-container'>
 
       </div>
