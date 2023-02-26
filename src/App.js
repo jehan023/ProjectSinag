@@ -1,40 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import './App.scss';
+// import Navbar from './components/navbar.js';
 import Logo from './images/Sinag-Logo.png';
 import Clock from 'react-live-clock';
-import Overview from './components/overview.js';
-import Profile from './components/profile.js';
-import Status from './components/status.js';
-import Analysis from './components/analysis.js';
-import Home from './components/home.js';
-import Reports from './components/reports.js';
+import ReactLoading from 'react-loading';
 import LoadDataFromSheet from './loadDataFromSheet';
 import axios from 'axios';
+// import Select from 'react-select';
+
+const Overview = lazy(() => import('./components/overview.js'));
+const Profile = lazy(() => import('./components/profile.js'));
+const Status = lazy(() => import('./components/status.js'));
+const Analysis = lazy(() => import('./components/analysis.js'));
+const Home = lazy(() => import('./components/home.js'));
+const Reports = lazy(() => import('./components/reports.js'));
 
 function App() {
-  const [page, setPage] = useState(() => {
-    const savedPage = window.sessionStorage.getItem("page");
-    if (savedPage) {
-      return String(savedPage);
-    } else {
-      return 'Dashboard';
-    }
-  });
+  const [page, setPage] = useState('Dashboard');
+  const [dashboard, setDashboard] = useState('overview');
 
-  const [dashboard, setDashboard] = useState(() => {
-    const savedDashboard = window.sessionStorage.getItem("dashboard");
-    if (savedDashboard) {
-      return String(savedDashboard);
-    } else {
-      return 'overview';
-    }
-  });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    window.sessionStorage.setItem("page", page);
-  }, [page]);
-
-
+  const [fetchData, setFetchData] = useState([]);
 
   const options = [
     {
@@ -52,41 +40,63 @@ function App() {
   ];
 
   const [selectedValue, setSelectedValue] = useState(options[0].value);
-
   const getObjectByValue = (value) => {
     return options.find((obj) => obj.value === value);
   };
-
   const streetlight = getObjectByValue(selectedValue);
 
-  const handleChange = (event) => {
-    setSelectedValue(event.target.value);
-  };
-
-  const [data, setData] = useState([]);
-
   useEffect(() => {
-    fetchData()
-  });
+    if (selectedValue) {
+      callAPI();
+    }
+  }, [selectedValue, dashboard]);
 
-  const fetchData = () => {
+  const callAPI = () => {
     try {
-      axios.get(`https://sheets.googleapis.com/v4/spreadsheets/1yg8ET-05HTyTipGyvNVDZ1T3WuOBc1vNwwz4N8ifPRA/values/${selectedValue}!A2:K`, {
-        params: {
-          key: 'AIzaSyDfmsbf3ilW3D0fXotyabO1pFLX8CrsKws'
-        }
-      }).then(response => {
-        setData(response.data.values);
-      }).catch(error => {
-        console.error(error);
-      });
+      setLoading(true);
+      axios.get(`https://sheets.googleapis.com/v4/spreadsheets/1yg8ET-05HTyTipGyvNVDZ1T3WuOBc1vNwwz4N8ifPRA/values/${selectedValue}!A1:K`,
+        {
+          params: {
+            key: 'AIzaSyDfmsbf3ilW3D0fXotyabO1pFLX8CrsKws'
+          }
+        }).then(response => {
+          setFetchData(response.data.values);
+        }).catch(error => {
+          setError(error);
+        }).finally(() => {
+          setLoading(false);
+        });
     } catch (error) {
       console.error(error);
     }
   };
 
-  //const filteredData = data.filter(item => item[0]);
+  const handleChange = (e) => {
+    setSelectedValue(e.target.value);
+  };
+  const handlePage = (Page) => {
+    setPage(Page);
+  };
+  const handleDash = (Dash) => {
+    setDashboard(Dash);
+  };
 
+  const formattedData = fetchData.slice(1).map(row => ({
+    date: row[0],
+    time: row[1],
+    pv_power: row[4],
+    batt_volts: row[5],
+    batt_level: row[6],
+    led_amps: row[7],
+    led_status: row[8],
+    lux: row[9],
+    temp: row[10]
+  }));
+
+  const lastData = formattedData[formattedData.length-1];
+  console.log('Last Data: ',lastData);
+
+  console.log('Render ', Math.random(), 'SLV: ', selectedValue);
 
   return (
     <div className="App">
@@ -98,19 +108,19 @@ function App() {
         </div>
 
         <div className='links-nav-container d-flex'>
-          <button className={page === 'Home' ? 'link-btn link-active' : 'link-btn'} onClick={() => { setPage('Home') }}>Home</button>
-          <button className={page === 'Dashboard' ? 'link-btn link-active' : 'link-btn'} onClick={() => { setPage('Dashboard') }}>Dashboard</button>
-          <button className={page === 'Reports' ? 'link-btn link-active' : 'link-btn'} onClick={() => { setPage('Reports') }}>Reports</button>
+          <button className={page === 'Home' ? 'link-btn link-active' : 'link-btn'} onClick={() => { handlePage('Home') }}>Home</button>
+          <button className={page === 'Dashboard' ? 'link-btn link-active' : 'link-btn'} onClick={() => { handlePage('Dashboard') }}>Dashboard</button>
+          <button className={page === 'Reports' ? 'link-btn link-active' : 'link-btn'} onClick={() => { handlePage('Reports') }}>Reports</button>
         </div>
       </div>
 
-      <div className='bottom-navbar'>
+      <div className={page === 'Dashboard' ? 'bottom-navbar' : 'hidden'}>
         <div className='d-flex align-items-center gap-2 mb-2'>
           <h4 className={page === 'Dashboard' ? 'nav-section my-0' : 'hidden'}>{page}</h4>
 
           <div className={page === 'Dashboard' ? 'd-flex align-items-center gap-2' : 'hidden'}>
             <h4 className='my-0'> | </h4>
-            <select className='sl-dropdown' value={selectedValue} onChange={handleChange}>
+            <select className='sl-dropdown' placeholder={'Select SL'} onChange={handleChange} onClick={handleChange} >
               {options.map((option) => (
                 <option className='dropdown-options' key={option.value} value={option.value}>
                   {option.list}
@@ -122,10 +132,10 @@ function App() {
 
         <div className='d-flex justify-content-between'>
           <div className={page === 'Dashboard' ? 'links-nav-container d-flex' : 'links-nav-container d-flex invisible'}>
-            <button className={dashboard === 'overview' ? 'link-btn link-active' : 'link-btn'} onClick={() => { setDashboard('overview') }}>Overview</button>
-            <button className={dashboard === 'profile' ? 'link-btn link-active' : 'link-btn'} onClick={() => { setDashboard('profile') }}>Profile</button>
-            <button className={dashboard === 'status' ? 'link-btn link-active' : 'link-btn'} onClick={() => { setDashboard('status') }}>Status</button>
-            <button className={dashboard === 'analysis' ? 'link-btn link-active' : 'link-btn'} onClick={() => { setDashboard('analysis') }}>Analysis</button>
+            <button className={dashboard === 'overview' ? 'link-btn link-active' : 'link-btn'} onClick={() => { handleDash('overview') }}>Overview</button>
+            <button className={dashboard === 'profile' ? 'link-btn link-active' : 'link-btn'} onClick={() => { handleDash('profile') }}>Profile</button>
+            <button className={dashboard === 'status' ? 'link-btn link-active' : 'link-btn'} onClick={() => { handleDash('status') }}>Status</button>
+            <button className={dashboard === 'analysis' ? 'link-btn link-active' : 'link-btn'} onClick={() => { handleDash('analysis') }}>Analysis</button>
 
           </div>
           <Clock
@@ -137,38 +147,40 @@ function App() {
 
       {/******* CONTENT SECTION ***************************************************/}
       <div className='content-container h-100'>
-        {page === 'Dashboard' ? (() => {
-          switch (dashboard) {
-            case 'overview':
-              return <Overview selectedSL={streetlight} />
-            case 'profile':
-              return <Profile selectedSL={streetlight} />
-            case 'status':
-              return <Status selectedSL={streetlight} />
-            case 'analysis':
-              return <Analysis selectedSL={streetlight} />
-            default:
-              return <Status selectedSL={streetlight} />
-          }
-        })() :
-          (() => {
-            switch (page) {
-              case 'Home':
-                return <Home />
-              case 'Reports':
-                return <Reports />
+        {loading ? <ReactLoading type={'spokes'} color={'#0f1b2a'} height={550} width={375} className='loading-component' /> : '' }
+        <Suspense fallback={<ReactLoading type={'spokes'} color={'#0f1b2a'} height={550} width={375} className='loading-component' />}>
+          {/* <LoadDataFromSheet slData={formattedData} /> */}
+          {page === 'Dashboard' ? (() => {
+            switch (dashboard) {
+              case 'overview':
+                return <Overview selectedSL={streetlight} />
+              case 'profile':
+                return <Profile selectedSL={streetlight} />
+              case 'status':
+                return <Status data={lastData} />
+              case 'analysis':
+                return <Analysis data={formattedData} />
               default:
-                return <Home />
+                return <Status selectedSL={streetlight} />
             }
-          })()}
+          })() :
+            (() => {
+              switch (page) {
+                case 'Home':
+                  return <Home />
+                case 'Reports':
+                  return <Reports />
+                default:
+                  return <Home />
+              }
+            })()}
+        </Suspense>
       </div>
 
       {/******* FOOTER BAR ***************************************************/}
-      <LoadDataFromSheet selectedSL={data} />
       <div className='footer-container'>
 
       </div>
-
     </div>
   );
 }

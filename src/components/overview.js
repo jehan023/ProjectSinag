@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import '../App.scss';
 
 import { GiSolarPower } from "react-icons/gi";
@@ -87,7 +87,7 @@ function Overview(props) {
             <h2 className='mb-3'>Devices</h2>
             <div className='devices-list'>
               {devices.map((option) => (
-                <div className='d-flex align-items-center gap-2 mb-1 mx-3'>
+                <div className='d-flex align-items-center gap-2 mb-1 mx-3' key={option.value}>
                   <div className='sl-status'> - </div>
                   <p>{option.label} ({option.list})</p>
                 </div>
@@ -112,4 +112,4 @@ function Overview(props) {
   )
 }
 
-export default Overview;
+export default memo(Overview);
