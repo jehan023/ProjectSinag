@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import { FaSolarPanel, FaBatteryFull, FaSignal } from "react-icons/fa";
 import { BsLightningChargeFill, BsThermometerSun, BsSunFill, BsFillMoonStarsFill } from "react-icons/bs";
 import { TbBulbOff, TbBulb, TbPlugConnected } from "react-icons/tb";
@@ -19,7 +19,8 @@ import { IoBatteryCharging } from "react-icons/io5";
 //Battery 25%: FaBatteryQuarter
 //Battery 0%: FaBatteryEmpty
 
-function Status() {
+function Status(props) {
+  console.log('Status:', props.data)
   return (
     <div className='status-container'>
       <div className='d-flex align-items-center my-0'>
@@ -37,7 +38,7 @@ function Status() {
           <div className='cards-row d-flex justify-content-center gap-4 my-4'>
             <div className='status-card'>
               <FaSolarPanel className='status-icon'/>
-              <h2>32W</h2>
+              <h2>{parseFloat(props.data.pv_power)}W</h2>
               <h5>Current Power</h5>
             </div>
             <div className='status-card'>
@@ -95,4 +96,4 @@ function Status() {
   )
 }
 
-export default Status;
+export default memo(Status);

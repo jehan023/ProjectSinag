@@ -17,11 +17,18 @@ body {
   display: none !important;
 }
 
+.loading-component {
+  z-index: 1000;
+  position: absolute;
+  //background-color: #bf212f;
+  margin: 5% 35%;
+}
+
 .top-navbar {
   background-color: #0f1b2a;
   height: 80px;
   width: 100%;
-  padding: 10px 50px 0px 50px;
+  padding: 10px 50px 10px 50px;
   justify-content: space-between;
   color: #faf8f5;
   position: fixed;
@@ -109,12 +116,13 @@ body {
 
 .content-container {
   //border: 5px solid red;
-  padding: 180px 50px 30px 50px;
+  padding: 120px 50px 30px 50px;
 }
 
 ////////////////////////////////////////// OVERVIEW ////////////////////
 .overview-container {
   height: 100vh;
+  padding-top: 60px;
   .sl-overview {
     width: 60%;
     padding-right: 100px;
@@ -192,6 +200,7 @@ body {
 ////////////////////////////////////////// PROFILE ////////////////////
 .profile-container {
   //height: 100vh;
+  padding-top: 60px;
   .profile-card {
     background-color: #f8f8f8;
     width: 50%;
@@ -211,6 +220,7 @@ body {
 ////////////////////////////////////////// STATUS ////////////////////
 .status-container {
   //height: 100vh !important;
+  padding-top: 60px;
   overflow-y: hidden;
   .status-card {
     background-color: #f5cf45;
@@ -239,6 +249,7 @@ body {
 ////////////////////////////////////////// ANALYSIS ////////////////////
 .analysis-container {
   height: 100vh;
+  padding-top: 60px;
   .analysis-date-picker {
     //border: 1px solid red;
     .date-picker-icon {
@@ -260,7 +271,7 @@ body {
     background-color: #f5cf45;
     color: #0f1b2a;
   }
-  .date-type-btn:hover { 
+  .date-type-btn:hover {
     background-color: #f9a73e;
     color: #0f1b2a;
   }
@@ -283,6 +294,46 @@ body {
       background-color: #f8f8f8;
       border: 1px solid black;
       height: 50px;
+    }
+  }
+}
+
+////////////////////////////////////////// HOME ////////////////////
+.home-container {
+  p {
+    text-align: justify;
+    font-size: 1em;
+    color: #0f1b2a;
+    font-family: "Gotham Medium";
+  }
+  .dev-section {
+    //background-image: url('./images/Sinag-Logo.png');
+    background-size: cover;
+    //height: 500px;
+    width: 100%;
+    border: 2px solid red;
+    padding: 50px 40px;
+    border-top-right-radius: 180px;
+    border-bottom-left-radius: 180px;
+
+    p {
+      margin: 0;
+    }
+
+    .img-dev-rect {
+      border: 1px solid #bf212f;
+      height: 150px;
+      width: 800px;
+    }
+    .dev-card-section {
+      margin-top: 50px;
+      border: 1px solid #bf212f;
+    }
+    .dev-image {
+      height: 200px;
+      width: 200px;
+      border-radius: 100px;
+      border: 1px solid #bf212f;
     }
   }
 }
