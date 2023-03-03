@@ -2,6 +2,10 @@ import React, { useState, memo } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { FaCalendarAlt } from 'react-icons/fa';
+import EnergyChart from '../charts/energyChart';
+import ChargingChart from '../charts/chargingChart';
+import BattLevelChart from '../charts/battLevelChart';
+import ProductionChart from '../charts/productionChart';
 
 function Analysis(props) {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -98,32 +102,25 @@ function Analysis(props) {
 
       <div className='analysis-section mt-3'>
         {/******* ENERGY CHART ***************************************************/}
-        <div className='energy-chart-section'>
-          <div className='energy-chart'>
-            Energy Chart
-          </div>
-          <div className='energy-chart-label d-flex justify-content-between'>
-            <p>System Generate: </p>
-            <p>Consumption: </p>
-          </div>
+
+        <div className='chart energy-chart mb-4'>
+          <EnergyChart data={filterData} viewMode={viewMode} />
         </div>
+
         {/******* CHARGING CHART **************************************************/}
-        <div className='charging-chart-section'>
-          <div className='charging-chart'>
-            Energy Chart
-          </div>
-          <div className='charging-chart-label d-flex justify-content-between'>
-            <p>Charging Time</p>
-            <p>Discharging Time</p>
-          </div>
+        <div className='chart mb-4'>
+          <ChargingChart data={filterData} viewMode={viewMode} />
         </div>
+
+
         {/******* ENERGY ANALYSIS CHART COMBINED **********************************/}
-        <div className='energy-analysis-section mb-4'>
-          Energy Analysis Chart
+        <div className='chart mb-4'>
+          <ProductionChart data={filterData} viewMode={viewMode} className='chart' />
         </div>
+
         {/******* BATTERY LEVEL ANALYSIS CHART ************************************/}
-        <div className='battery-analysis-section'>
-          Battery Level Chart
+        <div className='chart'>
+          <BattLevelChart data={filterData} viewMode={viewMode} className='chart' />
         </div>
       </div>
     </div>

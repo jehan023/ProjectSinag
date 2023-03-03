@@ -21,7 +21,7 @@ body {
   z-index: 1000;
   position: absolute;
   //background-color: #bf212f;
-  margin: 5% 35%;
+  margin: 15% 38%;
 }
 
 .top-navbar {
@@ -116,13 +116,17 @@ body {
 
 .content-container {
   //border: 5px solid red;
-  padding: 120px 50px 30px 50px;
+  //padding: 120px 50px 30px 50px;
 }
 
 ////////////////////////////////////////// OVERVIEW ////////////////////
 .overview-container {
-  height: 100vh;
-  padding-top: 60px;
+  padding: 180px 50px 30px 50px;
+  .loading-api {
+    z-index: 1000;
+    position: absolute;
+    margin: 5% 32%;
+  }
   .sl-overview {
     width: 60%;
     padding-right: 100px;
@@ -200,7 +204,7 @@ body {
 ////////////////////////////////////////// PROFILE ////////////////////
 .profile-container {
   //height: 100vh;
-  padding-top: 60px;
+  padding: 180px 50px 30px 50px;
   .profile-card {
     background-color: #f8f8f8;
     width: 50%;
@@ -220,7 +224,7 @@ body {
 ////////////////////////////////////////// STATUS ////////////////////
 .status-container {
   //height: 100vh !important;
-  padding-top: 60px;
+  padding: 180px 50px 30px 50px;
   overflow-y: hidden;
   .status-card {
     background-color: #f5cf45;
@@ -237,10 +241,24 @@ body {
   .status-icon {
     font-size: 60px;
   }
-  .battery-card {
+  .battFull {
     background-color: #27b376;
   }
-  .lamp-card {
+  .battSafe {
+    background-color: #f5cf45;
+  }
+  .battMid {
+    background-color: #e18119;
+  }
+  .battDanger {
+    background-color: #bf212f;
+    color: #eaeaea;
+  }
+  .lampON {
+    background-color: #27b376;
+    // color: #eaeaea;
+  }
+  .lampOFF {
     background-color: #bf212f;
     color: #eaeaea;
   }
@@ -248,8 +266,9 @@ body {
 
 ////////////////////////////////////////// ANALYSIS ////////////////////
 .analysis-container {
-  height: 100vh;
-  padding-top: 60px;
+  // height: 100vh;
+  // padding-top: 60px;
+  padding: 180px 50px 30px 50px;
   .analysis-date-picker {
     //border: 1px solid red;
     .date-picker-icon {
@@ -282,42 +301,66 @@ body {
       font-family: "Gotham Medium";
     }
 
-    .energy-analysis-section,
-    .battery-analysis-section {
+    .chart {
       background-color: #f8f8f8;
-      border: 1px solid black;
-      height: 150px;
+      border-radius: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      // height: 60vh;
+      padding: 10px 50px;
     }
 
-    .energy-chart,
-    .charging-chart {
-      background-color: #f8f8f8;
-      border: 1px solid black;
-      height: 50px;
-    }
   }
 }
 
 ////////////////////////////////////////// HOME ////////////////////
 .home-container {
+  // background-color: rgb(228, 228, 228);
+  // background-color: #eaeaea;
   p {
     text-align: justify;
     font-size: 1em;
     color: #0f1b2a;
     font-family: "Gotham Medium";
   }
-  .dev-section {
-    //background-image: url('./images/Sinag-Logo.png');
+  .project-desc {
+    // background-color: #0f1b2a;
+
+    background-image: url("./images/Lights2.jpg");
     background-size: cover;
-    //height: 500px;
-    width: 100%;
-    border: 2px solid red;
-    padding: 50px 40px;
-    border-top-right-radius: 180px;
-    border-bottom-left-radius: 180px;
+    margin-top: 80px;
+    padding: 50px 80px;
+    // height: 500px;
+    p {
+      margin: 0;
+      color: #eaeaea;
+    }
+    h3 {
+      color: #f5cf45;
+    }
+    // border-bottom-left-radius: 80px;
+    // border-bottom-right-radius: 80px;
+  }
+  .dev-section {
+    background-image: url("./images/devcodes.jpg");
+    background-size: cover;
+    // width: 100%;
+    // border: 2px solid red;
+    padding: 50px 80px;
+    // border-top-right-radius: 150px;
+    // border-bottom-left-radius: 150px;
+    color: #eaeaea;
+    // margin-left: 50px;
+    // margin-right: 50px;
 
     p {
       margin: 0;
+      color: #eaeaea;
+    }
+
+    .devs-section-header {
+      color: #f5cf45;
     }
 
     .img-dev-rect {
@@ -327,13 +370,35 @@ body {
     }
     .dev-card-section {
       margin-top: 50px;
-      border: 1px solid #bf212f;
+      // border: 1px solid #bf212f;
     }
     .dev-image {
       height: 200px;
       width: 200px;
-      border-radius: 100px;
-      border: 1px solid #bf212f;
+      // border-radius: 100px;
+      // border: 1px solid #bf212f;
+    }
+  }
+}
+
+.reports-container {
+  padding: 100px 50px 30px 50px;
+  .report-btn-section {
+    .report-from-btn {
+      background-color: #0f1b2a;
+      color: #f5cf45;
+      border-radius: 20px;
+      text-align: center;
+      width: 130px;
+      font-family: "Gotham Bold";
+    }
+    .report-from-btn-active {
+      background-color: #f5cf45;
+      color: #0f1b2a;
+    }
+    .report-from-btn:hover {
+      background-color: #f5cf45;
+      color: #0f1b2a;
     }
   }
 }

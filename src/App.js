@@ -54,7 +54,7 @@ function App() {
   const callAPI = () => {
     try {
       setLoading(true);
-      axios.get(`https://sheets.googleapis.com/v4/spreadsheets/1yg8ET-05HTyTipGyvNVDZ1T3WuOBc1vNwwz4N8ifPRA/values/${selectedValue}!A1:K`,
+      axios.get(`https://sheets.googleapis.com/v4/spreadsheets/1yg8ET-05HTyTipGyvNVDZ1T3WuOBc1vNwwz4N8ifPRA/values/${selectedValue}!A1:M`,
         {
           params: {
             key: 'AIzaSyDfmsbf3ilW3D0fXotyabO1pFLX8CrsKws'
@@ -84,17 +84,18 @@ function App() {
   const formattedData = fetchData.slice(1).map(row => ({
     date: row[0],
     time: row[1],
-    pv_power: row[4],
-    batt_volts: row[5],
-    batt_level: row[6],
-    led_amps: row[7],
-    led_status: row[8],
-    lux: row[9],
-    temp: row[10]
+    pv_power: parseFloat(row[4]),
+    batt_volts: parseFloat(row[5]),
+    batt_level: parseFloat(row[6]),
+    led_amps: parseFloat(row[7]),
+    led_status: parseFloat(row[8]),
+    lux: parseFloat(row[9]),
+    temp: parseFloat(row[10]),
+    snr: parseFloat(row[11]),
+    rssi: parseFloat(row[12])
   }));
 
   const lastData = formattedData[formattedData.length-1];
-  console.log('Last Data: ',lastData);
 
   console.log('Render ', Math.random(), 'SLV: ', selectedValue);
 
@@ -141,7 +142,7 @@ function App() {
           <Clock
             className='clock-text'
             ticking={true} timezone={'Asia/Manila'}
-            format={'h:mm:ss A | MMM DD YYYY'} />
+            format={'h:mm:ss A | MMM DD, YYYY'} />
         </div>
       </div>
 
@@ -159,7 +160,7 @@ function App() {
               case 'status':
                 return <Status data={lastData} />
               case 'analysis':
-                return <Analysis data={formattedData} />
+                return <Analysis data={formattedData}/>
               default:
                 return <Status selectedSL={streetlight} />
             }
