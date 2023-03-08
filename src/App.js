@@ -104,8 +104,8 @@ function App() {
       {/******* NAVIGATION BAR ***************************************************/}
       <div className='top-navbar d-flex'>
         <div className='title-nav-container d-flex align-items-center'>
-          <img src={Logo} alt='Logo' height={40} />
-          <h3 className='my-0 mx-2'>Project Sinag</h3>
+          <img src={Logo} alt='Logo' height={60} />
+          <h3 className='my-0 mx-2'></h3>
         </div>
 
         <div className='links-nav-container d-flex'>
@@ -148,8 +148,8 @@ function App() {
 
       {/******* CONTENT SECTION ***************************************************/}
       <div className='content-container h-100'>
-        {loading ? <ReactLoading type={'spokes'} color={'#0f1b2a'} height={550} width={375} className='loading-component' /> : '' }
-        <Suspense fallback={<ReactLoading type={'spokes'} color={'#0f1b2a'} height={550} width={375} className='loading-component' />}>
+        {loading ? <ReactLoading type={'spokes'} color={'#0f1b2a'} height={300} width={275} className='loading-component' /> : '' }
+        <Suspense fallback={<ReactLoading type={'spokes'} color={'#0f1b2a'} height={300} width={275} className='loading-component' />}>
           {/* <LoadDataFromSheet slData={formattedData} /> */}
           {page === 'Dashboard' ? (() => {
             switch (dashboard) {
