@@ -5,10 +5,10 @@
   display: none;
 }
 body {
-  background-color: #eaeaea !important;
+  background-color: #eff0fc !important;
 }
 .App {
-  background-color: #eaeaea;
+  background-color: #eff0fc;
   position: relative;
   height: 100% !important;
 }
@@ -25,7 +25,7 @@ body {
 }
 
 .top-navbar {
-  background-color: #0f1b2a;//#0f1b2a;
+  background-color: #0B1327;//#0f1b2a;
   height: 80px;
   width: 100%;
   padding: 2% 78% 2% 2%;
@@ -48,6 +48,9 @@ body {
     //border-bottom: 3px solid #ff9c07;
     font-family: "Gotham Medium";
     font-weight: bold;
+  }
+  .title-nav-container{
+    margin-left: 5%;
   }
 
   .hamburger-button {
@@ -82,7 +85,7 @@ body {
 }
 
 .bottom-navbar {
-  background-color: #0f1b2a;
+  background-color: #0B1327;
   height: auto;
   width: 100%;
   padding: 1% 3% 0% 2%;
@@ -104,13 +107,13 @@ body {
   }
   .link-btn {
     border: none;
-    margin-right: 5%;
+    margin-right: 15%;
     margin-left: -1%;
     padding-top: 2%;
     padding-bottom: 6%;
     
     color: #f8f8f8;
-    background-color: #0f1b2a;
+    background-color: transparent;
     font-family: "Gotham Medium";
   }
   .link-active {
@@ -184,6 +187,8 @@ body {
     margin: 0;
   }
 
+  
+
   .mb-3, .my-3{
     padding-left: 1%;
     font-size: 20pt;
@@ -196,7 +201,7 @@ body {
   }
 
   p {
-    color: #0f1b2a;
+    color: #0B1327;
     font-size: 14pt;
     margin: 0;
     font-family: "Gotham Book";
@@ -218,7 +223,7 @@ body {
   color: #f8f8f8;
 }
 .dropdown-options {
-  color: #0f1b2a;
+  color: #0B1327;
   padding: 5px;
 }
 
@@ -233,10 +238,10 @@ body {
 
     .line-break {
       margin-top: 2%;
-      border-bottom: 2pt solid #0f1b2a;
+      border-bottom: 2pt solid #0B1327;
     }
     p {
-      color: #0f1b2a;
+      color: #0B1327;
       margin-bottom: 5px;
       font-size: 16pt;
     }
@@ -301,7 +306,7 @@ body {
     //border: 1px solid red;
   }
   .date-type-btn {
-    background-color: #0f1b2a;
+    background-color: #0B1327;
     color: #f5cf45;
     border-radius: 20px;
     text-align: center;
@@ -310,16 +315,16 @@ body {
   }
   .date-type-btn-active {
     background-color: #f5cf45;
-    color: #0f1b2a;
+    color: #0B1327;
   }
   .date-type-btn:hover {
-    background-color: #f9a73e;
-    color: #0f1b2a;
+    background-color: #f8f8f8;
+    color: #0B1327;
   }
   .analysis-section {
     p {
       font-size: 1em;
-      color: #0f1b2a;
+      color: #0B1327;
       font-family: "Gotham Medium";
     }
 
@@ -329,7 +334,7 @@ body {
       display: flex;
       justify-content: center;
       align-items: center;
-      // height: 60vh;
+      height: 60vh;
       padding: 10px 50px;
     }
 
@@ -343,33 +348,130 @@ body {
   p {
     text-align: justify;
     font-size: 1em;
-    color: #0f1b2a;
+    color: #0B1327;
     font-family: "Gotham Medium";
   }
-  .project-desc {
-    background-color: #0f1b2a;
-
-    background-image: url("./images/Lights4.png");
+  .header {
+    background-color: #0B1327;
+    background-image: url("./images/Lights5.png");
     background-size: cover;
     margin-top: 80px;
     padding: 50px 80px;
+    //border-radius: 0 0 550px 0;
     // height: 500px;
-    p {
-      margin-right: 40%;
-      color: #f8f8f8;
-      letter-spacing: 0.5pt;
-
+    .laptop-img{
+      //padding-left: 30%;
+      //background-color: red;
+      
+      height: 100;
+      margin: -10px 25px 0 0;
+      position:relative;
+      float: right;
     }
-    h2 {
+    .title{
+      font-size: 72pt;
+      font-weight: bold;
+      margin-left:70px;
+      margin-top: 0;
+      margin-bottom: 0;
+      color: #f5cf45;
+    }
+
+    .mb-4 {
+      font-size: 22pt;
+      font-weight: bold;
+      margin-top: -15px;
+      margin-right:10px;
+      margin-left:70px;
+      padding-bottom: 0%;
       color: #f5cf45;
     }
     // border-bottom-left-radius: 80px;
     // border-bottom-right-radius: 80px;
+    .learn-btn {
+      border: none;
+      background-color: #f5cf45;
+      color: #0B1327;
+      padding: 5px;
+      border-radius: 20px;
+      text-align: center;
+      width: 130px;
+      font-family: "Gotham Bold";
+      margin-left:70px;
+      margin-bottom: 35px;
+    }
+    .learn-btn:hover {
+      background-color: #f8f8f8;
+      color:#0B1327;
+      //border-bottom: 3px solid #ff9c07;
+      font-family: "Gotham Medium";
+      font-weight: bold;
+    }
+  }
+  .project-desc{
+    padding-bottom:4%;
+    .hpi1-img{
+      //padding-left: 30%;
+      //background-color: red;
+      left:0%;
+      height: 500px;
+      width:500px;
+      margin: 2% 3% 0% 10%;
+      position:relative;
+      float: left;
+      
+    }
+    .tl-1{
+      color:#ffc619;//#f9a73e;
+      font-weight: bold;
+      font-size: 24pt;
+      margin-left: 35%;
+      padding-top:8%;
+      
+    }
+    .desc1{
+      color:#0B1327;//#f9a73e;
+      font-size: 14pt;
+      margin-left: 35%;
+      margin-right:12%;
+      line-height: 30pt;
+      
+    }
+    .hpi2-img{
+      //padding-left: 30%;
+      //background-color: red;
+      left:0%;
+      height: 500px;
+      width:500px;
+      margin: 3% 10% 0% 0%;
+      position:relative;
+      float: right;
+      
+    }
+    .tl-2{
+      color:#ffc619;//#f9a73e;
+      font-weight: bold;
+      font-size: 24pt;
+      margin-left: 15%;
+      padding-top:8%;
+      
+    }
+    .desc2{
+      color:#0B1327;//#f9a73e;
+      font-size: 14pt;
+      margin-left: 15%;
+      margin-right:25%;
+      line-height: 30pt;
+      
+    }
+    
   }
   .dev-section {
-    //background-image: url("./images/devcodes.jpg");
+    margin-top:10%;
+    background-image: url("./images/devcodes3.png");
     background-color: #f8f8f8;
     background-size: cover;
+    //border-radius: 550px 0 0 0;
     // width: 100%;
     // border: 2px solid red;
     padding: 50px 80px;
@@ -386,6 +488,9 @@ body {
 
     .devs-section-header {
       color: #f5cf45;
+      text-align: center;
+      font-weight: bold;
+      font-size: 22pt;
     }
 
     .img-dev-rect {
@@ -410,7 +515,7 @@ body {
   padding: 100px 50px 30px 50px;
   .report-btn-section {
     .report-from-btn {
-      background-color: #0f1b2a;
+      background-color: #0B1327;
       color: #f5cf45;
       border-radius: 20px;
       text-align: center;
@@ -419,11 +524,11 @@ body {
     }
     .report-from-btn-active {
       background-color: #f5cf45;
-      color: #0f1b2a;
+      color: #0B1327;
     }
     .report-from-btn:hover {
       background-color: #f5cf45;
-      color: #0f1b2a;
+      color: #0B1327;
     }
   }
 }
