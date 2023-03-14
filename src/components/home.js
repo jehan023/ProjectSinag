@@ -9,13 +9,13 @@ import Laptop from '../images/laptop-header.png';
 import hpi1 from '../images/hp-image-1.gif';
 import hpi2 from '../images/hp-image-2.gif';
 import hpi3 from '../images/hp-image-3.gif';
+import usermanual from '../files/SinagUserManual.pdf';
 
 
 function Home() {
-    const [page, setPage] = useState('');
-    const handlePage = (Page) => {
-        setPage(Page);
-      };
+    const openPDF = () => {
+        window.open(usermanual);
+    };
 
     const developer = [
         { name: 'ALLADA, EARL FRANCES NICOLI', email: 'alladaearlfrances@gmail.com', role: 'Developer', dp: EARL },
@@ -40,7 +40,7 @@ function Home() {
                 <img className='laptop-img' src={Laptop} alt='Laptop'  />
                 <p className='title'>SINAG</p>
                 <p className='mb-4'>Bringing sustainable illumination <br></br> for a brighter and greener future</p>
-                <button className='learn-btn'>Learn More </button>
+                <button className='learn-btn' onClick={openPDF}>Learn More </button>
             </div>
             <div className='project-desc'>
                 <img className='hpi1-img' src={hpi1} alt='image'  />  
