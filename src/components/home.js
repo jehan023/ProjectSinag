@@ -49,11 +49,15 @@ function Home() {
                     Combining the design of the Internet of Things technology and wireless communication technology, SINAG is a smart solution that allows remote monitoring and management of solar-powered street lights. The system is equipped with sensors and communication devices that gather real-time data on the performance and status of the street lights which will then be transmitted to a centralized monitoring station for analyzation.
                 </p>
 
+                <hr className='hr-divider1'/>
+
                 <img className='hpi2-img' src={hpi2} alt='image'  />  
                 <p className='tl-2'>LoRa Wireless Communication Technology</p>  
                 <p className='desc2'>
                 One of Sinag's key features is the usage of LoRa technology as its medium of communication between the gateway and the end-devices. LoRa (Long Range) wireless communication technology gained popularity due to its advantages for different IoT applications. Some of these advantages include its long-range communication capability, low power consumption, cost-effectiveness, high capacity, and easy deployment. 
                 </p>
+                
+                <hr className='hr-divider2'/>
 
                 <img className='hpi1-img' src={hpi3} alt='image'  />  
                 <p className='tl-1'>Data Analysis for Early Anomaly Detection</p>  
