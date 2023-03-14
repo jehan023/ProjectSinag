@@ -145,7 +145,7 @@ function Overview(props, { setHumidityValue }) {
           </div>
           <div>
             <h2 className='my-3'>Location</h2>
-            <p className='mx-3'>Narra St. and  Patola St., Brgy. BF International
+            <p className='mn-3'>Narra St. and  Patola St., Brgy. BF International
               Village, Las Piñas City | 1740</p>
           </div>
         </div>
