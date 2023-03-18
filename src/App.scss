@@ -25,7 +25,7 @@ body {
 }
 
 .top-navbar {
-  background-color: #0B1327;//#0f1b2a;
+  background-color: #090F1E;//#0f1b2a;
   height: 80px;
   width: 100%;
   padding: 2% 78% 2% 2%;
@@ -85,10 +85,10 @@ body {
 }
 
 .bottom-navbar {
-  background-color: #0B1327;
+  background-color: #090F1E;//#0B1327
   height: auto;
   width: 100%;
-  padding: 1% 3% 0% 2%;
+  padding: 1% 3% 0% 3.5%;
   justify-content: space-between;
   margin-top: 80px;
   color: #faf8f5;
@@ -201,7 +201,7 @@ body {
   }
 
   p {
-    color: #0B1327;
+    color: #090F1E;
     font-size: 14pt;
     margin: 0;
     font-family: "Gotham Book";
@@ -223,7 +223,7 @@ body {
   color: #f8f8f8;
 }
 .dropdown-options {
-  color: #0B1327;
+  color: #090F1E;
   padding: 5px;
 }
 
@@ -238,10 +238,10 @@ body {
 
     .line-break {
       margin-top: 2%;
-      border-bottom: 2pt solid #0B1327;
+      border-bottom: 2pt solid #090F1E;
     }
     p {
-      color: #0B1327;
+      color: #090F1E;
       margin-bottom: 5px;
       font-size: 16pt;
     }
@@ -306,7 +306,7 @@ body {
     //border: 1px solid red;
   }
   .date-type-btn {
-    background-color: #0B1327;
+    background-color: #090F1E;
     color: #f5cf45;
     border-radius: 20px;
     text-align: center;
@@ -315,16 +315,16 @@ body {
   }
   .date-type-btn-active {
     background-color: #f5cf45;
-    color: #0B1327;
+    color: #090F1E;
   }
   .date-type-btn:hover {
     background-color: #f8f8f8;
-    color: #0B1327;
+    color: #090F1E;
   }
   .analysis-section {
     p {
       font-size: 1em;
-      color: #0B1327;
+      color: #090F1E;
       font-family: "Gotham Medium";
     }
 
@@ -348,13 +348,14 @@ body {
   p {
     text-align: justify;
     font-size: 1em;
-    color: #0B1327;
+    color: #090F1E;
     font-family: "Gotham Medium";
   }
   .header { 
-    background-color: #0B1327;
-    background-image: url("./images/Lights5.png");
+    background-color: #090F1E;
+    background-image: url("./images/headerbg.svg");
     background-size: cover;
+    
     margin-top: 80px;
     padding: 50px 80px;
   
@@ -388,7 +389,7 @@ body {
     .learn-btn {
       border: none;
       background-color: #f5cf45;
-      color: #0B1327;
+      color: #090F1E;
       padding: 5px;
       border-radius: 20px;
       text-align: center;
@@ -399,7 +400,7 @@ body {
     }
     .learn-btn:hover {
       background-color: #f8f8f8;
-      color:#0B1327;
+      color:#090F1E;
       font-family: "Gotham Medium";
       font-weight: bold;
     }
@@ -427,7 +428,7 @@ body {
       
     }
     .desc1{//feature 1 and 3 desc
-      color:#0B1327;//#f9a73e;
+      color:#090F1E;//#f9a73e;
       font-size: 14pt;
       margin-left: 25%;
       line-height: 30pt;
@@ -458,7 +459,7 @@ body {
       
     }
     .desc2{//feature 2 desc
-      color:#0B1327;//#f9a73e;
+      color:#090F1E;//#f9a73e;
       font-size: 14pt;
       margin-right:25%;
       line-height: 30pt;
@@ -467,13 +468,13 @@ body {
       //background-color: #e18119;
     }
     .hr-divider1{
-      border: solid 1pt #0B1327;
+      border: solid 1pt #090F1E;
       width:100%;
       margin-top:5%;
       margin-bottom: -5%;
     }
     .hr-divider2{
-      border: solid 1pt #0B1327;
+      border: solid 1pt #090F1E;
       width:100%;
       margin-top:-2%;
       margin-bottom:4%;
@@ -522,7 +523,7 @@ body {
   padding: 100px 50px 30px 50px;
   .report-btn-section {
     .report-from-btn {
-      background-color: #0B1327;
+      background-color: #090F1E;
       color: #f5cf45;
       border-radius: 20px;
       text-align: center;
@@ -531,11 +532,53 @@ body {
     }
     .report-from-btn-active {
       background-color: #f5cf45;
-      color: #0B1327;
+      color: #090F1E;
     }
     .report-from-btn:hover {
       background-color: #f5cf45;
-      color: #0B1327;
+      color: #090F1E;
     }
   }
 }
+
+  .footer-container{
+    background-image: url("./images/footerbg.svg");
+    background-size: cover;
+    margin-top:20px;
+    height:250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    p{
+      font-size: 12pt;
+      font-weight: bold;
+      color:#bab6b6;
+      margin-bottom:0;
+    }
+    .links{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 60px;
+      text-align: center;
+      margin: 0 auto;
+      max-width: 800px;
+      padding-top:3%;
+      
+    }
+    .links ul{
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      
+      
+    }
+    .links a {
+      text-decoration: none;
+      color:#f8f8f8;
+    }
+    .links a:hover {
+      text-decoration: underline;
+      color:#f5cf45;
+    }
+  }

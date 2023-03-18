@@ -6,6 +6,7 @@ import Clock from 'react-live-clock';
 import ReactLoading from 'react-loading';
 import LoadDataFromSheet from './loadDataFromSheet';
 import axios from 'axios';
+import usermanual from './files/SinagUserManual.pdf';
 // import Select from 'react-select';
 
 const Overview = lazy(() => import('./components/overview.js'));
@@ -14,6 +15,7 @@ const Status = lazy(() => import('./components/status.js'));
 const Analysis = lazy(() => import('./components/analysis.js'));
 const Home = lazy(() => import('./components/home.js'));
 const Reports = lazy(() => import('./components/reports.js'));
+
 
 function App() {
   const [page, setPage] = useState('Dashboard');
@@ -99,6 +101,10 @@ function App() {
 
   console.log('Render ', Math.random(), 'SLV: ', selectedValue);
 
+  const openPDF = () => {
+    window.open(usermanual);
+  };
+
   return (
     <div className="App">
       {/******* NAVIGATION BAR ***************************************************/}
@@ -180,9 +186,35 @@ function App() {
 
       {/******* FOOTER BAR ***************************************************/}
       <div className='footer-container'>
+        <div className='links'>
+          <div>
+            <p>Product</p>
+              <ul>
+                <li><a href="#">Overview</a></li>
+                <li><a href={usermanual} target="_blank">User Manual</a></li>
+              </ul>
+          </div>
 
+          <div>
+            <p>Developers</p>
+              <ul>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+              </ul>
+          </div>
+
+          <div>
+            <p>Socials</p>
+              <ul>
+                <li><a href="#">Linkedin</a></li>
+                <li><a href="#">Github</a></li>
+              </ul>
+          </div>
+
+        </div>
       </div>
     </div>
+    
   );
 }
 
