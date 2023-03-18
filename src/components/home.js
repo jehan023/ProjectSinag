@@ -37,33 +37,47 @@ function Home() {
     return (
         <div className='home-container'>
             <div className='header'>
-                <img className='laptop-img' src={Laptop} alt='Laptop'  />
+                <img className='laptop-img' src={Laptop} alt='Laptop'/>
+                <div className='header-content'>
                 <p className='title'>SINAG</p>
                 <p className='mb-4'>Bringing sustainable illumination <br></br> for a brighter and greener future</p>
                 <button className='learn-btn' onClick={openPDF}>Learn More </button>
+                </div>
             </div>
             <div className='project-desc'>
-                <img className='hpi1-img' src={hpi1} alt='image'  />  
-                <p className='tl-1'>Centralized Monitoring System</p>  
-                <p className='desc1'>
-                    Combining the design of the Internet of Things technology and wireless communication technology, SINAG is a smart solution that allows remote monitoring and management of solar-powered street lights. The system is equipped with sensors and communication devices that gather real-time data on the performance and status of the street lights which will then be transmitted to a centralized monitoring station for analyzation.
-                </p>
+                <div className='content-container'>
+                    <img className='hpi1-img' src={hpi1} alt='image'/>  
+                    <div className='desc-container'>
+                        <p className='tl'>Centralized Monitoring System</p>  
+                        <p className='desc'>
+                            Combining the design of the Internet of Things technology and wireless communication technology, SINAG is a smart solution that allows remote monitoring and management of solar-powered street lights. The system is equipped with sensors and communication devices that gather real-time data on the performance and status of the street lights which will then be transmitted to a centralized monitoring station for analyzation.
+                        </p>
+                    </div>
+                </div>
 
-                <hr className='hr-divider1'/>
+                <hr className='hr-divider'/>
 
-                <img className='hpi2-img' src={hpi2} alt='image'  />  
-                <p className='tl-2'>LoRa Wireless Communication Technology</p>  
-                <p className='desc2'>
-                One of Sinag's key features is the usage of LoRa technology as its medium of communication between the gateway and the end-devices. LoRa (Long Range) wireless communication technology gained popularity due to its advantages for different IoT applications. Some of these advantages include its long-range communication capability, low power consumption, cost-effectiveness, high capacity, and easy deployment. 
-                </p>
+                <div className='content-container'>
+                    <img className='hpi2-img' src={hpi2} alt='image'  />
+                    <div className='desc-container'>
+                        <p className='tl'>LoRa Wireless Communication Technology</p>  
+                        <p className='desc'>
+                        One of Sinag's key features is the usage of LoRa technology as its medium of communication between the gateway and the end-devices. LoRa (Long Range) wireless communication technology gained popularity due to its advantages for different IoT applications. Some of these advantages include its long-range communication capability, low power consumption, cost-effectiveness, high capacity, and easy deployment. 
+                        </p>
+                    </div>
+                </div>
                 
-                <hr className='hr-divider2'/>
-
-                <img className='hpi1-img' src={hpi3} alt='image'  />  
-                <p className='tl-1'>Data Analysis for Early Anomaly Detection</p>  
-                <p className='desc1'>
-                    Combining the design of the Internet of Things technology and wireless communication technology, SINAG is a smart solution that allows remote monitoring and management of solar-powered street lights. The system is equipped with sensors and communication devices that gather real-time data on the performance and status of the street lights which will then be transmitted to a centralized monitoring station for analyzation.
-                </p>
+                <hr className='hr-divider'/>
+                
+                <div className='content-container'>
+                    <img className='hpi1-img' src={hpi3} alt='image'/>  
+                    <div className='desc-container'>
+                        <p className='tl'>Data Analysis for Early Anomaly Detection</p>  
+                        <p className='desc'>
+                            Combining the design of the Internet of Things technology and wireless communication technology, SINAG is a smart solution that allows remote monitoring and management of solar-powered street lights. The system is equipped with sensors and communication devices that gather real-time data on the performance and status of the street lights which will then be transmitted to a centralized monitoring station for analyzation.
+                        </p>
+                    </div>
+                </div>
                 
             </div>
 
