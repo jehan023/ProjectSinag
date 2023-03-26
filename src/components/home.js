@@ -10,6 +10,12 @@ import hpi1 from '../images/hp-image-1.gif';
 import hpi2 from '../images/hp-image-2.gif';
 import hpi3 from '../images/hp-image-3.gif';
 import usermanual from '../files/SinagUserManual.pdf';
+import reactLogo from '../images/react-logo.png';
+import loraLogo from '../images/lora-logo.png';
+import arduinoLogo from '../images/arduino-logo.png';
+import gsheetsLogo from '../images/gsheets-logo.jpg';
+import vscodeLogo from '../images/vscode-logo.png';
+
 
 
 function Home() {
@@ -50,7 +56,7 @@ function Home() {
                     <div className='desc-container'>
                         <p className='tl'>Centralized Monitoring System</p>  
                         <p className='desc'>
-                            Combining the design of the Internet of Things technology and wireless communication technology, SINAG is a smart solution that allows remote monitoring and management of solar-powered street lights. The system is equipped with sensors and communication devices that gather real-time data on the performance and status of the street lights which will then be transmitted to a centralized monitoring station for analyzation.
+                            Sinag is a LoRa-based centralized monitoring system for solar street lights that allows users to monitor and manage all the solar lamps on a single platform. Both the street lights and gateway are embedded with a tranceiver module and an antenna. The gateway functions as a bridge by providing a communication link between the end nodes (street lights) and the centralized monitoring system. The gateway sends a request to the end node to send its data. Once the request has been received, the sensor readings will be encoded. The data will be sent to the gateway prior to the request, transmitting it to the centralized monitoring system for analyzation.   
                         </p>
                     </div>
                 </div>
@@ -74,7 +80,7 @@ function Home() {
                     <div className='desc-container'>
                         <p className='tl'>Data Analysis for Early Anomaly Detection</p>  
                         <p className='desc'>
-                            Combining the design of the Internet of Things technology and wireless communication technology, SINAG is a smart solution that allows remote monitoring and management of solar-powered street lights. The system is equipped with sensors and communication devices that gather real-time data on the performance and status of the street lights which will then be transmitted to a centralized monitoring station for analyzation.
+                            Data analysis plays a crucial role in a monitoring portal in detecting unusual events that cause system failure and performance issues. Early detection of anomalies not only prevents severe damage to the system, it also saves resources and ensures system availability and stability.
                         </p>
                     </div>
                 </div>
@@ -93,6 +99,25 @@ function Home() {
                 </div>
                 <div className='dev-card-section d-flex justify-content-center gap-5'>
                     { DeveloperCard }
+                </div>
+            </div>
+
+            <div className='slider-container'>
+                <div className='slider'>
+                   
+                    <div className='slide'><img src={reactLogo} alt='ReactLogo'/></div>
+                    <div className='slide'><img src={loraLogo} alt='LoRaLogo'/></div>
+                    <div className='slide'><img src={arduinoLogo} alt='ArduinoLogo'/></div>
+                    <div className='slide'><img src={gsheetsLogo} alt='GSheetsLogo'/></div>
+                    <div className='slide'><img src={vscodeLogo} alt='VSLogo'/></div>
+                    <div className='slide'><img src={reactLogo} alt='ReactLogo'/></div>
+
+                    <div className='slide'><img src={loraLogo} alt='LoRaLogo'/></div>
+                    <div className='slide'><img src={arduinoLogo} alt='ArduinoLogo'/></div>
+                    <div className='slide'><img src={gsheetsLogo} alt='GSheetsLogo'/></div>
+                    <div className='slide'><img src={vscodeLogo} alt='VSLogo'/></div>
+                    <div className='slide'><img src={reactLogo} alt='ReactLogo'/></div>
+                    
                 </div>
             </div>
         </div>
