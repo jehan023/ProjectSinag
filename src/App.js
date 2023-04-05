@@ -8,6 +8,9 @@ import LoadDataFromSheet from './loadDataFromSheet';
 import axios from 'axios';
 import usermanual from './files/SinagUserManual.pdf';
 
+
+
+
 // import Select from 'react-select';
 
 const Overview = lazy(() => import('./components/overview.js'));
@@ -16,6 +19,9 @@ const Status = lazy(() => import('./components/status.js'));
 const Analysis = lazy(() => import('./components/analysis.js'));
 const Home = lazy(() => import('./components/home.js'));
 const Reports = lazy(() => import('./components/reports.js'));
+const ProductOverview= lazy(() => import('./components/productOverview.js'));
+
+
 
 function App() {
   const [page, setPage] = useState('Dashboard');
@@ -105,8 +111,12 @@ function App() {
     window.open(usermanual);
   };
 
+
+  
+
   return (
     <div className="App">
+      
       {/******* NAVIGATION BAR ***************************************************/}
       <div className='top-navbar d-flex'>
         <div className='title-nav-container d-flex align-items-center'>
@@ -118,6 +128,7 @@ function App() {
           <button className={page === 'Home' ? 'link-btn link-active' : 'link-btn'} onClick={() => { handlePage('Home') }}>Home</button>
           <button className={page === 'Dashboard' ? 'link-btn link-active' : 'link-btn'} onClick={() => { handlePage('Dashboard') }}>Dashboard</button>
           <button className={page === 'Reports' ? 'link-btn link-active' : 'link-btn'} onClick={() => { handlePage('Reports') }}>Reports</button>
+          
         </div>
       </div>
 
@@ -151,7 +162,8 @@ function App() {
             format={'h:mm:ss A | MMM DD, YYYY'} />
         </div>
       </div>
-
+      
+      
       {/******* CONTENT SECTION ***************************************************/}
       <div className='content-container h-100'>
         {loading ? <ReactLoading type={'spokes'} color={'#0f1b2a'} height={300} width={275} className='loading-component' /> : '' }
@@ -174,23 +186,29 @@ function App() {
             (() => {
               switch (page) {
                 case 'Home':
-                  return <Home />
+                  return <Home  handlePage={handlePage} page={page}/>
                 case 'Reports':
                   return <Reports />
+                  case 'ProductOverview':
+                    return <ProductOverview />
                 default:
                   return <Home />
               }
             })()}
+
+            
         </Suspense>
       </div>
 
+      
+      
       {/******* FOOTER BAR ***************************************************/}
       <div className='footer-container'>
         <div className='links'>
           <div>
             <p>Product</p>
               <ul>
-                <li><a href='#'>Overview</a></li>
+                <li><a href='./components/productOverview' target="_blank">Overview</a></li>
                 <li><a href={usermanual} target="_blank">User Manual</a></li>
               </ul>
           </div>
@@ -203,13 +221,7 @@ function App() {
               </ul>
           </div>
 
-          <div>
-            <p>Socials</p>
-              <ul>
-                <li><a href="#">Linkedin</a></li>
-                <li><a href="#">Github</a></li>
-              </ul>
-          </div>
+          
 
         </div>
       </div>

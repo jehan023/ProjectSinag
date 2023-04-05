@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState, Button} from 'react';
 import { Image } from 'react-bootstrap';
 import Logo from '../images/Sinag-Logo.png';
 import JEHAN from '../images/JHpic.JPG';
@@ -6,10 +6,7 @@ import MIAKA from '../images/MDVpic.jpg';
 import EARL from '../images/EFNApic.png';
 import JC from '../images/JCPpic.png';
 import Laptop from '../images/laptop-header.png';
-import hpi1 from '../images/hp-image-1.gif';
-import hpi2 from '../images/hp-image-2.gif';
-import hpi3 from '../images/hp-image-3.gif';
-import usermanual from '../files/SinagUserManual.pdf';
+
 import reactLogo from '../images/react-logo.png';
 import loraLogo from '../images/lora-logo.png';
 import arduinoLogo from '../images/arduino-logo.png';
@@ -18,10 +15,11 @@ import vscodeLogo from '../images/vscode-logo.png';
 
 
 
-function Home() {
-    const openPDF = () => {
-        window.open(usermanual);
-    };
+
+
+function Home(props) {
+    const {page, handlePage} = props; 
+
 
     const developer = [
         { name: 'ALLADA, EARL FRANCES NICOLI', email: 'alladaearlfrances@gmail.com', role: 'Developer', dp: EARL },
@@ -40,6 +38,8 @@ function Home() {
         </div>
     );
 
+    
+
     return (
         <div className='home-container'>
             <div className='header'>
@@ -47,44 +47,54 @@ function Home() {
                 <div className='header-content'>
                 <p className='title'>SINAG</p>
                 <p className='mb-4'>Bringing sustainable illumination <br></br> for a brighter and greener future</p>
-                <button className='learn-btn' onClick={openPDF}>Learn More </button>
+                <div className='learn-btn-container'>
+                    <button className={page === 'Home'? 'learn-btn' : 'learn-btn hide-on-page'} onClick={() => { handlePage('ProductOverview') }}>Learn More </button>
+                </div>
                 </div>
             </div>
-            <div className='project-desc'>
-                <div className='content-container'>
-                    <img className='hpi1-img' src={hpi1} alt='image'/>  
-                    <div className='desc-container'>
-                        <p className='tl'>Centralized Monitoring System</p>  
-                        <p className='desc'>
-                            Sinag is a LoRa-based centralized monitoring system for solar street lights that allows users to monitor and manage all the solar lamps on a single platform. Both the street lights and gateway are embedded with a tranceiver module and an antenna. The gateway functions as a bridge by providing a communication link between the end nodes (street lights) and the centralized monitoring system. The gateway sends a request to the end node to send its data. Once the request has been received, the sensor readings will be encoded. The data will be sent to the gateway prior to the request, transmitting it to the centralized monitoring system for analyzation.   
-                        </p>
+            
+            <div className='features-desc'>
+                <p className='fd-title'>Our Features</p>
+                <p className='fd-desc'>Discover how our innovative technology allows you to remotely monitor and optimize the performance of your solar streetlights, reducing costs and increasing efficiency.</p>
+                
+                <div className='feature-card-container'>
+                    <div className='feature-card'>
+                        {/* <img className='fc-img1' src={hpi2} alt='image'  /> */}
+                        
+                        <p className='feature-desc'>Our dashboard provides live updates on the current power, energy yield, battery life, environmental parameters and lighting output of each streetlight. With this feature, you can monitor your solar street lights from the comfort of your office all while ensuring that your solar streetlights are always working efficiently, providing a safe and well-lit environment for your community</p>
+                        <p className='feature-title'>Live Status Updates</p>
                     </div>
-                </div>
 
-                <hr className='hr-divider'/>
+                    <div className='feature-card'>
+                        
+                        <p className='feature-desc'>With our LoRa-based monitoring System, you can manage you street lights even if they are located in different area. This also ensures reliable and secure data transmission, so you can guarantee that all data transmitted and received are safe and accurate. </p>
+                        <p className='feature-title'>Long Range Communication</p>
+                    </div>
 
-                <div className='content-container'>
-                    <img className='hpi2-img' src={hpi2} alt='image'  />
-                    <div className='desc-container'>
-                        <p className='tl'>LoRa Wireless Communication Technology</p>  
-                        <p className='desc'>
-                        One of Sinag's key features is the usage of LoRa technology as its medium of communication between the gateway and the end-devices. LoRa (Long Range) wireless communication technology gained popularity due to its advantages for different IoT applications. Some of these advantages include its long-range communication capability, low power consumption, cost-effectiveness, high capacity, and easy deployment. 
-                        </p>
+                    <div className='feature-card'>
+                        
+                        <p className='feature-desc'>Our system optimizes energy consumption by ensuring that all energy are used productively. An automated dimming function is implemented to adjust the lighting output based on the available energy, ensuring that the solar street lights are always operating efficiently. This feature reduces energy waste, prolonging the battery life of the solar streetlights.</p>
+                        <p className='feature-title'>Energy Optimization</p>
+                    </div>
+
+                    <div className='feature-card'>
+                        
+                        <p className='feature-desc'>An alerting system is included with our system that notifies you of any issues with your solar street lights. This enables efficient response to issues, minimizing downtime. With our alerting system, you can have a peace of mind knowing that any problems with your solar street lights will be addressed promptly.</p>
+                        <p className='feature-title'>Alerting System</p>
+                    </div>
+
+                    <div className='feature-card'>
+                        
+                        <p className='feature-desc'>Feature 5 Desc</p>
+                        <p className='feature-title'>Cost-Effective Solution</p>
+                    </div>
+
+                    <div className='feature-card'>
+                        
+                        <p className='feature-desc'>Feature 6 Desc</p>
+                        <p className='feature-title'>Data Analysis</p>
                     </div>
                 </div>
-                
-                <hr className='hr-divider'/>
-                
-                <div className='content-container'>
-                    <img className='hpi1-img' src={hpi3} alt='image'/>  
-                    <div className='desc-container'>
-                        <p className='tl'>Data Analysis for Early Anomaly Detection</p>  
-                        <p className='desc'>
-                            Data analysis plays a crucial role in a monitoring portal in detecting unusual events that cause system failure and performance issues. Early detection of anomalies not only prevents severe damage to the system, it also saves resources and ensures system availability and stability.
-                        </p>
-                    </div>
-                </div>
-                
             </div>
 
             <div className='dev-section'>
@@ -102,7 +112,7 @@ function Home() {
                 </div>
             </div>
 
-            <div className='slider-container'>
+            {/* <div className='slider-container'>
                 <div className='slider'>
                    
                     <div className='slide'><img src={reactLogo} alt='ReactLogo'/></div>
@@ -119,7 +129,7 @@ function Home() {
                     <div className='slide'><img src={reactLogo} alt='ReactLogo'/></div>
                     
                 </div>
-            </div>
+            </div> */}
         </div>
     )
 }
