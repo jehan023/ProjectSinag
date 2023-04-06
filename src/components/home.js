@@ -6,7 +6,7 @@ import MIAKA from '../images/MDVpic.jpg';
 import EARL from '../images/EFNApic.png';
 import JC from '../images/JCPpic.png';
 import Laptop from '../images/laptop-header.png';
-
+import fc1img from '../images/fd1-img.png';
 import reactLogo from '../images/react-logo.png';
 import loraLogo from '../images/lora-logo.png';
 import arduinoLogo from '../images/arduino-logo.png';
@@ -59,39 +59,38 @@ function Home(props) {
                 
                 <div className='feature-card-container'>
                     <div className='feature-card'>
-                        {/* <img className='fc-img1' src={hpi2} alt='image'  /> */}
-                        
+                        <img className='fc-img' src={Logo} alt='image'/>
                         <p className='feature-desc'>Our dashboard provides live updates on the current power, energy yield, battery life, environmental parameters and lighting output of each streetlight. With this feature, you can monitor your solar street lights from the comfort of your office all while ensuring that your solar streetlights are always working efficiently, providing a safe and well-lit environment for your community</p>
                         <p className='feature-title'>Live Status Updates</p>
                     </div>
 
                     <div className='feature-card'>
-                        
+                        <img className='fc-img' src={Logo} alt='image'/>
                         <p className='feature-desc'>With our LoRa-based monitoring System, you can manage you street lights even if they are located in different area. This also ensures reliable and secure data transmission, so you can guarantee that all data transmitted and received are safe and accurate. </p>
                         <p className='feature-title'>Long Range Communication</p>
                     </div>
 
                     <div className='feature-card'>
-                        
-                        <p className='feature-desc'>Our system optimizes energy consumption by ensuring that all energy are used productively. An automated dimming function is implemented to adjust the lighting output based on the available energy, ensuring that the solar street lights are always operating efficiently. This feature reduces energy waste, prolonging the battery life of the solar streetlights.</p>
-                        <p className='feature-title'>Energy Optimization</p>
-                    </div>
-
-                    <div className='feature-card'>
-                        
+                        <img className='fc-img' src={Logo} alt='image'/>
                         <p className='feature-desc'>An alerting system is included with our system that notifies you of any issues with your solar street lights. This enables efficient response to issues, minimizing downtime. With our alerting system, you can have a peace of mind knowing that any problems with your solar street lights will be addressed promptly.</p>
                         <p className='feature-title'>Alerting System</p>
                     </div>
 
                     <div className='feature-card'>
-                        
-                        <p className='feature-desc'>Feature 5 Desc</p>
+                        <img className='fc-img' src={Logo} alt='image'/>
+                        <p className='feature-desc'>Our system includes a physical remote control for on-site management of your solar streetlights. The remote features buttons for Auto, On, Off, Brightness (+), Brightness (-), 3H, 6H, and 8H, reducing the need for manual adjustments. The Auto button adjusts lighting output based on ambient light levels, while the On/Off and Brightness (+/-) buttons offer manual control. The 3H, 6H, and 8H buttons allow for easy scheduling of lighting, ensuring proper illumination when needed for community safety.</p>
+                        <p className='feature-title'>Remote Control</p>
+                    </div>
+
+                    <div className='feature-card'>
+                        <img className='fc-img' src={Logo} alt='image'/>
+                        <p className='feature-desc'>Our solar streetlight monitoring system offers a cost-effective solution for communities seeking reliable and efficient lighting. By using renewable energy and optimizing energy consumption, our system reduces electricity and maintenance costs. Additionally, our remote management feature enables easy on-site control, reducing the need for manual adjustments and maintenance visits.</p>
                         <p className='feature-title'>Cost-Effective Solution</p>
                     </div>
 
                     <div className='feature-card'>
-                        
-                        <p className='feature-desc'>Feature 6 Desc</p>
+                        <img className='fc-img' src={Logo} alt='image'/>
+                        <p className='feature-desc'>Sinag includes a powerful data analysis capabilities that enables you to continuously monitor critical system parameters such as battery charge and discharge, energy generation, and battery level. With this information, we can quickly identify and resolve issues, ensuring that your streetlights always operate at optimal levels. </p>
                         <p className='feature-title'>Data Analysis</p>
                     </div>
                 </div>
