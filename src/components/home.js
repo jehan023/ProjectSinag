@@ -67,7 +67,7 @@ function Home(props) {
                 <div className='feature-card-container'>
                     <div className='feature-card'>
                         <img className='fc-img' src={fd1img} alt='image'/>
-                        <p className='feature-desc'>Our dashboard provides live updates on the current power, energy yield, battery life, environmental parameters and lighting output of each streetlight. With this feature, you can monitor your solar street lights from the comfort of your office all while ensuring that your solar streetlights are always working efficiently, providing a safe and well-lit environment for your community</p>
+                        <p className='feature-desc'>Our dashboard provides live updates on the current power, energy yield, battery life, and environmental parameters. With this feature, you can monitor your solar street lights from the comfort of your office all while ensuring that your solar streetlights are always working efficiently, providing a safe and well-lit environment for your community</p>
                         <p className='feature-title'>Live Status Updates</p>
                     </div>
 
@@ -85,7 +85,7 @@ function Home(props) {
 
                     <div className='feature-card'>
                         <img className='fc-img' src={fd4img} alt='image'/>
-                        <p className='feature-desc'>A physical remote control is included for on-site management of your solar street lights. The remote features buttons for Auto, On, Off, Brightness (+), Brightness (-), 3H, 6H, and 8H. The Auto button adjusts lighting output based on ambient light levels, while the On/Off and Brightness (+/-) buttons offer manual control. The 3H, 6H, and 8H buttons allow easy scheduling of lighting, ensuring proper illumination for community safety.</p>
+                        <p className='feature-desc'>A physical remote control is included for on-site management of your solar street lights. The remote features buttons for Auto, On, Off, Brightness (+), Brightness (-), 3H, 5H, and 8H. The Auto button adjusts lighting output based on ambient light levels, while the On/Off and Brightness (+/-) buttons offer manual control. The 3H, 6H, and 8H buttons allow easy scheduling of lighting, ensuring proper illumination for community safety.</p>
                         <p className='feature-title'>Remote Control</p>
                     </div>
 
