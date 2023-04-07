@@ -40,6 +40,7 @@ const ProductionChart = (props) => {
     const [generate, setGenerate] = useState([]);
     const [temp, setTemp] = useState([]);
     const [light, setLight] = useState([]);
+    const [level, setLevel] = useState([]);
 
     useEffect(() => {
         try {

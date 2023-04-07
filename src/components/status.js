@@ -22,6 +22,7 @@ import { IoBatteryCharging } from "react-icons/io5";
 function Status(props) {
   console.log('Status:', props.data)
   const data = props.data;
+  const sameDateData = props.sameDate;
   const battPercent = data.batt_level;
   const [battColor, setBattColor] = useState('');
   const [humidity, setHumidity] = useState('-');
@@ -43,7 +44,6 @@ function Status(props) {
       console.error(error);
     }
   }
-  console.log('Humidity: ', humidity);
 
   const BattStatusIcon = () => {
     if (battPercent >= 76) {
@@ -81,17 +81,72 @@ function Status(props) {
     }
   }
 
-  console.log('Humidity', humidity);
+  const GetEnergyYield = () => {
+    let energy = 0.0;
+    let totalEnergy = 0.0;
+    sameDateData.forEach(same => {
+      energy = energy + same.pv_power;
+    });
+    totalEnergy = (energy * 0.16667);
+    console.log("Energy: " + totalEnergy);
+    return (parseFloat(totalEnergy).toFixed(2));
+  }
+
+  // Get the current time
+  const currentTime = new Date();
+
+  // Extract the hour and minute components from the current time
+  const currentHour = currentTime.getHours();
+  const currentMinute = currentTime.getMinutes();
+
+  // Split the lastTime string into hour and minute components
+  const [lastHour, lastMinute] = data.time.split(':').map(Number);
+
+  // Calculate the time difference in minutes
+  const timeDifference = (currentHour - lastHour) * 60 + (currentMinute - lastMinute);
+
+  const hoursDifference = Math.floor(timeDifference / 60);
+  const minutesDifference = timeDifference % 60;
+  let HRlabel = " hr ";
+  let MINlabel = " min ";
+  if (hoursDifference > 1) {
+    HRlabel = " hrs ";
+  } else {
+    HRlabel = " hr ";
+  }
+  if (minutesDifference > 1) {
+    MINlabel = " mins ago.";
+  } else {
+    MINlabel = " min ago."
+  }
+
+  const GetLastUpdate = () => {
+    let active;
+    if (currentTime.toLocaleString("en-US", { month: "long", day: 'numeric', year: 'numeric' }) === data.date) {
+      if (data.pv_power > 0.0 || data.charging === 1.0 || data.led_status === 1.0) {
+        active = "Active";
+      }
+    } else {
+      active = "Inactive";
+    }
+    return <div className='d-flex align-items-center gap-2 my-2'>
+      <div className={active === "Active" ? 'sl-status sl-active' : 'sl-status sl-inactive'}> - </div>
+      {currentTime.toLocaleString("en-US", { month: "long", day: 'numeric', year: 'numeric' }) === data.date ?
+        timeDifference > 60 ?
+          <h6 className='my-0'>{active + " | Last update " + hoursDifference + HRlabel + minutesDifference + MINlabel}</h6> :
+          <h6 className='my-0'>{active + " | Last update " + timeDifference + MINlabel}</h6>
+        : <h6 className='my-0'>{active + " | Last update " + data.date}</h6>
+      }
+    </div>
+  }
+
 
   return (
     <div className='status-container'>
       <div className='d-flex align-items-center my-0'>
         <h3 className='my-0'>System Status</h3>
       </div>
-      <div className='d-flex align-items-center gap-2 my-2'>
-        <div className='sl-status'> - </div>
-        <h6 className='my-0'>Active | Last update 15mins ago</h6>
-      </div>
+      <GetLastUpdate />
 
       {/**Status Cards Section */}
       <div className='status-section'>
@@ -105,7 +160,7 @@ function Status(props) {
             </div>
             <div className='status-card'>
               <BsLightningChargeFill className='status-icon' />
-              <h2>18Wh</h2>
+              <h2>{GetEnergyYield()}Wh</h2>
               <h5>Energy Yield</h5>
             </div>
             <div className='status-card'>
