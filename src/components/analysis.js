@@ -108,9 +108,9 @@ function Analysis(props) {
         </div>
 
         {/******* CHARGING CHART **************************************************/}
-        <div className='chart mb-4'>
+        {/* <div className='chart mb-4'>
           <ChargingChart data={filterData} viewMode={viewMode} />
-        </div>
+        </div> */}
 
 
         {/******* ENERGY ANALYSIS CHART COMBINED **********************************/}

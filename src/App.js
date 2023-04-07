@@ -35,15 +35,15 @@ function App() {
   const options = [
     {
       list: 'SL1', value: 'SL1', label: 'Streetlight 1', location: 'Narra St., Brgy BF International Village, Las Piñas City | 1740',
-      battCapacity: '20Ah', pvPanel: '65W', lamp: '100W', status: 'Active'
+      battCapacity: '20Ah', pvPanel: '25W', lamp: '250W', status: 'Active'
     },
     {
       list: 'SL2', value: 'SL2', label: 'Streetlight 2', location: 'Narra St., Brgy BF International Village, Las Piñas City | 1740',
-      battCapacity: '30Ah', pvPanel: '65W', lamp: '120W', status: 'Inactive'
+      battCapacity: '20Ah', pvPanel: '25W', lamp: '250W', status: 'Inactive'
     },
     {
       list: 'SL3', value: 'SL3', label: 'Streetlight 3', location: 'Patola St., Brgy BF International Village, Las Piñas City | 1740',
-      battCapacity: '36Ah', pvPanel: '80W', lamp: '150W', status: 'Active'
+      battCapacity: '20Ah', pvPanel: '25W', lamp: '250W', status: 'Active'
     },
   ];
 
@@ -92,27 +92,31 @@ function App() {
   const formattedData = fetchData.slice(1).map(row => ({
     date: row[0],
     time: row[1],
-    pv_power: parseFloat(row[4]),
-    batt_volts: parseFloat(row[5]),
-    batt_level: parseFloat(row[6]),
-    led_amps: parseFloat(row[7]),
-    led_status: parseFloat(row[8]),
-    lux: parseFloat(row[9]),
-    temp: parseFloat(row[10]),
-    snr: parseFloat(row[11]),
-    rssi: parseFloat(row[12])
+    pv_volts: parseFloat(row[2]),
+    pv_power: parseFloat(row[3]),
+    batt_volts: parseFloat(row[4]),
+    batt_level: parseFloat(row[5]),
+    batt_power: parseFloat(row[6]),
+    led_status: parseFloat(row[7]),
+    lux: parseFloat(row[8]),
+    temp: parseFloat(row[9]),
+    snr: parseFloat(row[10]),
+    rssi: parseFloat(row[11]),
+    charging: parseFloat(row[12])
   }));
 
   const lastData = formattedData[formattedData.length-1];
+
+  const currentDate = new Date().toLocaleString("en-US", { month: "long", day: 'numeric', year: 'numeric' });
+  const sameDateData = formattedData.filter(sameDateItem => {
+    return (sameDateItem.date === currentDate);
+  });
 
   console.log('Render ', Math.random(), 'SLV: ', selectedValue);
 
   const openPDF = () => {
     window.open(usermanual);
   };
-
-
-  
 
   return (
     <div className="App">
@@ -172,11 +176,11 @@ function App() {
           {page === 'Dashboard' ? (() => {
             switch (dashboard) {
               case 'overview':
-                return <Overview selectedSL={streetlight} />
+                return <Overview selectedSL={streetlight} sameDate={sameDateData} />
               case 'profile':
                 return <Profile selectedSL={streetlight} />
               case 'status':
-                return <Status data={lastData} />
+                return <Status data={lastData} sameDate={sameDateData} />
               case 'analysis':
                 return <Analysis data={formattedData}/>
               default:

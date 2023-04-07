@@ -14,6 +14,7 @@ function Overview(props, { setHumidityValue }) {
   const [error, setError] = useState(null);
 
   const data = props.selectedSL;
+  const sameDateData = props.sameDate;
   const [sunrise, setSunrise] = useState('-');
   const [sunset, setSunset] = useState('-');
   const [temp, setTemp] = useState('-');
@@ -56,6 +57,17 @@ function Overview(props, { setHumidityValue }) {
     return formattedTime;
   }
 
+  const GetEnergyYield = () => {
+    let energy = 0.0;
+    let totalEnergy = 0.0;
+    sameDateData.forEach(same => {
+      energy = energy + same.pv_power;
+    });
+    totalEnergy = (energy * 0.16667);
+    console.log("Energy: " + totalEnergy);
+    return (parseFloat(totalEnergy).toFixed(2));
+  }
+
   return (
     <div className='overview-container'>
       {loading ? <ReactLoading type={'spokes'} color={'#0f1b2a'} height={550} width={375} className='loading-api' /> : ''}
@@ -71,17 +83,17 @@ function Overview(props, { setHumidityValue }) {
             <div className='sl-overview-card d-flex align-items-center'>
               <GiSolarPower className='overview-icon w-100' />
               <div className='w-100'>
-                <h3>90.6 Wh</h3>
+                <h3>{GetEnergyYield()}Wh</h3>
                 <p>Current Yield</p>
-                <h3>0.5 kWh</h3>
+                <h3>{0.00}Wh</h3>
                 <p>Highest Yield</p></div>
             </div>
             <div className='sl-overview-card d-flex align-items-center'>
               <ImPower className='overview-icon w-50' />
               <div className='w-100'>
-                <h3>0.38 kWh</h3>
+                <h3>{0.00}Wh</h3>
                 <p>Current Consumption</p>
-                <h3>1.43 kWh</h3>
+                <h3>{0.00}Wh</h3>
                 <p>Highest Consumption</p></div>
             </div>
           </div>
@@ -145,8 +157,7 @@ function Overview(props, { setHumidityValue }) {
           </div>
           <div>
             <h2 className='my-3'>Location</h2>
-            <p className='mn-3'>Narra St. and  Patola St., Brgy. BF International
-              Village, Las Piñas City | 1740</p>
+            <p className='mn-3'>{data.location}</p>
           </div>
         </div>
       </div>
