@@ -429,6 +429,7 @@ body {
       margin-left:70px;
       color: #f5cf45;
     }
+
     .learn-btn-container{
       .hide-on-page {
         display:none;
@@ -507,7 +508,11 @@ body {
       .feature-title {
         font-weight: bold;
         text-align: center;
-        color:#090F1E;
+       // background-color:#090F1E;
+        padding:5px 0% 5px 0%;// top right bottom left
+        margin:0% 5% 0% 5%;// top right bottom left
+        color: #090F1E;
+        //color: #f5cf45;
       }
       
       .feature-desc {
@@ -644,11 +649,44 @@ body {
 height:auto;
 width:100%;
 display:block;
+background-color: #f8f8f8;
+padding: 3% 5% 3% 5%;// top right bottom left
+text-align: justify;
 
 
 .header{
-  background-color: green;
-  height: 100px;
+  height: auto;
+  margin-top:80px;
+  .header-desc{
+    color:#090F1E;
+    font-size: 14pt;
+  }
+  
+}
+.content-container{
+  .content-title{
+    color: #f5cf45;
+    font-weight: bold;
+    font-size: 22pt;
+  }
+  .content-desc-container{
+    
+    .content-desc{
+      color:#090F1E;
+      font-size: 14pt;
+    }
+    .content-desc-title{
+      color:#090F1E;
+      font-weight: bold;
+      font-size: 14pt;
+    }
+    ul li{
+      color:#090F1E;
+      font-size: 14pt;
+    }
+  }
+  
+  
 }
 .project-desc{ //features main container
   margin: 5% 10% 0% 10%;// top right bottom left
@@ -713,11 +751,10 @@ display:block;
 }
 }
 
-
   .footer-container{
     background-image: url("./images/footerbg.svg");
     background-size: cover;
-    margin-top:20px;
+    padding-top:20px;
     height:250px;
     display: flex;
     align-items: center;

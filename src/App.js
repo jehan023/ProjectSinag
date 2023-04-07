@@ -118,6 +118,7 @@ function App() {
     window.open(usermanual);
   };
 
+
   return (
     <div className="App">
       
