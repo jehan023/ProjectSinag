@@ -6,6 +6,11 @@ import Clock from 'react-live-clock';
 import ReactLoading from 'react-loading';
 import LoadDataFromSheet from './loadDataFromSheet';
 import axios from 'axios';
+import usermanual from './files/SinagUserManual.pdf';
+
+
+
+
 // import Select from 'react-select';
 
 const Overview = lazy(() => import('./components/overview.js'));
@@ -14,6 +19,9 @@ const Status = lazy(() => import('./components/status.js'));
 const Analysis = lazy(() => import('./components/analysis.js'));
 const Home = lazy(() => import('./components/home.js'));
 const Reports = lazy(() => import('./components/reports.js'));
+const ProductOverview= lazy(() => import('./components/productOverview.js'));
+
+
 
 function App() {
   const [page, setPage] = useState('Dashboard');
@@ -99,19 +107,28 @@ function App() {
 
   console.log('Render ', Math.random(), 'SLV: ', selectedValue);
 
+  const openPDF = () => {
+    window.open(usermanual);
+  };
+
+
+  
+
   return (
     <div className="App">
+      
       {/******* NAVIGATION BAR ***************************************************/}
       <div className='top-navbar d-flex'>
         <div className='title-nav-container d-flex align-items-center'>
-          <img src={Logo} alt='Logo' height={40} />
-          <h3 className='my-0 mx-2'>Project Sinag</h3>
+          <img src={Logo} alt='Logo' height={45} />
+          <h3 className='my-0 mx-2'></h3>
         </div>
 
         <div className='links-nav-container d-flex'>
           <button className={page === 'Home' ? 'link-btn link-active' : 'link-btn'} onClick={() => { handlePage('Home') }}>Home</button>
           <button className={page === 'Dashboard' ? 'link-btn link-active' : 'link-btn'} onClick={() => { handlePage('Dashboard') }}>Dashboard</button>
           <button className={page === 'Reports' ? 'link-btn link-active' : 'link-btn'} onClick={() => { handlePage('Reports') }}>Reports</button>
+          
         </div>
       </div>
 
@@ -145,11 +162,12 @@ function App() {
             format={'h:mm:ss A | MMM DD, YYYY'} />
         </div>
       </div>
-
+      
+      
       {/******* CONTENT SECTION ***************************************************/}
       <div className='content-container h-100'>
-        {loading ? <ReactLoading type={'spokes'} color={'#0f1b2a'} height={550} width={375} className='loading-component' /> : '' }
-        <Suspense fallback={<ReactLoading type={'spokes'} color={'#0f1b2a'} height={550} width={375} className='loading-component' />}>
+        {loading ? <ReactLoading type={'spokes'} color={'#0f1b2a'} height={300} width={275} className='loading-component' /> : '' }
+        <Suspense fallback={<ReactLoading type={'spokes'} color={'#0f1b2a'} height={300} width={275} className='loading-component' />}>
           {/* <LoadDataFromSheet slData={formattedData} /> */}
           {page === 'Dashboard' ? (() => {
             switch (dashboard) {
@@ -168,21 +186,47 @@ function App() {
             (() => {
               switch (page) {
                 case 'Home':
-                  return <Home />
+                  return <Home  handlePage={handlePage} page={page}/>
                 case 'Reports':
                   return <Reports />
+                  case 'ProductOverview':
+                    return <ProductOverview />
                 default:
                   return <Home />
               }
             })()}
+
+            
         </Suspense>
       </div>
 
+      
+      
       {/******* FOOTER BAR ***************************************************/}
       <div className='footer-container'>
+        <div className='links'>
+          <div>
+            <p>Product</p>
+              <ul>
+                <li><a href='./components/productOverview' target="_blank">Overview</a></li>
+                <li><a href={usermanual} target="_blank">User Manual</a></li>
+              </ul>
+          </div>
 
+          <div>
+            <p>Developers</p>
+              <ul>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+              </ul>
+          </div>
+
+          
+
+        </div>
       </div>
     </div>
+    
   );
 }
 
