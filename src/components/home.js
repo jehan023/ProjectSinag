@@ -84,7 +84,7 @@ function Home(props) {
                     <div className='feature-card'>
                         <img className='fc-img' src={fd4img} alt='image'/>
 
-                        <p className='feature-desc'>A physical remote control is included for on-site management of your solar street lights. The remote features buttons for Auto, On, Off, Brightness (+), Brightness (-), 3H, 5H, and 8H. The Auto button adjusts lighting output based on ambient light levels, while the On/Off and Brightness (+/-) buttons offer manual control. The 3H, 6H, and 8H buttons allow easy scheduling of lighting, ensuring proper illumination for community safety.</p>
+                        <p className='feature-desc'>A physical remote control is included for on-site management of your solar street lights. The remote features buttons for Auto, On, Off, Brightness (+), Brightness (-), 3H, 5H, and 8H. The Auto button adjusts lighting output based on ambient light levels, while the On/Off and Brightness (+/-) buttons offer manual control. The 3H, 5H, and 8H buttons allow easy scheduling of lighting, ensuring proper illumination for community safety.</p>
 
                         <p className='feature-title'>Remote Control</p>
                     </div>
