@@ -108,7 +108,6 @@ function productOverview() {
                         </p>
                     </div>
                 </div>
-                
             </div> */}
 
         </div>
