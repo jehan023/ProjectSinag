@@ -9,9 +9,9 @@ import Laptop from '../images/laptop-header.png';
 
 import fd1img from '../images/fd1img.png';
 import fd2img from '../images/fd2img.png';
-import fd3img from '../images/fd3img.gif';
+import fd3img from '../images/fd3img.png';
 import fd4img from '../images/fd4img.png';
-import fd5img from '../images/fd5img.gif';
+import fd5img from '../images/fd5img.png';
 import fd6img from '../images/fd6img.png';
 
 import reactLogo from '../images/react-logo.png';
@@ -45,6 +45,88 @@ function Home(props) {
         </div>
     );
 
+    const handleMoreBtnClick = (id) => {
+        // toggle the showDetailed property for the corresponding feature object
+        setFeatures(prevFeatures => {
+          const updatedFeatures = [...prevFeatures];
+          updatedFeatures[id - 1] = { ...updatedFeatures[id - 1], showDetailed: !updatedFeatures[id - 1].showDetailed };
+          return updatedFeatures;
+        });
+      };
+    const [features, setFeatures] = useState ([
+        {
+          id: 1,
+          img: fd1img,
+          title: 'Live Status Updates',
+          desc: 'Our dashboard provides live updates on the current power, energy yield, battery life, and environmental parameters.',
+          descDetailed: 'With this feature, you can monitor your solar street lights from the comfort of your office all while ensuring that your solar streetlights are always working efficiently, providing a safe and well-lit environment for your community',
+          showDetailed: false
+        },
+        {
+          id: 2,
+          img: fd2img,
+          title: 'Long Range Communication',
+          desc: 'Ensure that you are in control of your street lights even if they are situated on different areas.',
+          descDetailed: 'LoRa\'s reliable and secure data transmission is made possible by its long-range capabilities, low power consumption, and robustness, which are further enhanced by its unique modulation scheme called "Chirp Spread Spectrum" (CSS), enabling reliable transmission over long distances while using low power and resisting interference.',
+          showDetailed: false
+        },
+        {
+          id: 3,
+          img: fd3img,
+          title: 'Alerting System',
+          desc: 'Sends real-time notifications to you about any issues with the system. Notifications can be accessed on the Reports Page.',
+          descDetailed: 'The proactive alert feature in our monitoring portal empowers users to respond promptly to any issues that may affect their solar street lights, minimizing downtime and ensuring optimal performance.',
+          showDetailed: false
+        },
+        {
+          id: 4,
+          img: fd4img,
+          title: 'Remote Control',
+          desc: 'A physical remote control is included for on-site management of your solar street lights.',
+          descDetailed: 'The remote features buttons for Auto, On, Off, Brightness (+), Brightness (-), 3H, 5H, and 8H. The Auto button adjusts lighting output based on ambient light levels, while the On/Off and Brightness (+/-) buttons offer manual control. The 3H, 5H, and 8H buttons allow easy scheduling of lighting, ensuring proper illumination for community safety.',
+          showDetailed: false
+        },
+        {
+          id: 5,
+          img: fd5img,
+          title: 'Cost-Effective Solution',
+          desc: 'Our solar streetlight monitoring system offers a cost-effective solution for communities seeking reliable and efficient lighting.',
+          descDetailed: ' By using renewable energy and optimizing energy consumption, our system reduces electricity and maintenance costs. Additionally, our remote management feature enables easy on-site control, reducing the need for manual adjustments and maintenance visits.',
+          showDetailed: false
+        },
+        {
+          id: 6,
+          img: fd6img,
+          title: 'Data Analysis',
+          desc: 'Sinag includes a powerful data analysis capabilities that enables you to continuously monitor critical system parameters.',
+          descDetailed: 'These parameters include battery charge and discharge, energy generation, and battery level. By utilizing data collected from solar street lights, we can promptly detect and address any problems, thereby ensuring that your streetlights function at their best at all times.',
+          showDetailed: false
+        }
+    ])
+    
+    const FeaturesCard = features.map((fc, id) =>
+    <div key={id} className={`feature-card${fc.showDetailed ? ' show-detailed' : ''}`}>
+        <img src={fc.img} alt='feature-img' className='fc-img' />
+        <p className='feature-title'>{fc.title}</p>
+        <p className='feature-desc'>{fc.desc}</p>
+        <div className='feature-btn-container'>
+            <button className='feature-btn' onClick={() => handleMoreBtnClick(id + 1)}> {fc.showDetailed ? 'Back' : 'More'}</button>
+        </div>
+        <p className='feature-desc-detailed'>{fc.descDetailed}</p>
+    </div>
+    );
+    // const FeaturesCard = features.map((fc, id) =>
+    //     <div key={id} className={`feature-card${showDesc ? ' show-detailed' : ''}`}>
+    //         <img src={fc.img} alt='feature-img' className='fc-img'/>
+    //         <p className='feature-title'>{fc.title}</p>
+    //         <p className='feature-desc'>{fc.desc}</p>
+    //         <button className='feature-btn' onClick={() => handleMoreBtnClick(id)}> {showDesc ? 'Back' : 'More'}</button>
+    //         <p className='feature-desc-detailed'>{fc.descDetailed}</p>
+    //     </div>
+    // );
+
+  
+
     return (
         <div className='home-container'>
             <div className='header'>
@@ -63,43 +145,7 @@ function Home(props) {
                 <p className='fd-desc'>Discover how our innovative technology allows you to remotely monitor and optimize the performance of your solar streetlights, reducing costs and increasing efficiency.</p>
                 
                 <div className='feature-card-container'>
-                    <div className='feature-card'>
-                        <img className='fc-img' src={fd1img} alt='image'/>
-                        <p className='feature-desc'>Our dashboard provides live updates on the current power, energy yield, battery life, and environmental parameters. With this feature, you can monitor your solar street lights from the comfort of your office all while ensuring that your solar streetlights are always working efficiently, providing a safe and well-lit environment for your community</p>
-                        <p className='feature-title'>Live Status Updates</p>
-                    </div>
-
-                    <div className='feature-card'>
-                        <img className='fc-img' src={fd2img} alt='image'/>
-                        <p className='feature-desc'>With our LoRa-based monitoring System, you can manage you street lights even if they are located in different area. This also ensures reliable and secure data transmission, so you can guarantee that all data transmitted and received are safe and accurate. </p>
-                        <p className='feature-title'>Long Range Communication</p>
-                    </div>
-
-                    <div className='feature-card'>
-                        <img className='fc-img' src={fd3img} alt='image'/>
-                        <p className='feature-desc'>An alerting system is included with our system that notifies you of any issues with your solar street lights. This enables efficient response to issues, minimizing downtime. With our alerting system, you can have a peace of mind knowing that any problems with your solar street lights will be addressed promptly.</p>
-                        <p className='feature-title'>Alerting System</p>
-                    </div>
-
-                    <div className='feature-card'>
-                        <img className='fc-img' src={fd4img} alt='image'/>
-
-                        <p className='feature-desc'>A physical remote control is included for on-site management of your solar street lights. The remote features buttons for Auto, On, Off, Brightness (+), Brightness (-), 3H, 5H, and 8H. The Auto button adjusts lighting output based on ambient light levels, while the On/Off and Brightness (+/-) buttons offer manual control. The 3H, 5H, and 8H buttons allow easy scheduling of lighting, ensuring proper illumination for community safety.</p>
-
-                        <p className='feature-title'>Remote Control</p>
-                    </div>
-
-                    <div className='feature-card'>
-                        <img className='fc-img' src={fd5img} alt='image'/>
-                        <p className='feature-desc'>Our solar streetlight monitoring system offers a cost-effective solution for communities seeking reliable and efficient lighting. By using renewable energy and optimizing energy consumption, our system reduces electricity and maintenance costs. Additionally, our remote management feature enables easy on-site control, reducing the need for manual adjustments and maintenance visits.</p>
-                        <p className='feature-title'>Cost-Effective Solution</p>
-                    </div>
-
-                    <div className='feature-card'>
-                        <img className='fc-img' src={fd6img} alt='image'/>
-                        <p className='feature-desc'>Sinag includes a powerful data analysis capabilities that enables you to continuously monitor critical system parameters such as battery charge and discharge, energy generation, and battery level. With this information, we can quickly identify and resolve issues, ensuring that your streetlights always operate at optimal levels. </p>
-                        <p className='feature-title'>Data Analysis</p>
-                    </div>
+                    {FeaturesCard}
                 </div>
             </div>
 
@@ -112,6 +158,24 @@ function Home(props) {
 
             <div className='tools-section'>
                 <p className='t-title'>Our Project Toolbox</p>
+                <div className='tools-row'>
+                    <div className='tools-card'>
+                        <img src={reactLogo} alt='ReactLogo'/>
+                    </div>
+                    <div className='tools-card'>
+                        <img src={loraLogo} alt='LoRaLogo'/>
+                    </div>
+                    <div className='tools-card'>
+                        <img src={vscodeLogo} alt='VSLogo'/>
+                    </div>
+                    <div className='tools-card'>
+                        <img src={gsheetsLogo} alt='GSheetsLogo'/>
+                    </div>
+                    <div className='tools-card'>
+                        <img src={arduinoLogo} alt='ArduinoLogo'/>
+                    </div>
+                </div>
+                
             </div>
 
             {/* <div className='slider-container'>

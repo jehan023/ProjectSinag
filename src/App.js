@@ -206,11 +206,12 @@ function App() {
           <div>
             <p>Product</p>
               <ul>
-                <li><a href='./components/productOverview' target="_blank">Overview</a></li>
+              <li><a href="#" onClick={() => { handlePage('ProductOverview') }}>Overview</a></li>
+
+
                 <li><a href={usermanual} target="_blank">User Manual</a></li>
               </ul>
           </div>
-
           <div>
             <p>Developers</p>
               <ul>

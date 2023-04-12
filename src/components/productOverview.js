@@ -3,6 +3,7 @@ import '../App.scss';
 import hpi1 from '../images/hp-image-1.gif';
 import hpi2 from '../images/hp-image-2.gif';
 import hpi3 from '../images/hp-image-3.gif';
+import header from '../images/product_header.svg';
 
 function productOverview() {
     
@@ -10,10 +11,14 @@ function productOverview() {
     return (
         <div className='productOverview-container'>
             <div className='header'>
-                <p className='header-desc'>Welcome! We are excited to share with you our project which aims to provide sustainable and efficient illumination for streets while also reducing energy costs and carbon footprint. In this page, you will find detailed information about our project, including technical specifications of our system. Additionally, we will also explain the social and environmental impact of our project, discussing the community benefits and economic contributions that our system can provide. We hope that this web page will give you a better understanding of our project and how it can make a positive impact on your community.</p>
+                <p className='header-desc'>WELCOME TO SINAG</p>
+                <p className='header-desc2'>A Lora-based Centralized Monitoring System for Solar Street Lights</p>
             </div>
 
             <div className='content-container'>
+                <div className='content-desc-container'>
+                    <p className='content-desc'> We are excited to share with you our project which aims to provide sustainable and efficient illumination for streets while also reducing energy costs and carbon footprint. In this page, you will find detailed information about our project, including technical specifications of our system. Additionally, we will also explain the social and environmental impact of our project, discussing the community benefits and economic contributions that our system can provide. We hope that this web page will give you a better understanding of our project and how it can make a positive impact on your community.</p>
+                </div>
                 <p className='content-title'>Goals and Objective</p>
                 <div className='content-desc-container'>
                     <p className='content-desc'>At our core, our project is driven by a mission to bring sustainable illumination to communities around the world while reducing maintenance costs. Our goals and objectives are centered around achieving this mission by creating a system for early anomaly detection that is efficient, effective, and user-friendly.</p>
