@@ -27,7 +27,7 @@ body {
   background-color: #090F1E;
   height: 80px;
   width: 100%;
-  padding: 2% 78% 2% 2%;
+  padding: 2% 73% 2% 2%;
   justify-content: space-between;
   color: #E7EDF5;
   position: fixed;
@@ -389,6 +389,9 @@ body {
     flex-direction: row;
     background-color: #090F1E;
     background-image: url("./images/headerbg.svg");
+    width: 100%;
+    height: auto; 
+    max-width: 100%;
     background-size: cover;
     margin-top: 80px;
     padding: 50px 80px;
@@ -400,11 +403,7 @@ body {
       order:2;
       margin-left: 10%;  
     }
-    @media (max-width: 1375px) {
-      .laptop-img {
-         display: none;
-      }
-   }
+    
     .header-content{
       display:flex;
       flex-direction: column;
@@ -455,8 +454,32 @@ body {
         
       }
     }
+    @media (max-width: 1375px) {
+      .laptop-img {
+         display: none;
+      }
+   }
+   @media (max-width: 1156px) {
     
+    .title {
+      font-size: 62pt;
+      margin-left:50px;
+    }
+    .mb-4 {
+      font-size: 18pt;
+      margin-left:50px;
+      
+    }
+    .learn-btn-container{
+      .learn-btn{
+      width: 180px;
+      margin-left:50px;
+      }
+    }
   }
+    
+}
+
 
   .features-desc{ //Our Features
     padding-top:3%;
@@ -497,7 +520,6 @@ body {
         box-sizing: border-box;
         overflow: hidden;
         //box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        
       }
       .fc-img{
         margin-bottom: 5px;
@@ -569,13 +591,13 @@ body {
       }
       @media (max-width: 1375px) {
         .feature-card{
-          height:300px;
+          height:380px;
         }
         .feature-title{
-          font-size: 10pt;
+          font-size: 12pt;
         }
         .feature-desc,.feature-desc-detailed {
-          font-size: 8pt;
+          font-size: 11pt;
         }
         .feature-btn{
           font-size: 10pt;
@@ -583,10 +605,29 @@ body {
         }
       } 
     }
+    @media (max-width: 1156px) {
+    
+      .fd-title{
+        font-size: 36pt;
+      }
+      .fd-desc{
+        font-size: 14pt;
+      }
+      .feature-card-container{
+        grid-gap: 20px;
+        .feature-card{
+          height:350px;
+          
+          .feature-desc,.feature-desc-detailed {
+            font-size: 9pt;
+          }
+        }
+        
+    }
 
   }
 
-  
+}  
   .dev-section {
     background-image: url("./images/devbg.svg");
     background-color: #E7EDF5;
@@ -838,8 +879,8 @@ font-family: "Gotham Medium";
  }
   
 }
-}
 
+}
 .footer-container{
   background-image: url("./images/footerbg.svg");
   background-size: cover;
@@ -848,6 +889,7 @@ font-family: "Gotham Medium";
   display: flex;
   align-items: center;
   justify-content: center;
+  
 
 
     p{
@@ -880,6 +922,6 @@ font-family: "Gotham Medium";
       text-decoration: underline;
       color:#f5cf45;
     }
-  }
+}
 
   
