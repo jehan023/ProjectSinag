@@ -130,19 +130,20 @@ body {
 
 ////////////////////////////////////////// OVERVIEW ////////////////////
 .overview-container {
-  padding: 210px 50px 30px 50px;
+  padding: 210px 50px 120px 50px;
   .loading-api {
     z-index: 1000;
     position: absolute;
     margin: 5% 32%;
   }
   .sl-overview {
-    width: 60%;
-    padding-right:100px;
+    width: 50%;
+    padding-right:20px;
+    padding-left:20px;
     
     .sl-overview-card {
       background-color: #f5cf45;
-      padding: 30px;
+      padding: 40px;
       border-radius: 20px;
       width: 100%;
       height: auto;
@@ -165,7 +166,7 @@ body {
     }
   }
   .sl-devices {
-    width: 40%;
+    width: 45%;
     background-color: #E7EDF5;
     border-radius: 20px;
     margin-top: 1%;
@@ -259,7 +260,7 @@ body {
 ////////////////////////////////////////// STATUS ////////////////////
 .status-container {
   //height: 100vh !important;
-  padding: 210px 50px 30px 50px;
+  padding: 210px 50px 120px 50px;
   overflow-y: hidden;
   .status-card {
     background-color: #f5cf45;
@@ -662,6 +663,7 @@ body {
     .dev-image {
       height: 200px;
       width: 200px;
+      
       // border-radius: 100px;
       // border: 1px solid #bf212f;
     }
@@ -881,6 +883,72 @@ font-family: "Gotham Medium";
 }
 
 }
+///////////////////ABOUT US/////////////////
+.aboutus-container{
+  height:auto;
+  width:100%;
+  display:block;
+  background-color: #dfe9f6;
+  padding: 0% 0% 3% 0%;// top right bottom left
+  text-align: justify;
+  font-family: "Gotham Medium";
+
+  .header{
+    height: 400px;
+    margin-top:80px;
+    background-image: url("./images/product_header.svg");
+    background-size: cover;
+    .header-desc{
+      font-size: 68pt;
+      font-weight: bold;
+      font-family: "Gotham Bold";
+      color: #f5cf45;
+      padding-top:6%;
+      margin-left: 8%;
+    }
+  }
+    .content-container{
+      padding: 3% 8% 2% 8%;// top right bottom left
+      .title{
+        color: #090F1E;
+        font-weight: bold;
+        font-size: 22pt;
+        font-family: "Gotham Bold";
+      }
+      .dev-card{
+        display:flex;
+        flex-direction: row;
+        background-color: #E7EDF5;
+        border-radius: 20px;
+        margin: 0% 0% 3% 0%;// top right bottom left
+        padding: 3% 3%  3% 3%;// top right bottom left
+        
+      }
+      .dev-img{
+        height: 200px;
+        width: 200px;
+        border-radius: 50%;
+      }
+      .dev-info{
+        margin: 2% 0% 0% 4%;// top right bottom left
+        align-items: center;
+        text-align: justify;
+      }
+      
+      .dev-name{
+        color:#090F1E;
+        font-size: 20pt;
+        font-family: 'Gotham Bold';
+        font-weight: bold;
+      }
+      .dev-desc{
+        color:#090F1E;
+        font-size: 14pt;
+      }
+    }
+  
+}
+///////////////FOOTER//////////////
 .footer-container{
   background-image: url("./images/footerbg.svg");
   background-size: cover;
