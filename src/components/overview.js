@@ -15,6 +15,7 @@ function Overview(props, { setHumidityValue }) {
 
   const data = props.selectedSL;
   const sameDateData = props.sameDate;
+  const allData = props.allData;
   const [sunrise, setSunrise] = useState('-');
   const [sunset, setSunset] = useState('-');
   const [temp, setTemp] = useState('-');
@@ -64,8 +65,22 @@ function Overview(props, { setHumidityValue }) {
       energy = energy + same.pv_power;
     });
     totalEnergy = (energy * 0.16667);
-    console.log("Energy: " + totalEnergy);
     return (parseFloat(totalEnergy).toFixed(2));
+  }
+
+  const GetHighestYield = () => {
+    const byDateFilter = allData.reduce((acc, item) => {
+      const existingItem = acc.find((el) => el.date === item.date);
+      if (existingItem) {
+        existingItem.gen_power += parseFloat(item.pv_power) * 0.16667;
+      } else {
+        acc.push({ date: item.date, gen_power: item.pv_power * 0.16667 });
+      }
+      return acc;
+    }, []);
+
+    const highestYield = byDateFilter.reduce((acc, curr) => Math.max(acc, curr.gen_power), Number.NEGATIVE_INFINITY);
+    return (parseFloat(highestYield).toFixed(2));
   }
 
   return (
@@ -73,7 +88,6 @@ function Overview(props, { setHumidityValue }) {
       {loading ? <ReactLoading type={'spokes'} color={'#0f1b2a'} height={550} width={375} className='loading-api' /> : ''}
       <div className='d-flex align-items-center my-0'>
         <h3 className='my-0'>System Overview</h3>
-        {/* <input type='text' onChange={() => callWeatherAPI}>Fetch Weather</input> */}
       </div>
 
       <div className='d-flex justify-content-between'>
@@ -85,7 +99,7 @@ function Overview(props, { setHumidityValue }) {
               <div className='w-100'>
                 <h3>{GetEnergyYield()}Wh</h3>
                 <p>Current Yield</p>
-                <h3>{0.00}Wh</h3>
+                <h3>{GetHighestYield()}Wh</h3>
                 <p>Highest Yield</p></div>
             </div>
             {/* <div className='sl-overview-card d-flex align-items-center'>
@@ -115,13 +129,13 @@ function Overview(props, { setHumidityValue }) {
             </div>
           </div>
 
-          
+
         </div>
 
         {/** Right side of the screen section*/}
 
         <div className='sl-devices p-3'>
-        <div>
+          <div>
             <h2 className='mb-3'>Devices</h2>
             <div className='devices-list'>
               {devices.map((option) => (
@@ -133,30 +147,30 @@ function Overview(props, { setHumidityValue }) {
             </div>
 
             <div>
-            <h2 className='my-3'>Location</h2>
-            <p className='mn-3'>{data.location}</p>
-          </div>  
-          {/** Details for temp and time section*/}
-          <h2 className='my-3'>Weather</h2>
-          <div className='temp-time d-flex justify-content-between p-1'>
-          {/* align-items-center */}
-            <div className='current-temp tt-item'>
-              <h2 className='mb-1'>{temp}°C</h2>
-              <h6><i>{weather}</i></h6>
-              <p>{location}</p>
+              <h2 className='my-3'>Location</h2>
+              <p className='mn-3'>{data.location}</p>
             </div>
-            <div className='sunrise-time tt-item'>
-              <h2 className='mb-1'>{sunrise}</h2>
-              <h6>(GMT+8)</h6>
-              <p>Sunrise</p>
+            {/** Details for temp and time section*/}
+            <h2 className='my-3'>Weather</h2>
+            <div className='temp-time d-flex justify-content-between p-1'>
+              {/* align-items-center */}
+              <div className='current-temp tt-item'>
+                <h2 className='mb-1'>{temp}°C</h2>
+                <h6><i>{weather}</i></h6>
+                <p>{location}</p>
+              </div>
+              <div className='sunrise-time tt-item'>
+                <h2 className='mb-1'>{sunrise}</h2>
+                <h6>(GMT+8)</h6>
+                <p>Sunrise</p>
+              </div>
+              <div className='sunset-time tt-item'>
+                <h2 className='mb-1'>{sunset}</h2>
+                <h6>(GMT+8)</h6>
+                <p>Sunset</p>
+              </div>
             </div>
-            <div className='sunset-time tt-item'>
-              <h2 className='mb-1'>{sunset}</h2>
-              <h6>(GMT+8)</h6>
-              <p>Sunset</p>
-            </div>
-          </div>
-          
+
           </div>
           {/* <div>
             <h2 className='my-3'>Energy Balance</h2>
@@ -164,7 +178,7 @@ function Overview(props, { setHumidityValue }) {
               chart
             </div>
           </div> */}
-          
+
         </div>
       </div>
 

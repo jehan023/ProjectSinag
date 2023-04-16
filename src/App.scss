@@ -189,8 +189,6 @@ body {
     margin: 0;
   }
 
-  
-
   .mb-3, .my-3{
     padding-left: 1%;
     font-size: 20pt;
@@ -285,20 +283,16 @@ body {
   .battSafe {
     background-color: #f5cf45;
   }
-  .battMid {
+  .battMid, .signal-fair {
     background-color: #e18119;
   }
-  .battDanger {
+  .battDanger, .lampOFF, .signal-bad, .signal-far, .signal-noisy {
     background-color: #bf212f;
     color: #eaeaea;
   }
-  .lampON {
+  .lampON, .signal-good {
     background-color: #27b376;
     // color: #eaeaea;
-  }
-  .lampOFF {
-    background-color: #bf212f;
-    color: #eaeaea;
   }
 }
 
