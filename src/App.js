@@ -20,6 +20,7 @@ const Analysis = lazy(() => import('./components/analysis.js'));
 const Home = lazy(() => import('./components/home.js'));
 const Reports = lazy(() => import('./components/reports.js'));
 const ProductOverview= lazy(() => import('./components/productOverview.js'));
+const AboutUs= lazy(() => import('./components/aboutus.js'));
 
 
 
@@ -121,7 +122,6 @@ function App() {
 
   return (
     <div className="App">
-      
       {/******* NAVIGATION BAR ***************************************************/}
       <div className='top-navbar d-flex'>
         <div className='title-nav-container d-flex align-items-center'>
@@ -133,7 +133,6 @@ function App() {
           <button className={page === 'Home' ? 'link-btn link-active' : 'link-btn'} onClick={() => { handlePage('Home') }}>Home</button>
           <button className={page === 'Dashboard' ? 'link-btn link-active' : 'link-btn'} onClick={() => { handlePage('Dashboard') }}>Dashboard</button>
           <button className={page === 'Reports' ? 'link-btn link-active' : 'link-btn'} onClick={() => { handlePage('Reports') }}>Reports</button>
-          
         </div>
       </div>
 
@@ -167,8 +166,7 @@ function App() {
             format={'h:mm:ss A | MMM DD, YYYY'} />
         </div>
       </div>
-      
-      
+
       {/******* CONTENT SECTION ***************************************************/}
       <div className='content-container h-100'>
         {loading ? <ReactLoading type={'spokes'} color={'#0f1b2a'} height={300} width={275} className='loading-component' /> : '' }
@@ -196,33 +194,32 @@ function App() {
                   return <Reports />
                   case 'ProductOverview':
                     return <ProductOverview />
+                  case 'AboutUs':
+                    return <AboutUs/>
                 default:
                   return <Home />
               }
             })()}
-
-            
         </Suspense>
       </div>
 
-      
-      
       {/******* FOOTER BAR ***************************************************/}
       <div className='footer-container'>
         <div className='links'>
           <div>
             <p>Product</p>
               <ul>
-                <li><a href='./components/productOverview' target="_blank">Overview</a></li>
+              <li><a href="#" onClick={() => { handlePage('ProductOverview') }}>Overview</a></li>
+
+
                 <li><a href={usermanual} target="_blank">User Manual</a></li>
               </ul>
           </div>
-
           <div>
             <p>Developers</p>
               <ul>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="#" onClick={() => { handlePage('AboutUs') }}>About Us</a></li>
+                <li><a href="mailto:sinagproject2023@gmail.com">Contact Us</a></li>
               </ul>
           </div>
 
@@ -231,7 +228,6 @@ function App() {
         </div>
       </div>
     </div>
-    
   );
 }
 

@@ -163,11 +163,11 @@ function Status(props) {
               <h2>{GetEnergyYield()}Wh</h2>
               <h5>Energy Yield</h5>
             </div>
-            <div className='status-card'>
+            {/* <div className='status-card'>
               <TbPlugConnected className='status-icon' />
               <h2>60Wh</h2>
               <h5>Consumption</h5>
-            </div>
+            </div> */}
             <div className={battColor}>
               {/* <FaBatteryThreeQuarters className='status-icon'/> */}
               <BattStatusIcon />
@@ -185,23 +185,23 @@ function Status(props) {
               <h5>Ambient Temperature</h5>
             </div>
             <div className='status-card'>
-              <BsSunFill className='status-icon' />
-              <h2>{parseFloat(data.lux)} lux</h2>
-              <h5>Ambient Light</h5>
-            </div>
-            <div className='status-card'>
               <WiHumidity className='status-icon' />
               <h2>{humidity}%</h2>
               <h5>Humidity</h5>
             </div>
             <div className='status-card'>
+              <BsSunFill className='status-icon' />
+              {/* <h2>{parseFloat(data.lux)} lux</h2> */}
+              <h5>Ambient Light</h5>
+            </div>
+            {/* <div className='status-card'>
               <GiSoundWaves className='status-icon' />
               <h2>{parseFloat(data.snr)}dB</h2>
               <h5>Signal-Noise Ratio</h5>
-            </div>
+            </div> */}
             <div className='status-card'>
               <FaSignal className='status-icon' />
-              <h2>{parseFloat(data.rssi)}dB</h2>
+              {/* <h2>{parseFloat(data.rssi)}dB</h2> */}
               <h5>Signal Strength</h5>
             </div>
           </div>
