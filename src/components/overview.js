@@ -88,14 +88,14 @@ function Overview(props, { setHumidityValue }) {
                 <h3>{0.00}Wh</h3>
                 <p>Highest Yield</p></div>
             </div>
-            <div className='sl-overview-card d-flex align-items-center'>
+            {/* <div className='sl-overview-card d-flex align-items-center'>
               <ImPower className='overview-icon w-50' />
               <div className='w-100'>
                 <h3>{0.00}Wh</h3>
                 <p>Current Consumption</p>
                 <h3>{0.00}Wh</h3>
                 <p>Highest Consumption</p></div>
-            </div>
+            </div> */}
           </div>
 
           <div className='d-flex gap-5 mb-3'>
@@ -115,8 +115,31 @@ function Overview(props, { setHumidityValue }) {
             </div>
           </div>
 
+          
+        </div>
+
+        {/** Right side of the screen section*/}
+
+        <div className='sl-devices p-3'>
+        <div>
+            <h2 className='mb-3'>Devices</h2>
+            <div className='devices-list'>
+              {devices.map((option) => (
+                <div className='d-flex align-items-center gap-2 mb-1 mx-3' key={option.value}>
+                  <div className='sl-status'> - </div>
+                  <p>{option.label} ({option.list})</p>
+                </div>
+              ))}
+            </div>
+
+            <div>
+            <h2 className='my-3'>Location</h2>
+            <p className='mn-3'>{data.location}</p>
+          </div>  
           {/** Details for temp and time section*/}
-          <div className='temp-time d-flex justify-content-between align-items-center p-3'>
+          <h2 className='my-3'>Weather</h2>
+          <div className='temp-time d-flex justify-content-between p-1'>
+          {/* align-items-center */}
             <div className='current-temp tt-item'>
               <h2 className='mb-1'>{temp}°C</h2>
               <h6><i>{weather}</i></h6>
@@ -133,32 +156,15 @@ function Overview(props, { setHumidityValue }) {
               <p>Sunset</p>
             </div>
           </div>
-        </div>
-
-        {/** Right side of the screen section*/}
-
-        <div className='sl-devices p-3'>
-          <div>
-            <h2 className='mb-3'>Devices</h2>
-            <div className='devices-list'>
-              {devices.map((option) => (
-                <div className='d-flex align-items-center gap-2 mb-1 mx-3' key={option.value}>
-                  <div className='sl-status'> - </div>
-                  <p>{option.label} ({option.list})</p>
-                </div>
-              ))}
-            </div>
+          
           </div>
-          <div>
+          {/* <div>
             <h2 className='my-3'>Energy Balance</h2>
             <div className='energy-balance-chart'>
               chart
             </div>
-          </div>
-          <div>
-            <h2 className='my-3'>Location</h2>
-            <p className='mn-3'>{data.location}</p>
-          </div>
+          </div> */}
+          
         </div>
       </div>
 

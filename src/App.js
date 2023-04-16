@@ -20,6 +20,7 @@ const Analysis = lazy(() => import('./components/analysis.js'));
 const Home = lazy(() => import('./components/home.js'));
 const Reports = lazy(() => import('./components/reports.js'));
 const ProductOverview= lazy(() => import('./components/productOverview.js'));
+const AboutUs= lazy(() => import('./components/aboutus.js'));
 
 
 
@@ -193,6 +194,8 @@ function App() {
                   return <Reports />
                   case 'ProductOverview':
                     return <ProductOverview />
+                  case 'AboutUs':
+                    return <AboutUs/>
                 default:
                   return <Home />
               }
@@ -215,8 +218,8 @@ function App() {
           <div>
             <p>Developers</p>
               <ul>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="#" onClick={() => { handlePage('AboutUs') }}>About Us</a></li>
+                <li><a href="mailto:sinagproject2023@gmail.com">Contact Us</a></li>
               </ul>
           </div>
 

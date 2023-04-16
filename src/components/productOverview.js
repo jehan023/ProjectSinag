@@ -17,7 +17,7 @@ function productOverview() {
         <div className='productOverview-container'>
             <div className='header'>
                 <p className='header-desc'>Overview</p>
-                {/* <p className='header-desc2'>Illuminating your community, one street light at a time.</p> */}
+                
             </div>
 
             <div className='content-container'>
