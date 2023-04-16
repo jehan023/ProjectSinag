@@ -1,14 +1,15 @@
 import React, { useState, memo, useEffect } from 'react';
-import { FaSolarPanel, FaBatteryFull, FaBatteryThreeQuarters, FaBatteryHalf, FaBatteryQuarter, FaBatteryEmpty, FaSignal } from "react-icons/fa";
+import { FaSolarPanel, FaBatteryFull, FaBatteryThreeQuarters, FaBatteryHalf, FaBatteryQuarter, FaBatteryEmpty } from "react-icons/fa";
 import { BsLightningChargeFill, BsThermometerSun, BsSunFill, BsFillMoonStarsFill } from "react-icons/bs";
-import { TbBulbOff, TbBulb, TbPlugConnected } from "react-icons/tb";
-import { WiHumidity } from "react-icons/wi";
-import { GiSoundWaves } from "react-icons/gi";
-import { IoBatteryCharging } from "react-icons/io5";
-// Direct Sunlight: IoMdSunny
+import { TbBulbOff, TbBulb } from "react-icons/tb";
+import { WiHumidity, WiDaySunny, WiDayCloudy } from "react-icons/wi";
+import { IoBatteryCharging, IoCloudyNight } from "react-icons/io5";
+import { IoMdSunny } from "react-icons/io";
+import { MdWbTwilight, MdSignalCellular1Bar, MdSignalCellular2Bar, MdOutlineSignalCellular4Bar, MdSignalCellularConnectedNoInternet1Bar, MdSignalCellularConnectedNoInternet3Bar } from "react-icons/md";
+// Direct Sunlight (Sunny): IoMdSunny
 // Ambient Daylight: WiDaySunny
-// Overcast Daylight:WiDayCloudy
-// Sunset & Sunrise: BsSunsetFill BsSunriseFill
+// Overcast Daylight (Cloudy):WiDayCloudy
+// Twilight: TbSunset2
 // Moonlight (Full moon): BsFillMoonStarsFill
 // Cloudy Night: IoCloudyNight
 
@@ -20,7 +21,6 @@ import { IoBatteryCharging } from "react-icons/io5";
 //Battery 0%: FaBatteryEmpty
 
 function Status(props) {
-  console.log('Status:', props.data)
   const data = props.data;
   const sameDateData = props.sameDate;
   const battPercent = data.batt_level;
@@ -46,21 +46,26 @@ function Status(props) {
   }
 
   const BattStatusIcon = () => {
-    if (battPercent >= 76) {
+    if (data.charging === 1) {
       setBattColor('status-card battFull');
-      return <FaBatteryFull className='status-icon' />
-    } else if (battPercent >= 51 && battPercent <= 75) {
-      setBattColor('status-card battSafe');
-      return <FaBatteryThreeQuarters className='status-icon' />
-    } else if (battPercent >= 26 && battPercent <= 50) {
-      setBattColor('status-card battMid');
-      return <FaBatteryHalf className='status-icon' />
-    } else if (battPercent >= 1 && battPercent <= 25) {
-      setBattColor('status-card battDanger');
-      return <FaBatteryQuarter className='status-icon' />
+      return <IoBatteryCharging className='status-icon' />
     } else {
-      setBattColor('status-card battDanger');
-      return <FaBatteryEmpty className='status-icon' />
+      if (battPercent >= 76) {
+        setBattColor('status-card battFull');
+        return <FaBatteryFull className='status-icon' />
+      } else if (battPercent >= 51 && battPercent <= 75) {
+        setBattColor('status-card battSafe');
+        return <FaBatteryThreeQuarters className='status-icon' />
+      } else if (battPercent >= 26 && battPercent <= 50) {
+        setBattColor('status-card battMid');
+        return <FaBatteryHalf className='status-icon' />
+      } else if (battPercent >= 1 && battPercent <= 25) {
+        setBattColor('status-card battDanger');
+        return <FaBatteryQuarter className='status-icon' />
+      } else {
+        setBattColor('status-card battDanger');
+        return <FaBatteryEmpty className='status-icon' />
+      }
     }
   };
 
@@ -88,7 +93,6 @@ function Status(props) {
       energy = energy + same.pv_power;
     });
     totalEnergy = (energy * 0.16667);
-    console.log("Energy: " + totalEnergy);
     return (parseFloat(totalEnergy).toFixed(2));
   }
 
@@ -140,6 +144,93 @@ function Status(props) {
     </div>
   }
 
+  const SignalStrength = () => {
+    let strength;
+    if (parseFloat(data.rssi) > -115) {
+      if (parseFloat(data.snr) > -7) {
+        strength = "Good";
+      }
+      if (parseFloat(data.snr) <= -13) {
+        strength = "Noisy environment";
+      }
+    }
+    if (parseFloat(data.rssi) <= -120) {
+      if (parseFloat(data.snr) > -7) {
+        strength = "Too far away";
+      }
+      if (parseFloat(data.snr) <= -13) {
+        strength = "Bad";
+      }
+    }
+    if (parseFloat(data.rssi) < -115 && parseFloat(data.rssi) > -120) {
+      strength = "Fair";
+    }
+
+    switch (strength) {
+      case 'Bad':
+        return <div className='status-card signal-bad'>
+          <MdSignalCellular1Bar className='status-icon' />
+          <h6><i>{strength}</i></h6>
+          <h5>Signal Strength</h5>
+        </div>
+      case 'Fair':
+        return <div className='status-card signal-fair'>
+          <MdSignalCellular2Bar className='status-icon' />
+          <h6><i>{strength}</i></h6>
+          <h5>Signal Strength</h5>
+        </div>
+      case 'Good':
+        return <div className='status-card signal-good'>
+          <MdOutlineSignalCellular4Bar className='status-icon' />
+          <h6><i>{strength}</i></h6>
+          <h5>Signal Strength</h5>
+        </div>
+      case 'Noisy environment':
+        return <div className='status-card signal-noisy'>
+          <MdSignalCellularConnectedNoInternet3Bar className='status-icon' />
+          <h6><i>{strength}</i></h6>
+          <h5>Signal Strength</h5>
+        </div>
+      case 'Too far away':
+        return <div className='status-card signal-far'>
+          <MdSignalCellularConnectedNoInternet1Bar className='status-icon' />
+          <h6><i>{strength}</i></h6>
+          <h5>Signal Strength</h5>
+        </div>
+      default:
+        return
+    }
+  }
+
+  const AmbientLight = () => {
+    let luxDesc;
+    let luxIcon;
+    if (parseFloat(data.lux) >= 32000) {
+      luxDesc = "Direct Sunlight";
+      luxIcon = <IoMdSunny className='status-icon' />;
+    } else if (parseFloat(data.lux) >= 10000) {
+      luxDesc = "Ambient Sunlight";
+      luxIcon = <WiDaySunny className='status-icon' />;
+    } else if (parseFloat(data.lux) >= 1000) {
+      luxDesc = "Overcast Sunlight";
+      luxIcon = <WiDayCloudy className='status-icon' />;
+    } else if (parseFloat(data.lux) >= 400) {
+      luxDesc = "Twilight";
+      luxIcon = <MdWbTwilight className='status-icon' />;
+    } else if (parseFloat(data.lux) >= 1) {
+      luxDesc = "Moonlight";
+      luxIcon = <BsFillMoonStarsFill className='status-icon' />;
+    } else if (parseFloat(data.lux) < 1){
+      luxDesc = "Night";
+      luxIcon = <IoCloudyNight className='status-icon' />;
+    }
+
+    return <div className='status-card'>
+      {luxIcon}
+      <h6><i>{luxDesc}</i></h6>
+      <h5>Ambient Light</h5>
+    </div>
+  }
 
   return (
     <div className='status-container'>
@@ -158,16 +249,13 @@ function Status(props) {
               <h2>{parseFloat(data.pv_power)}W</h2>
               <h5>Current Power</h5>
             </div>
+
             <div className='status-card'>
               <BsLightningChargeFill className='status-icon' />
               <h2>{GetEnergyYield()}Wh</h2>
               <h5>Energy Yield</h5>
             </div>
-            {/* <div className='status-card'>
-              <TbPlugConnected className='status-icon' />
-              <h2>60Wh</h2>
-              <h5>Consumption</h5>
-            </div> */}
+
             <div className={battColor}>
               {/* <FaBatteryThreeQuarters className='status-icon'/> */}
               <BattStatusIcon />
@@ -182,28 +270,18 @@ function Status(props) {
             <div className='status-card'>
               <BsThermometerSun className='status-icon' />
               <h2>{parseFloat(data.temp)}°C</h2>
-              <h5>Ambient Temperature</h5>
+              <h5>Temperature</h5>
             </div>
+
             <div className='status-card'>
               <WiHumidity className='status-icon' />
               <h2>{humidity}%</h2>
               <h5>Humidity</h5>
             </div>
-            <div className='status-card'>
-              <BsSunFill className='status-icon' />
-              {/* <h2>{parseFloat(data.lux)} lux</h2> */}
-              <h5>Ambient Light</h5>
-            </div>
-            {/* <div className='status-card'>
-              <GiSoundWaves className='status-icon' />
-              <h2>{parseFloat(data.snr)}dB</h2>
-              <h5>Signal-Noise Ratio</h5>
-            </div> */}
-            <div className='status-card'>
-              <FaSignal className='status-icon' />
-              {/* <h2>{parseFloat(data.rssi)}dB</h2> */}
-              <h5>Signal Strength</h5>
-            </div>
+
+            <AmbientLight />
+
+            <SignalStrength />
           </div>
         </div>
 
