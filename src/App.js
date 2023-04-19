@@ -125,7 +125,7 @@ function App() {
       {/******* NAVIGATION BAR ***************************************************/}
       <div className='top-navbar d-flex'>
         <div className='title-nav-container d-flex align-items-center'>
-          <img src={Logo} alt='Logo' height={45} />
+          <img className='sinag-logo' src={Logo} alt='Logo' />
           <h3 className='my-0 mx-2'></h3>
         </div>
 

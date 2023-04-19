@@ -22,18 +22,24 @@ body {
   position: absolute;
   margin: 15% 38%;
 }
-
+.sinag-logo{
+  height:45px;
+  margin-right:60%;
+  margin-left: -40%;
+  //background-color: red;
+}
 .top-navbar {
   background-color: #090F1E;
   height: 80px;
   width: 100%;
-  padding: 2% 73% 2% 2%;
-  justify-content: space-between;
+  padding: 2% 10% 2% 0%;
+  //justify-content: space-between;
   color: #E7EDF5;
   position: fixed;
   top: 0;
   z-index: 10;
   align-items: center;
+  
   .link-btn {
     border: none;
     margin-right: 25%;
@@ -130,54 +136,130 @@ body {
 
 ////////////////////////////////////////// OVERVIEW ////////////////////
 .overview-container {
-  padding: 210px 50px 120px 50px;
+  padding: 210px 50px 120px 50px;// top right bottom left
+  .overview-container-wrapper{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between; 
+    //background-color: red; 
+    margin:1% 3% 1% 3%;// top right bottom left
+  }
   .loading-api {
     z-index: 1000;
     position: absolute;
     margin: 5% 32%;
   }
-  .sl-overview {
-    //background-color: red;
-    width: 50%;
-    padding:0% 5% 0% 5%;// top right bottom left
-    
-    .sl-overview-card {
-      background-color: #f5cf45;
-      padding: 20px;
-      border-radius: 20px;
-      width: 100%;
-      height: auto;
-      text-align: center;
-      margin:3% 0% 0% 0%;// top right bottom left
-
-      .overview-icon {
-        font-size: 90pt;
-        padding-right:2%;
+  .sl-overview-container{
+    .sl-wrapper{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 20px;
+    }
+  .sl-overview-card {
+    background-color: #F5CF45;
+    border-radius: 20px;
+    padding:2% 8% 2% 8%;// top right bottom left
+    width:300px;
+    height: 190px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin:2% 0% 2% 0%;// top right bottom left
+    .sl-icon{
+      margin-top:3%;
+      font-size: 65pt;
+    }
+    }
+    .devices-container{
+      margin-top:4%;
+      .device-title{
+        
       }
     }
-    .temp-time {
-      //border: 1px solid blue;
+    .status-wrapper {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin:1%;
+      border-radius:15px;
+      padding: 1%;
       background-color: #E7EDF5;
-      border-radius: 20px;
-
-      .tt-item {
-        text-align: center;
-        //border: 1px dashed red;
-        width: 100%;
-      }
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    .sl-status{
+      margin-right: 2%;
+    }
+    .status-wrapper p{
+      font-size: 18pt;
     }
   }
-  .sl-devices {
-    width: 45%;
+  .sl-devices-container {
+    margin-top:1%;
     background-color: #E7EDF5;
-    border-radius: 20px;
-    margin:1% 5% 0% 5%;// top right bottom left
-    height: max-content;
-
-    .energy-balance-chart {
-      background-color: #E7EDF5;
-      height: 160px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 25px;
+    height:max-content;
+    .weather-wrapper{
+      background-color: #0f1b2a;
+      border-radius: 30px;
+      .icon-wrapper{
+        text-align: center;
+        .weather-icon{
+          margin-top: 5%;
+          font-size: 100pt;
+          justify-content: center;
+          align-items: center;
+          color:#dfe9f6;
+        }
+      }
+      .temp-container{
+        text-align: center;
+        //background-color: violet;
+        padding: 3% 0% 10% 0%;// top right bottom left
+        .temp-value, h6{
+          color:#dfe9f6;
+        
+        }
+      }
+      .device-title{
+        text-align: center;
+        color:#dfe9f6;
+      }
+      .weather-container{
+        padding:2% 0% 2% 0%;// top right bottom left
+        border-top: 2pt solid #dfe9f6;
+        border-radius: 30px;
+        background-color: #0f1b2a;
+        display:flex;
+        flex-direction: row;
+        // align-items: center;
+        justify-content: center;
+        
+        .content-container{
+          //background-color: yellow;
+          text-align: center;
+          margin: 2% 5% 2% 5%;// top right bottom left
+          
+        }
+        
+        .sunrise-value,.sunset-value, h6,p{
+          color:#dfe9f6;
+          font-weight: normal;
+        }
+        
+      }
     }
+    .dv-container{
+      background-color: #E7EDF5;
+      padding:7% 3% 5% 3%;// top right bottom left
+      border-bottom-left-radius: 30px;
+      border-bottom-right-radius: 30px;    
+      .device-title{
+        margin-bottom: 1%;
+        
+      }
+    }
+
   }
 
   h1,
