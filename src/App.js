@@ -36,15 +36,15 @@ function App() {
   const options = [
     {
       list: 'SL1', value: 'SL1', label: 'Streetlight 1', location: 'Narra St., Brgy BF International Village, Las Piñas City | 1740',
-      battCapacity: '20Ah', pvPanel: '25W', lamp: '250W', status: 'Active'
+      battCapacity: '20Ah', pvPanel: '25W 6V', lamp: '250W', status: 'Active'
     },
     {
       list: 'SL2', value: 'SL2', label: 'Streetlight 2', location: 'Narra St., Brgy BF International Village, Las Piñas City | 1740',
-      battCapacity: '20Ah', pvPanel: '25W', lamp: '250W', status: 'Inactive'
+      battCapacity: '20Ah', pvPanel: '25W 6V', lamp: '250W', status: 'Inactive'
     },
     {
       list: 'SL3', value: 'SL3', label: 'Streetlight 3', location: 'Patola St., Brgy BF International Village, Las Piñas City | 1740',
-      battCapacity: '20Ah', pvPanel: '25W', lamp: '250W', status: 'Active'
+      battCapacity: '20Ah', pvPanel: '25W 6V', lamp: '250W', status: 'Active'
     },
   ];
 
@@ -108,9 +108,9 @@ function App() {
 
   const lastData = formattedData[formattedData.length-1];
 
-  const currentDate = new Date().toLocaleString("en-US", { month: "long", day: 'numeric', year: 'numeric' });
+  // const currentDate = new Date().toLocaleString("en-US", { month: "long", day: 'numeric', year: 'numeric' });
   const sameDateData = formattedData.filter(sameDateItem => {
-    return (sameDateItem.date === currentDate);
+    return (sameDateItem.date === lastData.date);
   });
 
   console.log('Render ', Math.random(), 'SLV: ', selectedValue);
@@ -175,7 +175,7 @@ function App() {
           {page === 'Dashboard' ? (() => {
             switch (dashboard) {
               case 'overview':
-                return <Overview selectedSL={streetlight} sameDate={sameDateData} />
+                return <Overview selectedSL={streetlight} allData={formattedData} sameDate={sameDateData} />
               case 'profile':
                 return <Profile selectedSL={streetlight} />
               case 'status':
