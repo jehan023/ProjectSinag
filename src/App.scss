@@ -353,7 +353,8 @@ body {
     height: 180px;
     align-items: center;
     display: flex;
-    justify-content: center;
+    // justify-content: center;
+    justify-content: space-between;
     flex-direction: column;
   }
   .status-icon {
@@ -423,8 +424,8 @@ body {
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 60vh;
-      padding: 10px 50px;
+      height: 75vh;
+      padding: 10px 10px;
     }
 
   }
