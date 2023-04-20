@@ -142,7 +142,8 @@ body {
     flex-direction: row;
     justify-content: space-between; 
     //background-color: red; 
-    margin:1% 3% 1% 3%;// top right bottom left
+    margin:1% 0% 1% 0%;// top right bottom left
+    //background-color: red;
   }
   .loading-api {
     z-index: 1000;
@@ -150,12 +151,18 @@ body {
     margin: 5% 32%;
   }
   .sl-overview-container{
+    //width:55%;
+    margin-right: 2%;
+    //background-color: green;
+    box-sizing: border-box;
+    
     .sl-wrapper{
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       grid-gap: 20px;
     }
   .sl-overview-card {
+    
     background-color: #F5CF45;
     border-radius: 20px;
     padding:2% 8% 2% 8%;// top right bottom left
@@ -164,7 +171,7 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    margin:2% 0% 2% 0%;// top right bottom left
+    margin:0% 0% 2% 0%;// top right bottom left
     .sl-icon{
       margin-top:3%;
       font-size: 65pt;
@@ -192,74 +199,128 @@ body {
     .status-wrapper p{
       font-size: 18pt;
     }
+  
   }
-  .sl-devices-container {
-    margin-top:1%;
-    background-color: #E7EDF5;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    border-radius: 25px;
-    height:max-content;
-    .weather-wrapper{
-      background-color: #0f1b2a;
-      border-radius: 30px;
-      .icon-wrapper{
+  .sl-temp-container {
+    
+    position: relative;
+    //background-color: green;
+    
+    .sl-wrapper{
+      display: flex;
+      flex-direction: row;
+      
+      
+      .weather-wrapper{
+        background-color: #E7EDF5;
+        width:80%;
+        margin: 0% 2% 0% 0%;// top right bottom left
+        padding: 2% 5% 2% 5%;// top right bottom left
+        border-radius: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+       
+        .icon-wrapper{
+          text-align: center;
+          .weather-icon{
+            margin-top: 5%;
+            font-size: 70pt;
+            justify-content: center;
+            align-items: center;
+            color:#f5cf45;
+          }
+
+        }
+        .temp-container{
+          text-align: center;
+          .temp-value, h6{
+            color:#090F1E;
+            font-size: 14pt;
+          
+          }
+        }
+        .device-title{
+          text-align: center;
+          font-size: 14pt;
+          ccolor:#090F1E;
+        }
+      }
+      
+      .weather-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        justify-content: center;
+        align-items: center;
+        width:100%;
+        //background-color: green;
+        box-sizing: border-box;
+        grid-row-gap: 10px; 
+      }
+      
+      .content-container {
+        padding: 5% 5% 5% 5%;
+        background-color: #E7EDF5;
+        border-radius: 20px;
+        margin: 0% 0% 0% 0%;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         text-align: center;
-        .weather-icon{
-          margin-top: 5%;
-          font-size: 100pt;
+        display: flex;
+        flex-direction: row;
+      
+        .icon-wrapper {
+          text-align: center;
+          align-items: center;
+          justify-content: center;
+        }
+      
+        .content-wrap {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: center;
+          flex: 1;
+        }
+      
+        .s-icon {
+          margin-top: 7%;
+          font-size: 55pt;
           justify-content: center;
           align-items: center;
-          color:#dfe9f6;
+          color: #f5cf45;
         }
       }
-      .temp-container{
-        text-align: center;
-        //background-color: violet;
-        padding: 3% 0% 10% 0%;// top right bottom left
-        .temp-value, h6{
-          color:#dfe9f6;
-        
-        }
+      
+      .sunrise-container{
+        grid-row: 1;
       }
-      .device-title{
-        text-align: center;
-        color:#dfe9f6;
+      
+      .sunset-container{
+        grid-row: 2;
+        align-self: end;
       }
-      .weather-container{
-        padding:2% 0% 2% 0%;// top right bottom left
-        border-top: 2pt solid #dfe9f6;
-        border-radius: 30px;
-        background-color: #0f1b2a;
-        display:flex;
-        flex-direction: row;
-        // align-items: center;
-        justify-content: center;
-        
-        .content-container{
-          //background-color: yellow;
-          text-align: center;
-          margin: 2% 5% 2% 5%;// top right bottom left
-          
-        }
-        
-        .sunrise-value,.sunset-value, h6,p{
-          color:#dfe9f6;
-          font-weight: normal;
-        }
-        
-      }
+      
+      .sunrise-value, .sunset-value, h6, p, h2 {
+        color: #090F1E;
+        font-weight: normal;
+        font-size: 14pt;
+      }  
     }
+    
     .dv-container{
+      
+      
       background-color: #E7EDF5;
-      padding:7% 3% 5% 3%;// top right bottom left
-      border-bottom-left-radius: 30px;
-      border-bottom-right-radius: 30px;    
+      margin:5% 0% 2% 0%;// top right bottom left
+      padding:2% 3% 2% 3%;// top right bottom left
+      border-radius: 20px;    
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
       .device-title{
-        margin-bottom: 1%;
-        
+       
+   
       }
+      
+      
     }
-
   }
 
   h1,
@@ -847,7 +908,7 @@ font-family: "Gotham Medium";
       color:#090F1E;
       font-size: 12pt;
       margin-bottom: 2%;
-      text-align: justify;
+      text-align: left;
       //list-style: none;
       
       
@@ -858,13 +919,13 @@ font-family: "Gotham Medium";
       flex-direction: row;
       text-align: center;
       justify-content: space-between;
-      margin: 0% 12% 0% 12%;// top right bottom left
+      margin: 0% 8% 0% 8%;// top right bottom left
       .GO-card{
         flex: 1;
         background-color: #E7EDF5;
         border-radius: 20px;
         margin: 0% 2% 3% 2%;// top right bottom left
-        padding: 3% 3%  3% 3%;// top right bottom left
+        padding: 3% 2%  3% 2%;// top right bottom left
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
       }
       .go-img{
