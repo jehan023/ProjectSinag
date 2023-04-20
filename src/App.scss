@@ -162,6 +162,7 @@ body {
       grid-gap: 20px;
     }
   .sl-overview-card {
+    
     background-color: #F5CF45;
     border-radius: 20px;
     padding:2% 8% 2% 8%;// top right bottom left
@@ -170,7 +171,7 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    margin:2% 0% 2% 0%;// top right bottom left
+    margin:0% 0% 2% 0%;// top right bottom left
     .sl-icon{
       margin-top:3%;
       font-size: 65pt;
@@ -198,83 +199,128 @@ body {
     .status-wrapper p{
       font-size: 18pt;
     }
-    .dv-container{
-      background-color: #E7EDF5;
-      margin-top: 2%;
-      padding:2% 3% 2% 3%;// top right bottom left
-      border-radius: 30px;    
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-      .device-title{
-        margin-bottom: 1%;
-      }
-    }
+  
   }
   .sl-temp-container {
-    width:35%;
     
-    .weather-wrapper{
-      position:relative;
-      background-color: #0f1b2a;
-      border-radius: 30px;
-      height: 100%;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
+    //background-color: green;
+    
+    .sl-wrapper{
+      display: flex;
+      flex-direction: row;
       
-      .icon-wrapper{
-        text-align: center;
-        .weather-icon{
-          margin-top: 11%;
-          font-size: 120pt;
-          justify-content: center;
-          align-items: center;
-          color:#dfe9f6;
+      
+      .weather-wrapper{
+        background-color: #E7EDF5;
+        width:80%;
+        margin: 0% 2% 0% 0%;// top right bottom left
+        padding: 2% 5% 2% 5%;// top right bottom left
+        border-radius: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+       
+        .icon-wrapper{
+          text-align: center;
+          .weather-icon{
+            margin-top: 5%;
+            font-size: 70pt;
+            justify-content: center;
+            align-items: center;
+            color:#f5cf45;
+          }
+
+        }
+        .temp-container{
+          text-align: center;
+          .temp-value, h6{
+            color:#090F1E;
+            font-size: 14pt;
+          
+          }
+        }
+        .device-title{
+          text-align: center;
+          font-size: 14pt;
+          ccolor:#090F1E;
         }
       }
-      .temp-container{
-        text-align: center;
-        //background-color: violet;
-        padding: 3% 0% 10% 0%;// top right bottom left
-        .temp-value, h6{
-          color:#dfe9f6;
-        
-        }
-      }
-      .device-title{
-        text-align: center;
-        color:#dfe9f6;
-      }
+      
       .weather-container {
-        width: 100%;
-        position:absolute;
-        bottom:0;
-        padding:2% 0% 2% 0%;// top right bottom left
-        display: flex;
-        flex-direction: row;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
         justify-content: center;
         align-items: center;
-        background-color: #0f1b2a;
-        border-radius: 30px;
-        border-top: 2pt solid #dfe9f6;
+        width:100%;
+        //background-color: green;
+        box-sizing: border-box;
+        grid-row-gap: 10px; 
       }
       
       .content-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin: 2% 5%;
+        padding: 5% 5% 5% 5%;
+        background-color: #E7EDF5;
+        border-radius: 20px;
+        margin: 0% 0% 0% 0%;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         text-align: center;
+        display: flex;
+        flex-direction: row;
+      
+        .icon-wrapper {
+          text-align: center;
+          align-items: center;
+          justify-content: center;
+        }
+      
+        .content-wrap {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: center;
+          flex: 1;
+        }
+      
+        .s-icon {
+          margin-top: 7%;
+          font-size: 55pt;
+          justify-content: center;
+          align-items: center;
+          color: #f5cf45;
+        }
       }
       
-      .sunrise-value, .sunset-value, h6, p {
-        color: #dfe9f6;
+      .sunrise-container{
+        grid-row: 1;
+      }
+      
+      .sunset-container{
+        grid-row: 2;
+        align-self: end;
+      }
+      
+      .sunrise-value, .sunset-value, h6, p, h2 {
+        color: #090F1E;
         font-weight: normal;
-      }
+        font-size: 14pt;
+      }  
+    }
+    
+    .dv-container{
       
+      
+      background-color: #E7EDF5;
+      margin:5% 0% 2% 0%;// top right bottom left
+      padding:2% 3% 2% 3%;// top right bottom left
+      border-radius: 20px;    
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      .device-title{
+       
+   
+      }
       
       
     }
-    
-
   }
 
   h1,
