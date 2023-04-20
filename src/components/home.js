@@ -110,7 +110,7 @@ function Home(props) {
         <p className='feature-title'>{fc.title}</p>
         <p className='feature-desc'>{fc.desc}</p>
         <div className='feature-btn-container'>
-            <button className='feature-btn' onClick={() => handleMoreBtnClick(id + 1)}> {fc.showDetailed ? 'Back' : 'More'}</button>
+            <button className='feature-btn' onClick={() => handleMoreBtnClick(id + 1)}> {fc.showDetailed ? 'See Less' : 'More'}</button>
         </div>
         <p className='feature-desc-detailed'>{fc.descDetailed}</p>
     </div>
