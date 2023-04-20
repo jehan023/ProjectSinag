@@ -8,7 +8,8 @@ import { FaCarBattery } from "react-icons/fa";
 import { ImPower } from "react-icons/im";
 import { TbBulb } from "react-icons/tb";
 import { BiCloud } from "react-icons/bi";
-
+import { BsSunrise } from "react-icons/bs";
+import { BsSunset } from "react-icons/bs";
 
 function Overview(props, { setHumidityValue }) {
   const [loading, setLoading] = useState(false);
@@ -155,15 +156,7 @@ function Overview(props, { setHumidityValue }) {
             </div>
           </div>
 
-          {/** Details for devices and location section*/}
-          <div className='dv-container'>
-            <div>
-              <h2 className='device-title'>Location</h2>
-              <p className='location-txt'>{data.location}</p>
-            </div>
-
-          </div> 
-
+          
           {/* <div className='devices-container'> */}
             {/* <h2 className='device-title'>Devices</h2> */}
               {/* <div className='devices-list'>
@@ -184,32 +177,57 @@ function Overview(props, { setHumidityValue }) {
 
         <div className='sl-temp-container'>
           {/** Details for temp and time section*/}
-          <div className='weather-wrapper'>
-            <div className='icon-wrapper'>
-              <BiCloud className='weather-icon' />
-            </div>
+          <div className='sl-wrapper'>
+            <div className='weather-wrapper'>
+              <div className='icon-wrapper'>
+                <BiCloud className='weather-icon' />
+              </div>
 
-            <h2 className='device-title'>{location}</h2>
-            <div className='temp-container'>
-              <h2 className='temp-value'>{temp}°C</h2>
-              <h6><i>{weather}</i></h6>
-              {/* <p>{location}</p> */}
+              
+              <div className='temp-container'>
+                <h2 className='temp-value'>{temp}°C</h2>
+                <h2 className='device-title'>{location}</h2>
+                <h6><i>{weather}</i></h6>
+                {/* <p>{location}</p> */}
+              </div>
             </div>
 
             <div className='weather-container'>
-              <div className='content-container'>
-                <h2 className='sunrise-value'>{sunrise}</h2>
+            <div className="content-container sunrise-container">
+              <div className="content-wrap">
+                <div className="icon-wrapper">
+                  <BsSunrise className="s-icon" />
+                </div>
+              </div>
+              <div className="content-wrap">
+                <h2 className="sunrise-value">{sunrise}</h2>
                 <h6>(GMT+8)</h6>
                 <p>Sunrise</p>
               </div>
-              <div className='content-container'>
-                <h2 className='sunset-value'>{sunset}</h2>
+            </div>
+            <div className="content-container sunset-container">
+              <div className="content-wrap">
+                <div className="icon-wrapper">
+                  <BsSunset className="s-icon" />
+                </div>
+              </div>
+              <div className="content-wrap">
+                <h2 className="sunset-value">{sunset}</h2>
                 <h6>(GMT+8)</h6>
                 <p>Sunset</p>
               </div>
             </div>
+            </div>
           </div>
-          
+          {/** Details for devices and location section*/}
+          <div className='dv-container'>
+            <div>
+              <h2 className='device-title'>Location</h2>
+              <p className='location-txt'>{data.location}</p>
+            </div>
+
+          </div> 
+
       </div>
     </div>
   </div>
