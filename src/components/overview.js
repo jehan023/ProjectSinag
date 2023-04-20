@@ -1,15 +1,16 @@
 import React, { useState, memo, useEffect } from 'react';
 import '../App.scss';
-import axios from 'axios';
+// import axios from 'axios';
 import ReactLoading from 'react-loading';
 
 import { GiSolarPower } from "react-icons/gi";
-import { FaCarBattery } from "react-icons/fa";
-import { ImPower } from "react-icons/im";
+import { FaCarBattery, FaSolarPanel } from "react-icons/fa";
+import { IoIosBulb } from "react-icons/io";
 import { TbBulb } from "react-icons/tb";
 import { BiCloud } from "react-icons/bi";
 import { BsSunrise } from "react-icons/bs";
 import { BsSunset } from "react-icons/bs";
+import { IoBatteryCharging } from "react-icons/io5";
 
 function Overview(props, { setHumidityValue }) {
   const [loading, setLoading] = useState(false);
@@ -96,32 +97,26 @@ function Overview(props, { setHumidityValue }) {
         {/** Left side of the screen section*/}
         <div className='sl-overview-container'>
 
-          <div className='sl-wrapper'>
+          <div className='sl-wrapper mb-3'>
             <div className='sl-overview-card'>
               <div className='card-content'>
-                <GiSolarPower className='sl-icon' />
-                <div className='w-100'>
-                  <h3>{GetEnergyYield()}Wh</h3>
-                  <p>Current Yield</p>
-                </div>
+                <FaSolarPanel className='sl-icon' />
+                <h3>{GetEnergyYield()}Wh</h3>
+                <p>Current Yield</p>
               </div>
             </div>
             <div className='sl-overview-card'>
               <div className='card-content'>
                 <GiSolarPower className='sl-icon' />
-                <div className='w-100'>
-                  <h3>{GetHighestYield()}Wh</h3>
-                  <p>Highest Yield</p>
-                </div>
+                <h3>{GetHighestYield()}Wh</h3>
+                <p>Highest Yield</p>
               </div>
             </div>
             <div className='sl-overview-card'>
               <div className='card-content'>
                 <FaCarBattery className='sl-icon' />
-                <div className='w-100'>
-                  <h2>{data.battCapacity}</h2>
-                  <p>Battery Capacity</p>
-                </div>
+                <h3>{data.battCapacity}</h3>
+                <p>Battery Capacity</p>
               </div>
             </div>
           </div>
@@ -129,48 +124,27 @@ function Overview(props, { setHumidityValue }) {
           <div className='sl-wrapper'>
             <div className='sl-overview-card'>
               <div className='card-content'>
-                <GiSolarPower className='sl-icon' />
-                <div className='w-100'>
-                  <h3>{GetHighestYield()}Hr</h3>
-                  <p>SL ave time</p>
-                </div>
-              </div>
-            </div>
-            <div className='sl-overview-card'>
-              <div className='card-content'>
-                <GiSolarPower className='sl-icon' />
-                <div className='w-100'>
-                  <h3>{GetHighestYield()}W</h3>
-                  <p>SL ave power</p>
-                </div>
+                <IoBatteryCharging className='sl-icon' />
+                <h3>{GetHighestYield()}hr</h3>
+                <p>Avg. Charging Time</p>
               </div>
             </div>
             <div className='sl-overview-card'>
               <div className='card-content'>
                 <TbBulb className='sl-icon' />
-                <div className='w-100'>
-                  <h2>{data.lamp}</h2>
-                  <p>LED Lamp</p>
-                </div>
+                <h3>{GetHighestYield()}hr</h3>
+                <p>Avg. ON Time</p>
+              </div>
+            </div>
+            <div className='sl-overview-card'>
+              <div className='card-content'>
+                <IoIosBulb className='sl-icon' />
+                <h3>{data.lamp}</h3>
+                <p>LED Lamp</p>
               </div>
             </div>
           </div>
-
-          {/* <div className='devices-container'> */}
-            {/* <h2 className='device-title'>Devices</h2> */}
-              {/* <div className='devices-list'>
-                {devices.map((option) => (
-                  <div className='sl-list' key={option.value}>
-                    <div className='status-wrapper'>
-                      <div className='sl-status'> - </div>
-                      <p>{option.label} ({option.list})</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-          </div> */}
         </div>
-        
 
         {/** Right side of the screen section*/}
 
@@ -182,40 +156,40 @@ function Overview(props, { setHumidityValue }) {
                 <BiCloud className='weather-icon' />
               </div>
 
-              
+
               <div className='temp-container'>
-                <h2 className='temp-value'>{temp}°C</h2>
-                <h2 className='device-title'>{location}</h2>
-                <h6><i>{weather}</i></h6>
+                <h3 className='temp-value'>{temp}°C</h3>
+                <h5 className='device-title'>{location}</h5>
+                <p><i>{weather}</i></p>
                 {/* <p>{location}</p> */}
               </div>
             </div>
 
             <div className='weather-container'>
-            <div className="content-container sunrise-container">
-              <div className="content-wrap">
-                <div className="icon-wrapper">
-                  <BsSunrise className="s-icon" />
+              <div className="content-container sunrise-container">
+                <div className="content-wrap">
+                  <div className="icon-wrapper">
+                    <BsSunrise className="s-icon" />
+                  </div>
+                </div>
+                <div className="content-wrap">
+                  <h5 className="sunrise-value">{sunrise}</h5>
+                  <h6>(GMT+8)</h6>
+                  <p>Sunrise</p>
                 </div>
               </div>
-              <div className="content-wrap">
-                <h2 className="sunrise-value">{sunrise}</h2>
-                <h6>(GMT+8)</h6>
-                <p>Sunrise</p>
-              </div>
-            </div>
-            <div className="content-container sunset-container">
-              <div className="content-wrap">
-                <div className="icon-wrapper">
-                  <BsSunset className="s-icon" />
+              <div className="content-container sunset-container">
+                <div className="content-wrap">
+                  <div className="icon-wrapper">
+                    <BsSunset className="s-icon" />
+                  </div>
+                </div>
+                <div className="content-wrap">
+                  <h5 className="sunset-value">{sunset}</h5>
+                  <h6>(GMT+8)</h6>
+                  <p>Sunset</p>
                 </div>
               </div>
-              <div className="content-wrap">
-                <h2 className="sunset-value">{sunset}</h2>
-                <h6>(GMT+8)</h6>
-                <p>Sunset</p>
-              </div>
-            </div>
             </div>
           </div>
 
@@ -226,10 +200,10 @@ function Overview(props, { setHumidityValue }) {
               <p className='location-txt'>{data.location}</p>
             </div>
 
-          </div> 
+          </div>
+        </div>
       </div>
     </div>
-  </div>
   )
 }
 

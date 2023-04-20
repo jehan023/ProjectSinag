@@ -97,9 +97,7 @@ const EnergyChart = (props) => {
                         const sum = sumByMonth[yearMonth];
                         resultArray.push({ month: monthNames[month - 1], sum });
                     }
-                    console.table(resultArray);
 
-                    // console.log(resultArray);
                     resultArray.map(row => {
                         setDataSys(prevList => [...prevList, row.sum]);
                         setDataCons(prevList => [...prevList, row.sum]);

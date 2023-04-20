@@ -147,7 +147,7 @@ const ProductionChart = (props) => {
         responsive: true,
         plugins: {
             legend: {
-                position: 'right'
+                position: 'bottom'
             },
             title: {
                 display: true,
@@ -197,7 +197,7 @@ const ProductionChart = (props) => {
             },
             {
                 // fill: true,
-                type: 'bar',
+                type: 'line',
                 label: 'Generation (Wh)',
                 data: generate,
                 backgroundColor: 'rgb(207, 0, 15, 1)',
