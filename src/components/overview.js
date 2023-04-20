@@ -7,6 +7,7 @@ import { GiSolarPower } from "react-icons/gi";
 import { FaCarBattery } from "react-icons/fa";
 import { ImPower } from "react-icons/im";
 import { TbBulb } from "react-icons/tb";
+import { BiCloud } from "react-icons/bi";
 
 
 function Overview(props, { setHumidityValue }) {
@@ -86,103 +87,130 @@ function Overview(props, { setHumidityValue }) {
   return (
     <div className='overview-container'>
       {loading ? <ReactLoading type={'spokes'} color={'#0f1b2a'} height={550} width={375} className='loading-api' /> : ''}
-      <div className='d-flex align-items-center my-0'>
+      <div className=''>
         <h3 className='my-0'>System Overview</h3>
       </div>
 
-      <div className='d-flex justify-content-between'>
+      <div className='overview-container-wrapper'>
         {/** Left side of the screen section*/}
-        <div className='sl-overview py-3'>
-          <div className='d-flex gap-5 mb-3'>
-            <div className='sl-overview-card d-flex align-items-center'>
-              <GiSolarPower className='overview-icon w-100' />
-              <div className='w-100'>
-                <h3>{GetEnergyYield()}Wh</h3>
-                <p>Current Yield</p>
-                <h3>{GetHighestYield()}Wh</h3>
-                <p>Highest Yield</p></div>
-            </div>
-            {/* <div className='sl-overview-card d-flex align-items-center'>
-              <ImPower className='overview-icon w-50' />
-              <div className='w-100'>
-                <h3>{0.00}Wh</h3>
-                <p>Current Consumption</p>
-                <h3>{0.00}Wh</h3>
-                <p>Highest Consumption</p></div>
-            </div> */}
-          </div>
+        <div className='sl-overview-container'>
 
-          <div className='d-flex gap-5 mb-3'>
-            <div className='sl-overview-card d-flex align-items-center'>
-              <FaCarBattery className='overview-icon w-100' />
-              <div className='w-100'>
-                <h2>{data.battCapacity}</h2>
-                <p>Battery Capacity</p>
+          <div className='sl-wrapper'>
+            <div className='sl-overview-card'>
+              <div className='card-content'>
+                <GiSolarPower className='sl-icon' />
+                <div className='w-100'>
+                  <h3>{GetEnergyYield()}Wh</h3>
+                  <p>Current Yield</p>
+                </div>
               </div>
             </div>
-            <div className='sl-overview-card d-flex align-items-center'>
-              <TbBulb className='overview-icon w-100' />
-              <div className='w-100'>
-                <h2>{data.lamp}</h2>
-                <p>LED Lamp</p>
+            <div className='sl-overview-card'>
+              <div className='card-content'>
+                <GiSolarPower className='sl-icon' />
+                <div className='w-100'>
+                  <h3>{GetHighestYield()}Wh</h3>
+                  <p>Highest Yield</p>
+                </div>
+              </div>
+            </div>
+            <div className='sl-overview-card'>
+              <div className='card-content'>
+                <FaCarBattery className='sl-icon' />
+                <div className='w-100'>
+                  <h2>{data.battCapacity}</h2>
+                  <p>Battery Capacity</p>
+                </div>
               </div>
             </div>
           </div>
 
+          <div className='sl-wrapper'>
+            <div className='sl-overview-card'>
+              <div className='card-content'>
+                <GiSolarPower className='sl-icon' />
+                <div className='w-100'>
+                  <h3>{GetHighestYield()}Hr</h3>
+                  <p>SL ave time</p>
+                </div>
+              </div>
+            </div>
+            <div className='sl-overview-card'>
+              <div className='card-content'>
+                <GiSolarPower className='sl-icon' />
+                <div className='w-100'>
+                  <h3>{GetHighestYield()}W</h3>
+                  <p>SL ave power</p>
+                </div>
+              </div>
+            </div>
+            <div className='sl-overview-card'>
+              <div className='card-content'>
+                <TbBulb className='sl-icon' />
+                <div className='w-100'>
+                  <h2>{data.lamp}</h2>
+                  <p>LED Lamp</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
+          <div className='devices-container'>
+            {/* <h2 className='device-title'>Devices</h2> */}
+              <div className='devices-list'>
+                {devices.map((option) => (
+                  <div className='sl-list' key={option.value}>
+                    <div className='status-wrapper'>
+                      <div className='sl-status'> - </div>
+                      <p>{option.label} ({option.list})</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+          </div>
         </div>
+        
 
         {/** Right side of the screen section*/}
 
-        <div className='sl-devices p-3'>
-          <div>
-            <h2 className='mb-3'>Devices</h2>
-            <div className='devices-list'>
-              {devices.map((option) => (
-                <div className='d-flex align-items-center gap-2 mb-1 mx-3' key={option.value}>
-                  <div className='sl-status'> - </div>
-                  <p>{option.label} ({option.list})</p>
-                </div>
-              ))}
+        <div className='sl-devices-container'>
+          {/** Details for temp and time section*/}
+          <div className='weather-wrapper'>
+            <div className='icon-wrapper'>
+              <BiCloud className='weather-icon' />
             </div>
 
-            <div>
-              <h2 className='my-3'>Location</h2>
-              <p className='mn-3'>{data.location}</p>
+            <h2 className='device-title'>{location}</h2>
+            <div className='temp-container'>
+              <h2 className='temp-value'>{temp}°C</h2>
+              <h6><i>{weather}</i></h6>
+              {/* <p>{location}</p> */}
             </div>
-            {/** Details for temp and time section*/}
-            <h2 className='my-3'>Weather</h2>
-            <div className='temp-time d-flex justify-content-between p-1'>
-              {/* align-items-center */}
-              <div className='current-temp tt-item'>
-                <h2 className='mb-1'>{temp}°C</h2>
-                <h6><i>{weather}</i></h6>
-                <p>{location}</p>
-              </div>
-              <div className='sunrise-time tt-item'>
-                <h2 className='mb-1'>{sunrise}</h2>
+
+            <div className='weather-container'>
+              <div className='content-container'>
+                <h2 className='sunrise-value'>{sunrise}</h2>
                 <h6>(GMT+8)</h6>
                 <p>Sunrise</p>
               </div>
-              <div className='sunset-time tt-item'>
-                <h2 className='mb-1'>{sunset}</h2>
+              <div className='content-container'>
+                <h2 className='sunset-value'>{sunset}</h2>
                 <h6>(GMT+8)</h6>
                 <p>Sunset</p>
               </div>
             </div>
-
           </div>
-          {/* <div>
-            <h2 className='my-3'>Energy Balance</h2>
-            <div className='energy-balance-chart'>
-              chart
+          {/** Details for devices and location section*/}
+          <div className='dv-container'>
+            <div>
+              <h2 className='device-title'>Location</h2>
+              <p className='location-txt'>{data.location}</p>
             </div>
-          </div> */}
 
-        </div>
+          </div> 
       </div>
-
     </div>
+  </div>
   )
 }
 
