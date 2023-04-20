@@ -125,14 +125,13 @@ function Status(props) {
   }
 
   const GetLastUpdate = () => {
-    let active;
+    let active = "Inactive";
     if (currentTime.toLocaleString("en-US", { month: "long", day: 'numeric', year: 'numeric' }) === data.date) {
       if (data.pv_power > 0.0 || data.charging === 1.0 || data.led_status === 1.0) {
         active = "Active";
       }
-    } else {
-      active = "Inactive";
     }
+    
     return <div className='d-flex align-items-center gap-2 my-2'>
       <div className={active === "Active" ? 'sl-status sl-active' : 'sl-status sl-inactive'}> - </div>
       {currentTime.toLocaleString("en-US", { month: "long", day: 'numeric', year: 'numeric' }) === data.date ?
@@ -220,7 +219,7 @@ function Status(props) {
     } else if (parseFloat(data.lux) >= 1) {
       luxDesc = "Moonlight";
       luxIcon = <BsFillMoonStarsFill className='status-icon' />;
-    } else if (parseFloat(data.lux) < 1){
+    } else if (parseFloat(data.lux) < 1) {
       luxDesc = "Night";
       luxIcon = <IoCloudyNight className='status-icon' />;
     }

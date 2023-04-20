@@ -209,16 +209,16 @@ function App() {
           <div>
             <p>Product</p>
               <ul>
-              <li><a href="#" onClick={() => { handlePage('ProductOverview') }}>Overview</a></li>
+              <li><a href="#/" onClick={() => { handlePage('ProductOverview') }}>Overview</a></li>
 
 
-                <li><a href={usermanual} target="_blank">User Manual</a></li>
+                <li><a href={usermanual} target="_blank" rel="noreferrer">User Manual</a></li>
               </ul>
           </div>
           <div>
             <p>Developers</p>
               <ul>
-                <li><a href="#" onClick={() => { handlePage('AboutUs') }}>About Us</a></li>
+                <li><a href="#/" onClick={() => { handlePage('AboutUs') }}>About Us</a></li>
                 <li><a href="mailto:sinagproject2023@gmail.com">Contact Us</a></li>
               </ul>
           </div>
