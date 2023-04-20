@@ -155,9 +155,18 @@ function Overview(props, { setHumidityValue }) {
             </div>
           </div>
 
-          <div className='devices-container'>
+          {/** Details for devices and location section*/}
+          <div className='dv-container'>
+            <div>
+              <h2 className='device-title'>Location</h2>
+              <p className='location-txt'>{data.location}</p>
+            </div>
+
+          </div> 
+
+          {/* <div className='devices-container'> */}
             {/* <h2 className='device-title'>Devices</h2> */}
-              <div className='devices-list'>
+              {/* <div className='devices-list'>
                 {devices.map((option) => (
                   <div className='sl-list' key={option.value}>
                     <div className='status-wrapper'>
@@ -167,13 +176,13 @@ function Overview(props, { setHumidityValue }) {
                   </div>
                 ))}
               </div>
-          </div>
+          </div> */}
         </div>
         
 
         {/** Right side of the screen section*/}
 
-        <div className='sl-devices-container'>
+        <div className='sl-temp-container'>
           {/** Details for temp and time section*/}
           <div className='weather-wrapper'>
             <div className='icon-wrapper'>
@@ -200,14 +209,7 @@ function Overview(props, { setHumidityValue }) {
               </div>
             </div>
           </div>
-          {/** Details for devices and location section*/}
-          <div className='dv-container'>
-            <div>
-              <h2 className='device-title'>Location</h2>
-              <p className='location-txt'>{data.location}</p>
-            </div>
-
-          </div> 
+          
       </div>
     </div>
   </div>
