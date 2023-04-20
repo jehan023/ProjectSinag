@@ -156,7 +156,6 @@ function Overview(props, { setHumidityValue }) {
             </div>
           </div>
 
-          
           {/* <div className='devices-container'> */}
             {/* <h2 className='device-title'>Devices</h2> */}
               {/* <div className='devices-list'>
@@ -219,6 +218,7 @@ function Overview(props, { setHumidityValue }) {
             </div>
             </div>
           </div>
+
           {/** Details for devices and location section*/}
           <div className='dv-container'>
             <div>
@@ -227,7 +227,6 @@ function Overview(props, { setHumidityValue }) {
             </div>
 
           </div> 
-
       </div>
     </div>
   </div>
