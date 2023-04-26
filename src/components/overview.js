@@ -156,40 +156,40 @@ function Overview(props, { setHumidityValue }) {
                 <BiCloud className='weather-icon' />
               </div>
 
-
+              
               <div className='temp-container'>
-                <h3 className='temp-value'>{temp}°C</h3>
-                <h5 className='device-title'>{location}</h5>
-                <p><i>{weather}</i></p>
+                <h2 className='temp-value'>{temp}°C</h2>
+                <h2 className='device-title'>{location}</h2>
+                <h6><i>{weather}</i></h6>
                 {/* <p>{location}</p> */}
               </div>
             </div>
 
             <div className='weather-container'>
-              <div className="content-container sunrise-container">
-                <div className="content-wrap">
-                  <div className="icon-wrapper">
-                    <BsSunrise className="s-icon" />
-                  </div>
-                </div>
-                <div className="content-wrap">
-                  <h5 className="sunrise-value">{sunrise}</h5>
-                  <h6>(GMT+8)</h6>
-                  <p>Sunrise</p>
+            <div className="content-container sunrise-container">
+              <div className="content-wrap">
+                <div className="icon-wrapper">
+                  <BsSunrise className="s-icon" />
                 </div>
               </div>
-              <div className="content-container sunset-container">
-                <div className="content-wrap">
-                  <div className="icon-wrapper">
-                    <BsSunset className="s-icon" />
-                  </div>
-                </div>
-                <div className="content-wrap">
-                  <h5 className="sunset-value">{sunset}</h5>
-                  <h6>(GMT+8)</h6>
-                  <p>Sunset</p>
+              <div className="content-wrap">
+                <h2 className="sunrise-value">{sunrise}</h2>
+                <h6>(GMT+8)</h6>
+                <p>Sunrise</p>
+              </div>
+            </div>
+            <div className="content-container sunset-container">
+              <div className="content-wrap">
+                <div className="icon-wrapper">
+                  <BsSunset className="s-icon" />
                 </div>
               </div>
+              <div className="content-wrap">
+                <h2 className="sunset-value">{sunset}</h2>
+                <h6>(GMT+8)</h6>
+                <p>Sunset</p>
+              </div>
+            </div>
             </div>
           </div>
 
@@ -200,10 +200,10 @@ function Overview(props, { setHumidityValue }) {
               <p className='location-txt'>{data.location}</p>
             </div>
 
-          </div>
-        </div>
+          </div> 
       </div>
     </div>
+  </div>
   )
 }
 
