@@ -29,10 +29,10 @@ function Home(props) {
 
 
     const developer = [
-        { name: 'ALLADA, EARL FRANCES NICOLI', email: 'alladaearlfrances@gmail.com', role: 'Developer', dp: EARL },
-        { name: 'DE VERA, MIAKA NICOLE', email: 'devera.mnl@gmail.com', role: 'Developer', dp: MIAKA },
-        { name: 'HADJISAID, JEHAN', email: 'jehanlaohadjisaid@gmail.com', role: 'Developer', dp: JEHAN },
-        { name: 'PANGANIBAN, JOHN CARLO', email: 'JcPanganiban6@gmail.com', role: 'Developer', dp: JC }
+        { name: 'ALLADA, EARL FRANCES NICOLI', role: 'Developer', dp: EARL },
+        { name: 'DE VERA, MIAKA NICOLE',  role: 'Developer', dp: MIAKA },
+        { name: 'HADJISAID, JEHAN',  role: 'Developer', dp: JEHAN },
+        { name: 'PANGANIBAN, JOHN CARLO',role: 'Developer', dp: JC }
     ];
 
     const DeveloperCard = developer.map(dev =>

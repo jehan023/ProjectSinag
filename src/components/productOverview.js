@@ -59,10 +59,10 @@ function productOverview() {
                 </div>
 
                 
-                <div className='content-desc-container'>
+                {/* <div className='content-desc-container'>
                     <p className='content-title'>Technical Specifications</p>
                     <p className='content-desc'>Desc</p>
-                </div>
+                </div> */}
 
                 
                 <div className='content-desc-container'>
