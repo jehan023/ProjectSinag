@@ -33,7 +33,6 @@ const EnergyChart = (props) => {
         try {
             setLabel([]);
             setDataSys([]);
-            setDataCons([]);
 
             switch (view) {
                 case 'day':
@@ -49,17 +48,15 @@ const EnergyChart = (props) => {
                     const byMonthFilter = sysData.reduce((acc, item) => {
                         const existingItem = acc.find((el) => el.date === item.date);
                         if (existingItem) {
-                            existingItem.sys_value += parseFloat(item.pv_power);
-                            existingItem.cons_value += parseFloat(item.pv_power);
+                            existingItem.pv_gen += parseFloat(item.pv_power)*0.16667;
                         } else {
-                            acc.push({ date: item.date, sys_value: item.pv_power, cons_value: item.pv_power });
+                            acc.push({ date: item.date, pv_gen: item.pv_power*0.16667 });
                         }
                         return acc;
                     }, []);
 
                     byMonthFilter.map(row => {
-                        setDataSys(prevList => [...prevList, row.sys_value]);
-                        setDataCons(prevList => [...prevList, row.cons_value]);
+                        setDataSys(prevList => [...prevList, row.pv_gen]);
                         setLabel(prevList => [...prevList, row.date]);
                     });
 
@@ -101,7 +98,6 @@ const EnergyChart = (props) => {
                         resultArray.push({ month: monthNames[month - 1], sum });
                     }
 
-                    console.log(resultArray);
                     resultArray.map(row => {
                         setDataSys(prevList => [...prevList, row.sum]);
                         setDataCons(prevList => [...prevList, row.sum]);
@@ -138,15 +134,15 @@ const EnergyChart = (props) => {
                     enabled: true,
                     mode: 'x'
                 },
-                zoom: {
-                    pinch: {
-                        enabled: true       // Enable pinch zooming
-                    },
-                    wheel: {
-                        enabled: true       // Enable wheel zooming
-                    },
-                    mode: 'x',
-                }
+                // zoom: {
+                //     pinch: {
+                //         enabled: true       // Enable pinch zooming
+                //     },
+                //     wheel: {
+                //         enabled: true       // Enable wheel zooming
+                //     },
+                //     mode: 'x',
+                // }
             }
         },
     };
@@ -161,11 +157,11 @@ const EnergyChart = (props) => {
                 data: dataSys,
                 backgroundColor: 'rgba(255, 99, 132, 1)',
             },
-            {
-                label: 'Consumption',
-                data: dataCons,
-                backgroundColor: 'rgba(53, 162, 235, 1)',
-            },
+            // {
+            //     label: 'Consumption',
+            //     data: dataCons,
+            //     backgroundColor: 'rgba(53, 162, 235, 1)',
+            // },
         ],
     };
 

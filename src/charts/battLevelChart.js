@@ -51,31 +51,59 @@ const BattLevelChart = (props) => {
                     break;
 
                 case 'month':
-                    // const byMonthFilter = sysData.reduce((acc, item) => {
-                    //     const existingItem = acc.find((el) => el.date === item.date);
-                    //     if (existingItem) {
-                    //         existingItem.sys_value += parseFloat(item.pv_power);
-                    //         existingItem.cons_value += parseFloat(item.pv_power);
-                    //     } else {
-                    //         acc.push({ date: item.date, sys_value: item.pv_power, cons_value: item.pv_power });
-                    //     }
-                    //     return acc;
-                    // }, []);
+                    const byMonthFilter = sysData.reduce((acc, item) => {
+                        const existingItem = acc.find((el) => el.date === item.date);
+                        if (existingItem) {
+                            existingItem.level = Math.max(existingItem.level, parseFloat(item.batt_level));
+                        } else {
+                            acc.push({ date: item.date, level: item.batt_level});
+                        }
+                        return acc;
+                    }, []);
 
-                    // byMonthFilter.map(row => {
-                    //     setLevel(prevList => [...prevList, row.sys_value]);
-                    //     setLabel(prevList => [...prevList, row.date]);
-                    // });
-
-                    sysData.map(row => {
-                        setLevel(prevList => [...prevList, row.batt_level]);
+                    byMonthFilter.map(row => {
+                        setLevel(prevList => [...prevList, row.level]);
                         setLabel(prevList => [...prevList, row.date]);
                     });
 
                     break
 
                 case 'year':
-                    return;
+                    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+                    const levelByMonth = {};
+                    const countByMonth = {};
+
+                    for (let i = 0; i < sysData.length; i++) {
+                        const dateParts = sysData[i].date.split(' ');
+                        const monthIndex = monthNames.indexOf(dateParts[0]);
+                        const year = dateParts[2];
+                        const yearMonth = `${monthNames[monthIndex]}-${year}`;
+                        const level = sysData[i].batt_level;
+
+                        if (levelByMonth[yearMonth]) {
+                            levelByMonth[yearMonth] += level;
+                            countByMonth[yearMonth]++;
+                        } else {
+                            levelByMonth[yearMonth] = level;
+                            countByMonth[yearMonth] = 1;
+                        }
+                    }
+
+                    const resultArray = [];
+                    for (const yearMonth in levelByMonth) {
+                        const [monthName, year] = yearMonth.split('-');
+                        const month = monthNames.indexOf(monthName) + 1;
+                        const level = levelByMonth[yearMonth] / countByMonth[yearMonth];
+                        resultArray.push({ month: monthNames[month - 1], level: level});
+                    }
+
+                    resultArray.map(row => {
+                        setLevel(prevList => [...prevList, row.level]);
+                        setLabel(prevList => [...prevList, row.month]);
+                    });
+
+                    break;
 
                 default:
                     return;
@@ -106,15 +134,15 @@ const BattLevelChart = (props) => {
                     enabled: true,
                     mode: 'x'
                 },
-                zoom: {
-                    pinch: {
-                        enabled: true       // Enable pinch zooming
-                    },
-                    wheel: {
-                        enabled: true       // Enable wheel zooming
-                    },
-                    mode: 'x',
-                }
+                // zoom: {
+                //     pinch: {
+                //         enabled: true       // Enable pinch zooming
+                //     },
+                //     wheel: {
+                //         enabled: true       // Enable wheel zooming
+                //     },
+                //     mode: 'x',
+                // }
             }
         },
     };

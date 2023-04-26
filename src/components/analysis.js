@@ -62,8 +62,8 @@ function Analysis(props) {
         return month === fMonth && day === fday && year === fYear;
     }
   });
-  console.table(filterData);
-  console.log(formattedDate);
+  // console.table(filterData);
+  // console.log(formattedDate);
 
   return (
     <div className='analysis-container'>
