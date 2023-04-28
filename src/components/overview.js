@@ -25,6 +25,9 @@ function Overview(props, { setHumidityValue }) {
   const [weather, setWeather] = useState('-');
   const location = 'Las Piñas, PH';
 
+  const [avgCharging, setAvgCharging] = useState(0);
+  const [avgON, setAvgON] = useState(0);
+
   const devices = [
     { list: 'SL1', value: 'SL1', label: 'Streetlight 1' },
     { list: 'SL2', value: 'SL2', label: 'Streetlight 2' },
@@ -34,6 +37,11 @@ function Overview(props, { setHumidityValue }) {
   useEffect(() => {
     callWeatherAPI();
   }, []);
+
+  useEffect(() => {
+    AvgCharging();
+    AvgON();
+  }, [allData]);
 
   const callWeatherAPI = () => {
     console.log('Fetching Weather Data');
@@ -86,6 +94,95 @@ function Overview(props, { setHumidityValue }) {
     return (parseFloat(highestYield).toFixed(2));
   }
 
+  const AvgCharging = () => {
+    const chargingTimePerDay = allData.reduce((acc, item, index, array) => {
+      if (item.charging === 1) {
+        const nextItem = array[index + 1];
+        if (nextItem && nextItem.date === item.date && nextItem.charging === 0) {
+          const dateISO = new Date(item.date).toISOString().split('T')[0];
+          const start = new Date(`${dateISO}T${item.time}:00Z`);
+          console.log(start);
+          const end = new Date(`${dateISO}T${nextItem.time}:00Z`);
+          const chargingTime = (end - start) / (1000 * 60 * 60); // convert milliseconds to hours
+          const existingItem = acc.find((el) => el.date === item.date);
+          if (existingItem) {
+            existingItem.charging_time += chargingTime;
+          } else {
+            acc.push({ date: item.date, charging_time: chargingTime });
+          }
+        }
+      }
+      return acc;
+    }, []);
+    console.table(chargingTimePerDay);
+
+    const totalChargingTime = chargingTimePerDay.reduce((acc, curr) => acc + curr.charging_time, 0);
+    const averageChargingTime = totalChargingTime / chargingTimePerDay.length;
+
+    console.log(averageChargingTime);
+
+    setAvgCharging(parseFloat(averageChargingTime).toFixed(2));
+  }
+
+  const AvgON = () => {
+    const OnTimePerDay = allData.reduce((acc, item, index, array) => {
+      if (item.led_status === 1) {
+        const nextItem = array[index + 1];
+        if (nextItem && nextItem.date === item.date && nextItem.led_status === 1) {
+          const dateISO = new Date(item.date).toISOString().split('T')[0];
+          const start = new Date(`${dateISO}T${item.time}:00Z`);
+          const end = new Date(`${dateISO}T${nextItem.time}:00Z`);
+          const ONtime = (end - start) / (1000 * 60 * 60); // convert milliseconds to hours
+          const existingItem = acc.find((el) => el.date === item.date);
+          if (existingItem) {
+            existingItem.on_time += ONtime;
+          } else {
+            acc.push({ date: item.date, on_time: ONtime });
+          }
+        }
+        if (nextItem && nextItem.date === item.date && nextItem.led_status === 0) {
+          const dateISO = new Date(item.date).toISOString().split('T')[0];
+          const start = new Date(`${dateISO}T${item.time}:00Z`);
+          const end = new Date(`${dateISO}T${nextItem.time}:00Z`);
+          const ONtime = (end - start) / (1000 * 60 * 60); // convert milliseconds to hours
+          const existingItem = acc.find((el) => el.date === item.date);
+          if (existingItem) {
+            existingItem.on_time += ONtime;
+          } else {
+            acc.push({ date: item.date, on_time: ONtime });
+          }
+        }
+      }
+
+      // if (item.led_status === 0) {
+      //   const prevItem = array[index - 1];
+      //   // const nextItem = array[index + 1];
+      //   if (prevItem && prevItem.date !== item.date && prevItem.led_status === 1) {
+      //     const dateISO = new Date(item.date).toISOString().split('T')[0];
+      //     const start = new Date(`${dateISO}T00:00:00Z`);
+      //     const end = new Date(`${dateISO}T${item.time}:00Z`);
+      //     const ONtime = (end - start) / (1000 * 60 * 60); // convert milliseconds to hours
+      //     const existingItem = acc.find((el) => el.date === item.date);
+      //     if (existingItem) {
+      //       existingItem.on_time += ONtime;
+      //     } else {
+      //       acc.push({ date: item.date, on_time: ONtime });
+      //     }
+      //   }
+      // }
+
+      return acc;
+    }, []);
+    console.table(OnTimePerDay);
+
+    const totalOnTime = OnTimePerDay.reduce((acc, curr) => acc + curr.on_time, 0);
+    const averageOnTime = totalOnTime / OnTimePerDay.length;
+
+    console.log(averageOnTime);
+
+    setAvgON(parseFloat(averageOnTime).toFixed(2))
+  }
+
   return (
     <div className='overview-container'>
       {loading ? <ReactLoading type={'spokes'} color={'#0f1b2a'} height={550} width={375} className='loading-api' /> : ''}
@@ -125,14 +222,14 @@ function Overview(props, { setHumidityValue }) {
             <div className='sl-overview-card'>
               <div className='card-content'>
                 <IoBatteryCharging className='sl-icon' />
-                <h3>{GetHighestYield()}hr</h3>
+                <h3>{avgCharging}hr</h3>
                 <p>Avg. Charging Time</p>
               </div>
             </div>
             <div className='sl-overview-card'>
               <div className='card-content'>
                 <TbBulb className='sl-icon' />
-                <h3>{GetHighestYield()}hr</h3>
+                <h3>{avgON}hr</h3>
                 <p>Avg. ON Time</p>
               </div>
             </div>

@@ -269,7 +269,7 @@ function Status(props) {
             <div className='status-card'>
               <BsThermometerSun className='status-icon' />
               <h2>{parseFloat(data.temp)}°C</h2>
-              <h5>Temperature</h5>
+              <h5>Ambient Temperature</h5>
             </div>
 
             <div className='status-card'>
