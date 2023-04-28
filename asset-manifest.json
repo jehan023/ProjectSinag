@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/ProjectSinag/static/css/main.50429b44.css",
-    "main.js": "/ProjectSinag/static/js/main.403dc95c.js",
-    "static/js/758.4320f792.chunk.js": "/ProjectSinag/static/js/758.4320f792.chunk.js",
+    "main.css": "/ProjectSinag/static/css/main.7c6e9094.css",
+    "main.js": "/ProjectSinag/static/js/main.89715bd8.js",
+    "static/js/758.3ecc4d44.chunk.js": "/ProjectSinag/static/js/758.3ecc4d44.chunk.js",
     "static/js/395.738f4f83.chunk.js": "/ProjectSinag/static/js/395.738f4f83.chunk.js",
-    "static/js/67.95c35e16.chunk.js": "/ProjectSinag/static/js/67.95c35e16.chunk.js",
-    "static/js/703.ab20cb42.chunk.js": "/ProjectSinag/static/js/703.ab20cb42.chunk.js",
-    "static/js/546.1b5b63d5.chunk.js": "/ProjectSinag/static/js/546.1b5b63d5.chunk.js",
+    "static/js/67.6e01d0c1.chunk.js": "/ProjectSinag/static/js/67.6e01d0c1.chunk.js",
+    "static/js/703.b1d552ff.chunk.js": "/ProjectSinag/static/js/703.b1d552ff.chunk.js",
+    "static/js/546.91a0807d.chunk.js": "/ProjectSinag/static/js/546.91a0807d.chunk.js",
     "static/js/718.595ca1bc.chunk.js": "/ProjectSinag/static/js/718.595ca1bc.chunk.js",
-    "static/js/13.d2c32296.chunk.js": "/ProjectSinag/static/js/13.d2c32296.chunk.js",
-    "static/js/899.357fabb5.chunk.js": "/ProjectSinag/static/js/899.357fabb5.chunk.js",
+    "static/js/13.6811cbf7.chunk.js": "/ProjectSinag/static/js/13.6811cbf7.chunk.js",
+    "static/js/899.7bbb2f09.chunk.js": "/ProjectSinag/static/js/899.7bbb2f09.chunk.js",
     "static/js/355.d54d241a.chunk.js": "/ProjectSinag/static/js/355.d54d241a.chunk.js",
     "static/js/816.cca28040.chunk.js": "/ProjectSinag/static/js/816.cca28040.chunk.js",
     "static/css/21.7e6b0054.chunk.css": "/ProjectSinag/static/css/21.7e6b0054.chunk.css",
@@ -55,16 +55,16 @@
     "static/media/devbg.svg": "/ProjectSinag/static/media/devbg.63666c95b06016d728c9.svg",
     "static/media/overviewbg.svg": "/ProjectSinag/static/media/overviewbg.1b37c41b15946e558041.svg",
     "index.html": "/ProjectSinag/index.html",
-    "main.50429b44.css.map": "/ProjectSinag/static/css/main.50429b44.css.map",
-    "main.403dc95c.js.map": "/ProjectSinag/static/js/main.403dc95c.js.map",
-    "758.4320f792.chunk.js.map": "/ProjectSinag/static/js/758.4320f792.chunk.js.map",
+    "main.7c6e9094.css.map": "/ProjectSinag/static/css/main.7c6e9094.css.map",
+    "main.89715bd8.js.map": "/ProjectSinag/static/js/main.89715bd8.js.map",
+    "758.3ecc4d44.chunk.js.map": "/ProjectSinag/static/js/758.3ecc4d44.chunk.js.map",
     "395.738f4f83.chunk.js.map": "/ProjectSinag/static/js/395.738f4f83.chunk.js.map",
-    "67.95c35e16.chunk.js.map": "/ProjectSinag/static/js/67.95c35e16.chunk.js.map",
-    "703.ab20cb42.chunk.js.map": "/ProjectSinag/static/js/703.ab20cb42.chunk.js.map",
-    "546.1b5b63d5.chunk.js.map": "/ProjectSinag/static/js/546.1b5b63d5.chunk.js.map",
+    "67.6e01d0c1.chunk.js.map": "/ProjectSinag/static/js/67.6e01d0c1.chunk.js.map",
+    "703.b1d552ff.chunk.js.map": "/ProjectSinag/static/js/703.b1d552ff.chunk.js.map",
+    "546.91a0807d.chunk.js.map": "/ProjectSinag/static/js/546.91a0807d.chunk.js.map",
     "718.595ca1bc.chunk.js.map": "/ProjectSinag/static/js/718.595ca1bc.chunk.js.map",
-    "13.d2c32296.chunk.js.map": "/ProjectSinag/static/js/13.d2c32296.chunk.js.map",
-    "899.357fabb5.chunk.js.map": "/ProjectSinag/static/js/899.357fabb5.chunk.js.map",
+    "13.6811cbf7.chunk.js.map": "/ProjectSinag/static/js/13.6811cbf7.chunk.js.map",
+    "899.7bbb2f09.chunk.js.map": "/ProjectSinag/static/js/899.7bbb2f09.chunk.js.map",
     "355.d54d241a.chunk.js.map": "/ProjectSinag/static/js/355.d54d241a.chunk.js.map",
     "816.cca28040.chunk.js.map": "/ProjectSinag/static/js/816.cca28040.chunk.js.map",
     "21.7e6b0054.chunk.css.map": "/ProjectSinag/static/css/21.7e6b0054.chunk.css.map",
@@ -73,7 +73,7 @@
     "968.3ddaa1ae.chunk.js.map": "/ProjectSinag/static/js/968.3ddaa1ae.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.50429b44.css",
-    "static/js/main.403dc95c.js"
+    "static/css/main.7c6e9094.css",
+    "static/js/main.89715bd8.js"
   ]
 }
