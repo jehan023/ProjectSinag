@@ -187,7 +187,7 @@ const BattLevelChart = (props) => {
                 backgroundColor: (point) => {
                     if (status[point.dataIndex]) {
                         return 'rgba(28, 164, 63, 0.8)'; // green if charging
-                    } if (lamp[point.dataIndex]) {
+                    } else if (lamp[point.dataIndex]) {
                         return 'rgb(207, 0, 15, 0.8)'; // red if lamp is ON
                     } else {
                         return 'rgba(75,192,192,0.8)'; // blue if neither
