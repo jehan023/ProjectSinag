@@ -28,7 +28,6 @@ function Overview(props, { setHumidityValue }) {
   const [avgCharging, setAvgCharging] = useState(0);
   const [avgON, setAvgON] = useState(0);
 
-
   const devices = [
     { list: 'SL1', value: 'SL1', label: 'Streetlight 1' },
     { list: 'SL2', value: 'SL2', label: 'Streetlight 2' },
@@ -102,6 +101,7 @@ function Overview(props, { setHumidityValue }) {
         if (nextItem && nextItem.date === item.date && nextItem.charging === 0) {
           const dateISO = new Date(item.date).toISOString().split('T')[0];
           const start = new Date(`${dateISO}T${item.time}:00Z`);
+          console.log(start);
           const end = new Date(`${dateISO}T${nextItem.time}:00Z`);
           const chargingTime = (end - start) / (1000 * 60 * 60); // convert milliseconds to hours
           const existingItem = acc.find((el) => el.date === item.date);
@@ -122,14 +122,24 @@ function Overview(props, { setHumidityValue }) {
     console.log(averageChargingTime);
 
     setAvgCharging(parseFloat(averageChargingTime).toFixed(2));
-
-    // return (parseFloat(averageChargingTime).toFixed(2));
   }
 
   const AvgON = () => {
     const OnTimePerDay = allData.reduce((acc, item, index, array) => {
       if (item.led_status === 1) {
         const nextItem = array[index + 1];
+        if (nextItem && nextItem.date === item.date && nextItem.led_status === 1) {
+          const dateISO = new Date(item.date).toISOString().split('T')[0];
+          const start = new Date(`${dateISO}T${item.time}:00Z`);
+          const end = new Date(`${dateISO}T${nextItem.time}:00Z`);
+          const ONtime = (end - start) / (1000 * 60 * 60); // convert milliseconds to hours
+          const existingItem = acc.find((el) => el.date === item.date);
+          if (existingItem) {
+            existingItem.on_time += ONtime;
+          } else {
+            acc.push({ date: item.date, on_time: ONtime });
+          }
+        }
         if (nextItem && nextItem.date === item.date && nextItem.led_status === 0) {
           const dateISO = new Date(item.date).toISOString().split('T')[0];
           const start = new Date(`${dateISO}T${item.time}:00Z`);
@@ -142,36 +152,24 @@ function Overview(props, { setHumidityValue }) {
             acc.push({ date: item.date, on_time: ONtime });
           }
         }
-        if (nextItem && nextItem.date !== item.date) {
-          const dateISO = new Date(item.date).toISOString().split('T')[0];
-          const start = new Date(`${dateISO}T${item.time}:00Z`);
-          const end = new Date(`${dateISO}T23:59:59Z`);
-          const ONtime = (end - start) / (1000 * 60 * 60); // convert milliseconds to hours
-          const existingItem = acc.find((el) => el.date === item.date);
-          if (existingItem) {
-            existingItem.on_time += ONtime;
-          } else {
-            acc.push({ date: item.date, on_time: ONtime });
-          }
-        }
       }
 
-      if (item.led_status === 0) {
-        const prevItem = array[index - 1];
-        // const nextItem = array[index + 1];
-        if (prevItem && prevItem.date !== item.date && prevItem.led_status === 1) {
-          const dateISO = new Date(item.date).toISOString().split('T')[0];
-          const start = new Date(`${dateISO}T00:00:00Z`);
-          const end = new Date(`${dateISO}T${item.time}:00Z`);
-          const ONtime = (end - start) / (1000 * 60 * 60); // convert milliseconds to hours
-          const existingItem = acc.find((el) => el.date === item.date);
-          if (existingItem) {
-            existingItem.on_time += ONtime;
-          } else {
-            acc.push({ date: item.date, on_time: ONtime });
-          }
-        }
-      }
+      // if (item.led_status === 0) {
+      //   const prevItem = array[index - 1];
+      //   // const nextItem = array[index + 1];
+      //   if (prevItem && prevItem.date !== item.date && prevItem.led_status === 1) {
+      //     const dateISO = new Date(item.date).toISOString().split('T')[0];
+      //     const start = new Date(`${dateISO}T00:00:00Z`);
+      //     const end = new Date(`${dateISO}T${item.time}:00Z`);
+      //     const ONtime = (end - start) / (1000 * 60 * 60); // convert milliseconds to hours
+      //     const existingItem = acc.find((el) => el.date === item.date);
+      //     if (existingItem) {
+      //       existingItem.on_time += ONtime;
+      //     } else {
+      //       acc.push({ date: item.date, on_time: ONtime });
+      //     }
+      //   }
+      // }
 
       return acc;
     }, []);
@@ -183,8 +181,6 @@ function Overview(props, { setHumidityValue }) {
     console.log(averageOnTime);
 
     setAvgON(parseFloat(averageOnTime).toFixed(2))
-
-    // return (parseFloat(averageOnTime).toFixed(2));
   }
 
   return (

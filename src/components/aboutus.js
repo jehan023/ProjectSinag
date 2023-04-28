@@ -35,7 +35,7 @@ function AboutUs() {
                     <img className='dev-img' src={JEHAN} alt='image'/>
                     <div className='dev-info'>
                         <p className='dev-name'>HADJISAID, Jehan L.</p>
-                        <p className='dev-desc'>Jehan Hadjisaid is a computer engineering student at the Polytechnic University of the Philippines. During his senior year of high school, he had a co-authorship on a research paper that was published in the Central Asian Journal of Global Health 2020. The research paper is entitled "Online Game Addiction and the Level of Depression Among Adolescents in Manila, Philippines." Also, he was a Philippine Robotics Olympiad finalist in 2016.</p>
+                        <p className='dev-desc'>Jehan Hadjisaid is a 4th Year Computer Engineering student at the Polytechnic University of the Philippines. During his senior year of high school, he had a co-authorship on a research paper that was published in the Central Asian Journal of Global Health 2020. The research paper is entitled "Online Game Addiction and the Level of Depression Among Adolescents in Manila, Philippines." Also, he is a DOST-SEI Scholar Awardee 2019.</p>
                     </div>
                 </div>
                 <div className='dev-card'>

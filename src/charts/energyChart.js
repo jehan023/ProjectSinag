@@ -153,7 +153,7 @@ const EnergyChart = (props) => {
         labels,
         datasets: [
             {
-                label: 'Generate',
+                label: 'Generate (Wh)',
                 data: dataSys,
                 backgroundColor: 'rgba(255, 99, 132, 1)',
             },
