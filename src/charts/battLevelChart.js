@@ -124,29 +124,39 @@ const BattLevelChart = (props) => {
 
     const options = {
         responsive: true,
+        interaction: {
+            intersect: false,
+            mode: 'index',
+        },
 
-        // scales: {
-        //     yAxes: [
-        //         {
-        //             id: 'lamp',
-        //             type: 'category',
-        //             labels: ['OFF', 'ON'],
-        //         },
-        //         {
-        //             id: 'charging',
-        //             type: 'category',
-        //             labels: ['discharging', 'charging'],
-        //         },
-        //     ],
-        // },
+        scales: {
+            y2: {
+                type: 'linear',
+                position: 'left',
+                stack: 'batt',
+                // stackWeight: 2,
+            },
+            y1: {
+                type: 'linear',
+                offset: true,
+                position: 'right',
+                stack: 'batt',
+                // stackWeight: 1,
+                min: 0,
+                max: 1,
+                ticks: {
+                    stepSize: 1
+                }
+            }
+        },
         plugins: {
             legend: {
                 position: 'bottom',
-                labels: {
-                    filter: function (legendItem, data) {
-                        return legendItem.datasetIndex !== 0;
-                    },
-                },
+                // labels: {
+                //     filter: function (legendItem, data) {
+                //         return legendItem.datasetIndex !== 0;
+                //     },
+                // },
             },
             title: {
                 display: true,
@@ -179,39 +189,42 @@ const BattLevelChart = (props) => {
         labels,
         datasets: [
             {
-                type: 'bar',
-                label: 'Level (%)',
-                data: level,
-                // backgroundColor: 'rgba(22, 160, 133, 0.5)',
-                // borderColor: 'rgba(75,192,192,1)',
-                backgroundColor: (point) => {
-                    if (status[point.dataIndex]) {
-                        return 'rgba(28, 164, 63, 0.8)'; // green if charging
-                    } else if (lamp[point.dataIndex]) {
-                        return 'rgb(207, 0, 15, 0.8)'; // red if lamp is ON
-                    } else {
-                        return 'rgba(75,192,192,0.8)'; // blue if neither
-                    }
-                },
-                // fill: false,
-            },
-            {
                 type: 'line',
-                label: 'Lamp ON',
-                // data: lamp.map((d) => (d.lamp_status ? 'ON' : 'OFF')),
+                label: 'Lamp',
+                data: lamp,
                 backgroundColor: 'rgb(207, 0, 15, 0.8)',
-                // borderColor: 'rgba(245, 39, 39, 0.8)',
+                borderColor: 'rgb(207, 0, 15, 0.8)',
                 // borderColor: 'rgba(255,0,0,1)',
-                // yAxisID: 'lamp',
+                yAxisID: 'y1',
+                stepped: true,
             },
             {
                 type: 'line',
                 label: 'Charging',
-                // data: status,
+                data: status,
                 backgroundColor: 'rgba(28, 164, 63, 0.8)',
-                // borderColor: 'rgba(22, 160, 133, 1)',
+                borderColor: 'rgba(28, 164, 63, 0.8)',
                 // borderColor: 'rgba(0,255,0,1)',
-                // yAxisID: 'charging',
+                yAxisID: 'y1',
+                stepped: true,
+            },
+            {
+                type: 'bar',
+                label: 'Level (%)',
+                data: level,
+                backgroundColor: 'rgba(9, 15, 30, 0.8)',
+                // borderColor: 'rgba(75,192,192,1)',
+                // backgroundColor: (point) => {
+                //     if (status[point.dataIndex]) {
+                //         return 'rgba(28, 164, 63, 0.8)'; // green if charging
+                //     } else if (lamp[point.dataIndex]) {
+                //         return 'rgb(207, 0, 15, 0.8)'; // red if lamp is ON
+                //     } else {
+                //         return 'rgba(75,192,192,0.8)'; // blue if neither
+                //     }
+                // },
+                // fill: false,
+                yAxisID: 'y2',
             },
         ],
     };
