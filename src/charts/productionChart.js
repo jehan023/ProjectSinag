@@ -76,8 +76,8 @@ const ProductionChart = (props) => {
                     byMonthFilter.map(row => {
                         setLabel(prevList => [...prevList, row.date]);
                         setGenerate(prevList => [...prevList, row.sys_power]);
-                        setTemp(prevList => [...prevList, row.sys_temp/row.count]);
-                        setLight(prevList => [...prevList, row.sys_lux/row.count]);
+                        setTemp(prevList => [...prevList, row.sys_temp / row.count]);
+                        setLight(prevList => [...prevList, row.sys_lux / row.count]);
                     });
                     console.table(byMonthFilter);
 
@@ -145,6 +145,10 @@ const ProductionChart = (props) => {
 
     const options = {
         responsive: true,
+        interaction: {
+            intersect: false,
+            mode: 'index',
+        },
         plugins: {
             legend: {
                 position: 'bottom'
@@ -172,6 +176,16 @@ const ProductionChart = (props) => {
                 // }
             }
         },
+        scales: {
+            y: {
+              type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
+              position: 'right',
+            },
+            y1: {
+                type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
+                position: 'left',
+              },
+        }
     };
 
     const labels = label;
@@ -186,14 +200,16 @@ const ProductionChart = (props) => {
                 backgroundColor: 'rgb(4, 59, 92, 1)',
                 data: temp,
                 borderColor: 'rgb(4, 59, 92, 1)',
+                yAxisID: 'y1',
             },
             {
                 // fill: true,
                 type: 'line',
-                label: 'Ambient Light (Lux)',
+                label: 'Ambient Light (lux)',
                 backgroundColor: 'rgb(22, 160, 133, 1)',
                 data: light,
                 borderColor: 'rgb(22, 160, 133, 1)',
+                yAxisID: 'y',
             },
             {
                 // fill: true,
@@ -202,6 +218,7 @@ const ProductionChart = (props) => {
                 data: generate,
                 backgroundColor: 'rgb(207, 0, 15, 1)',
                 borderColor: 'rgb(207, 0, 15, 1)',
+                yAxisID: 'y1',
             },
         ],
     };
