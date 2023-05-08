@@ -98,12 +98,12 @@ function App() {
     batt_volts: parseFloat(row[4]),
     batt_level: parseFloat(row[5]),
     batt_power: parseFloat(row[6]),
-    led_status: parseFloat(row[7]),
-    lux: parseFloat(row[8]),
-    temp: parseFloat(row[9]),
-    snr: parseFloat(row[10]),
-    rssi: parseFloat(row[11]),
-    charging: parseFloat(row[12])
+    charging: parseFloat(row[7]),
+    led_status: parseFloat(row[8]),
+    lux: parseFloat(row[9]),
+    temp: parseFloat(row[10]),
+    snr: parseFloat(row[11]),
+    rssi: parseFloat(row[12])
   }));
 
   const lastData = formattedData[formattedData.length-1];
