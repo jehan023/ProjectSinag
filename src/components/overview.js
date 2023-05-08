@@ -101,7 +101,7 @@ function Overview(props, { setHumidityValue }) {
         if (nextItem && nextItem.date === item.date && nextItem.charging === 0) {
           const dateISO = new Date(item.date).toISOString().split('T')[0];
           const start = new Date(`${dateISO}T${item.time}:00Z`);
-          console.log(start);
+          // console.log(start);
           const end = new Date(`${dateISO}T${nextItem.time}:00Z`);
           const chargingTime = (end - start) / (1000 * 60 * 60); // convert milliseconds to hours
           const existingItem = acc.find((el) => el.date === item.date);
