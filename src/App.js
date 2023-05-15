@@ -8,9 +8,6 @@ import LoadDataFromSheet from './loadDataFromSheet';
 import axios from 'axios';
 import usermanual from './files/SinagUserManual.pdf';
 
-
-
-
 // import Select from 'react-select';
 
 const Overview = lazy(() => import('./components/overview.js'));
@@ -21,7 +18,6 @@ const Home = lazy(() => import('./components/home.js'));
 const Reports = lazy(() => import('./components/reports.js'));
 const ProductOverview= lazy(() => import('./components/productOverview.js'));
 const AboutUs= lazy(() => import('./components/aboutus.js'));
-
 
 
 function App() {
@@ -222,9 +218,6 @@ function App() {
                 <li><a href="mailto:sinagproject2023@gmail.com">Contact Us</a></li>
               </ul>
           </div>
-
-          
-
         </div>
       </div>
     </div>

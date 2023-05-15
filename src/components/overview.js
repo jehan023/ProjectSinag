@@ -263,7 +263,7 @@ function Overview(props, { setHumidityValue }) {
             </div>
 
             <div className='weather-container'>
-            <div className="content-container sunrise-container">
+            <div className="overview-content-container sunrise-container">
               <div className="content-wrap">
                 <div className="icon-wrapper">
                   <BsSunrise className="s-icon" />
@@ -275,7 +275,7 @@ function Overview(props, { setHumidityValue }) {
                 <p>Sunrise</p>
               </div>
             </div>
-            <div className="content-container sunset-container">
+            <div className="overview-content-container sunset-container">
               <div className="content-wrap">
                 <div className="icon-wrapper">
                   <BsSunset className="s-icon" />
