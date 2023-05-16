@@ -63,12 +63,12 @@ const ProductionChart = (props) => {
                     const byMonthFilter = sysData.reduce((acc, item) => {
                         const existingItem = acc.find((el) => el.date === item.date);
                         if (existingItem) {
-                            existingItem.sys_power += parseFloat(item.pv_power) * 0.16667;
+                            existingItem.sys_power += parseFloat(item.pv_power) * 0.08333;
                             existingItem.sys_temp += parseFloat(item.temp);
                             existingItem.sys_lux += parseFloat(item.lux);
                             existingItem.count += 1;
                         } else {
-                            acc.push({ date: item.date, sys_power: item.pv_power * 0.16667, sys_temp: item.temp, sys_lux: item.lux, count: 1 });
+                            acc.push({ date: item.date, sys_power: item.pv_power * 0.08333, sys_temp: item.temp, sys_lux: item.lux, count: 1 });
                         }
                         return acc;
                     }, []);
@@ -145,6 +145,7 @@ const ProductionChart = (props) => {
 
     const options = {
         responsive: true,
+        maintainAspectRatio: false,
         interaction: {
             intersect: false,
             mode: 'index',
@@ -155,7 +156,7 @@ const ProductionChart = (props) => {
             },
             title: {
                 display: true,
-                text: 'Energy Production',
+                text: "Solar Panel's Production",
                 font: {
                     size: 24,
                 }
@@ -165,26 +166,33 @@ const ProductionChart = (props) => {
                     enabled: true,
                     mode: 'x'
                 },
-                // zoom: {
-                //     pinch: {
-                //         enabled: true       // Enable pinch zooming
-                //     },
-                //     wheel: {
-                //         enabled: true       // Enable wheel zooming
-                //     },
-                //     mode: 'x',
-                // }
+                zoom: {
+                    pinch: {
+                        enabled: true       // Enable pinch zooming
+                    },
+                    wheel: {
+                        enabled: true       // Enable wheel zooming
+                    },
+                    mode: 'x',
+                }
             }
         },
         scales: {
+            x: {
+                type: 'category',
+                ticks: {
+                    maxRotation: 0,
+                    autoSkipPadding: 50,
+                },
+            },
             y: {
-              type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
-              position: 'right',
+                type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
+                position: 'right',
             },
             y1: {
                 type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
                 position: 'left',
-              },
+            },
         }
     };
 
@@ -214,7 +222,7 @@ const ProductionChart = (props) => {
             {
                 // fill: true,
                 type: 'line',
-                label: 'Generation (Wh)',
+                label: view === 'day' ? 'Power (W)' : 'Energy (Wh)',
                 data: generate,
                 backgroundColor: 'rgb(207, 0, 15, 1)',
                 borderColor: 'rgb(207, 0, 15, 1)',
