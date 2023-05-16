@@ -2,22 +2,30 @@ import React, { useEffect, useState } from 'react';
 import zoomPlugin from 'chartjs-plugin-zoom';
 import {
     Chart as ChartJS,
-    CategoryScale,
     LinearScale,
+    CategoryScale,
     BarElement,
-    Title,
-    Tooltip,
+    PointElement,
+    LineElement,
     Legend,
+    Tooltip,
+    Filler,
+    LineController,
+    BarController,
 } from 'chart.js';
-import { Bar } from 'react-chartjs-2';
+import { Chart } from 'react-chartjs-2';
 
 ChartJS.register(
-    CategoryScale,
     LinearScale,
+    CategoryScale,
     BarElement,
-    Title,
-    Tooltip,
+    PointElement,
+    LineElement,
     Legend,
+    Tooltip,
+    Filler,
+    LineController,
+    BarController,
     zoomPlugin
 );
 
@@ -48,9 +56,9 @@ const EnergyChart = (props) => {
                     const byMonthFilter = sysData.reduce((acc, item) => {
                         const existingItem = acc.find((el) => el.date === item.date);
                         if (existingItem) {
-                            existingItem.pv_gen += parseFloat(item.pv_power)*0.16667;
+                            existingItem.pv_gen += parseFloat(item.pv_power) * 0.08333;
                         } else {
-                            acc.push({ date: item.date, pv_gen: item.pv_power*0.16667 });
+                            acc.push({ date: item.date, pv_gen: item.pv_power * 0.08333 });
                         }
                         return acc;
                     }, []);
@@ -118,6 +126,11 @@ const EnergyChart = (props) => {
 
     const options = {
         responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+            intersect: false,
+            mode: 'index',
+        },
         plugins: {
             legend: {
                 position: 'bottom'
@@ -134,15 +147,6 @@ const EnergyChart = (props) => {
                     enabled: true,
                     mode: 'x'
                 },
-                // zoom: {
-                //     pinch: {
-                //         enabled: true       // Enable pinch zooming
-                //     },
-                //     wheel: {
-                //         enabled: true       // Enable wheel zooming
-                //     },
-                //     mode: 'x',
-                // }
             }
         },
     };
@@ -152,10 +156,12 @@ const EnergyChart = (props) => {
     const data = {
         labels,
         datasets: [
-            {
+            {   
+                type: 'line',
                 label: 'Generate (Wh)',
                 data: dataSys,
                 backgroundColor: 'rgba(255, 99, 132, 1)',
+                borderColor: 'rgba(255, 99, 132, 1)',
             },
             // {
             //     label: 'Consumption',
@@ -165,7 +171,7 @@ const EnergyChart = (props) => {
         ],
     };
 
-    return <Bar options={options} data={data} />;
+    return <Chart options={options} data={data} />;
 };
 
 export default EnergyChart;

@@ -75,7 +75,7 @@ function Overview(props, { setHumidityValue }) {
     sameDateData.forEach(same => {
       energy = energy + same.pv_power;
     });
-    totalEnergy = (energy * 0.16667);
+    totalEnergy = (energy * 0.08333);
     return (parseFloat(totalEnergy).toFixed(2));
   }
 
@@ -83,9 +83,9 @@ function Overview(props, { setHumidityValue }) {
     const byDateFilter = allData.reduce((acc, item) => {
       const existingItem = acc.find((el) => el.date === item.date);
       if (existingItem) {
-        existingItem.gen_power += parseFloat(item.pv_power) * 0.16667;
+        existingItem.gen_power += parseFloat(item.pv_power) * 0.08333;
       } else {
-        acc.push({ date: item.date, gen_power: item.pv_power * 0.16667 });
+        acc.push({ date: item.date, gen_power: item.pv_power * 0.08333 });
       }
       return acc;
     }, []);

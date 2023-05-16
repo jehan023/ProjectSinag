@@ -484,8 +484,9 @@ body {
       justify-content: center;
       align-items: center;
       height: 65vh;
-      padding: 10px 10px;
+      padding: 10px 40px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      overflow-x: scroll;
     }
   }
 }
@@ -493,7 +494,7 @@ body {
 .reports-container {
   padding: 80px 0px 30px 0px;
   .loading-component {
-    margin: 5% 38%;
+    margin: 5% 41%;
   }
   .report-btn-section {
     height: 40px;

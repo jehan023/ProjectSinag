@@ -124,24 +124,30 @@ const BattLevelChart = (props) => {
 
     const options = {
         responsive: true,
+        maintainAspectRatio: false,
         interaction: {
             intersect: false,
             mode: 'index',
         },
 
         scales: {
+            x: {
+                type: 'category',
+                ticks: {
+                    maxRotation: 0,
+                    autoSkipPadding: 50,
+                },
+            },
             y2: {
                 type: 'linear',
                 position: 'left',
                 stack: 'batt',
-                // stackWeight: 2,
             },
             y1: {
                 type: 'linear',
                 offset: true,
                 position: 'right',
                 stack: 'batt',
-                // stackWeight: 1,
                 min: 0,
                 max: 1,
                 ticks: {
@@ -152,15 +158,19 @@ const BattLevelChart = (props) => {
         plugins: {
             legend: {
                 position: 'bottom',
-                // labels: {
-                //     filter: function (legendItem, data) {
-                //         return legendItem.datasetIndex !== 0;
-                //     },
-                // },
+                display: true,
+                labels: {
+                    filter: function (legendItem, chartData) {
+                        if (view !== 'day' && (legendItem.text === 'Lamp' || legendItem.text === 'Charging')) {
+                            return false; // Hide Lamp and Charge legends when view is not 'day'
+                        }
+                        return true; // Display other legends
+                    },
+                },
             },
             title: {
                 display: true,
-                text: 'Battery Level',
+                text: view === 'day' ? 'Battery Level, Charging & LED Status' : 'Average Battery Level',
                 font: {
                     size: 24,
                 }
@@ -170,16 +180,20 @@ const BattLevelChart = (props) => {
                     enabled: true,
                     mode: 'x'
                 },
-                // zoom: {
-                //     pinch: {
-                //         enabled: true       // Enable pinch zooming
-                //     },
-                //     wheel: {
-                //         enabled: true       // Enable wheel zooming
-                //     },
-                //     mode: 'x',
-                // }
-            }
+                zoom: {
+                    pinch: {
+                        enabled: true       // Enable pinch zooming
+                    },
+                    wheel: {
+                        enabled: true       // Enable wheel zooming
+                    },
+                    mode: 'x',
+                }
+            },
+            clip: {
+                left: 25, // Adjust the number of initially visible data points
+                right: 25, // Adjust the number of initially visible data points
+            },
         },
     };
 
@@ -192,9 +206,9 @@ const BattLevelChart = (props) => {
                 type: 'line',
                 label: 'Lamp',
                 data: lamp,
-                backgroundColor: 'rgb(207, 0, 15, 0.8)',
-                borderColor: 'rgb(207, 0, 15, 0.8)',
-                // borderColor: 'rgba(255,0,0,1)',
+                backgroundColor: 'rgb(243, 156, 18, 0.8)',
+                borderColor: 'rgb(243, 156, 18, 0.8)',
+                borderWidth: 4,
                 yAxisID: 'y1',
                 stepped: true,
             },
@@ -204,7 +218,7 @@ const BattLevelChart = (props) => {
                 data: status,
                 backgroundColor: 'rgba(28, 164, 63, 0.8)',
                 borderColor: 'rgba(28, 164, 63, 0.8)',
-                // borderColor: 'rgba(0,255,0,1)',
+                borderWidth: 4,
                 yAxisID: 'y1',
                 stepped: true,
             },
@@ -213,17 +227,6 @@ const BattLevelChart = (props) => {
                 label: 'Level (%)',
                 data: level,
                 backgroundColor: 'rgba(9, 15, 30, 0.8)',
-                // borderColor: 'rgba(75,192,192,1)',
-                // backgroundColor: (point) => {
-                //     if (status[point.dataIndex]) {
-                //         return 'rgba(28, 164, 63, 0.8)'; // green if charging
-                //     } else if (lamp[point.dataIndex]) {
-                //         return 'rgb(207, 0, 15, 0.8)'; // red if lamp is ON
-                //     } else {
-                //         return 'rgba(75,192,192,0.8)'; // blue if neither
-                //     }
-                // },
-                // fill: false,
                 yAxisID: 'y2',
             },
         ],

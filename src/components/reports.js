@@ -8,7 +8,7 @@ function Reports() {
     const [reportFrom, setReportFrom] = useState('SL3');
     const [reportData, setReportData] = useState([]);
 
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     const handleReportChange = (from) => {

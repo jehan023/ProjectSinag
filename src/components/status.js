@@ -92,7 +92,7 @@ function Status(props) {
     sameDateData.forEach(same => {
       energy = energy + same.pv_power;
     });
-    totalEnergy = (energy * 0.16667);
+    totalEnergy = (energy * 0.08333);
     return (parseFloat(totalEnergy).toFixed(2));
   }
 
