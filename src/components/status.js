@@ -128,7 +128,7 @@ function Status(props) {
     let active = "Inactive";
     if (currentTime.toLocaleString("en-US", { month: "long", day: 'numeric', year: 'numeric' }) === data.date) {
       if (data.pv_power > 0.0 || data.charging === 1.0 || data.led_status === 1.0) {
-        active = "Active";
+        active = "Active";  
       }
     }
     
