@@ -202,7 +202,7 @@ function Overview(props, { setHumidityValue }) {
             <div className='sl-overview-card'>
               <div className='card-content'>
                 <FaCarBattery className='sl-icon' />
-                <h3>{data.battCapacity}</h3>
+                <h3>{data.battCapacity.split(' ')[1]}</h3>
                 <p>Battery Capacity</p>
               </div>
             </div>
