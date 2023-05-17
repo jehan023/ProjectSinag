@@ -128,11 +128,14 @@ function Overview(props, { setHumidityValue }) {
     const OnTimePerDay = allData.reduce((acc, item, index, array) => {
       if (item.led_status === 1) {
         const nextItem = array[index + 1];
-        if (nextItem && nextItem.date === item.date && nextItem.led_status === 1) {
+        if (nextItem && nextItem.date === item.date && (nextItem.led_status === 1 || nextItem.led_status === 0)) {
           const dateISO = new Date(item.date).toISOString().split('T')[0];
           const start = new Date(`${dateISO}T${item.time}:00Z`);
           const end = new Date(`${dateISO}T${nextItem.time}:00Z`);
           const ONtime = (end - start) / (1000 * 60 * 60); // convert milliseconds to hours
+          console.log(item.date);
+          console.log(item.time);
+          console.log(ONtime - (1/60));
           const existingItem = acc.find((el) => el.date === item.date);
           if (existingItem) {
             existingItem.on_time += ONtime;
@@ -140,10 +143,11 @@ function Overview(props, { setHumidityValue }) {
             acc.push({ date: item.date, on_time: ONtime });
           }
         }
-        if (nextItem && nextItem.date === item.date && nextItem.led_status === 0) {
+        
+        if (nextItem && nextItem.date !== item.date && nextItem.led_status === 1) {
           const dateISO = new Date(item.date).toISOString().split('T')[0];
           const start = new Date(`${dateISO}T${item.time}:00Z`);
-          const end = new Date(`${dateISO}T${nextItem.time}:00Z`);
+          const end = new Date(`${dateISO}T23:59:59Z`);
           const ONtime = (end - start) / (1000 * 60 * 60); // convert milliseconds to hours
           const existingItem = acc.find((el) => el.date === item.date);
           if (existingItem) {
