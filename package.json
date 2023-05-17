@@ -1,7 +1,7 @@
 {
   "name": "sinag-project",
   "version": "0.1.0",
-  "homepage": "https://jehan023.github.io/ProjectSinag/",
+  "homepage": "https://projectsinag.com",
   "private": true,
   "dependencies": {
     "@react-pdf/renderer": "^3.1.9",
