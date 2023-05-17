@@ -173,7 +173,7 @@ const PDFFile = (props) => {
           <Image style={styles.logo} src={Logo} />
           <View>
             <Text style={styles.name}>Project Sinag</Text>
-            <Text style={styles.email}>sinagproject2023@gmail.com</Text>
+            <Text style={styles.email}>www.projectsinag.com</Text>
           </View>
         </View>
 

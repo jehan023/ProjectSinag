@@ -54,7 +54,7 @@ function Reports() {
         }
     }
 
-    const formattedData = reportData.map(row => ({
+    const formattedData = reportData.reverse().map(row => ({
         date: row[0],
         time: row[1],
         anomaly: parseFloat(row[2])
