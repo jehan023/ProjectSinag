@@ -44,7 +44,6 @@ function Overview(props, { setHumidityValue }) {
   }, [allData]);
 
   const callWeatherAPI = () => {
-    console.log('Fetching Weather Data');
     try {
       setLoading(true);
       fetch(`https://api.openweathermap.org/data/2.5/weather?lat=14.4506&lon=120.9828&appid=a09978101e59b60cb76ea444b36760cc&units=metric`)
@@ -101,7 +100,6 @@ function Overview(props, { setHumidityValue }) {
         if (nextItem && nextItem.date === item.date && nextItem.charging === 0) {
           const dateISO = new Date(item.date).toISOString().split('T')[0];
           const start = new Date(`${dateISO}T${item.time}:00Z`);
-          // console.log(start);
           const end = new Date(`${dateISO}T${nextItem.time}:00Z`);
           const chargingTime = (end - start) / (1000 * 60 * 60); // convert milliseconds to hours
           const existingItem = acc.find((el) => el.date === item.date);
@@ -114,12 +112,9 @@ function Overview(props, { setHumidityValue }) {
       }
       return acc;
     }, []);
-    console.table(chargingTimePerDay);
 
     const totalChargingTime = chargingTimePerDay.reduce((acc, curr) => acc + curr.charging_time, 0);
     const averageChargingTime = totalChargingTime / chargingTimePerDay.length;
-
-    console.log(averageChargingTime);
 
     setAvgCharging(parseFloat(averageChargingTime).toFixed(2));
   }
@@ -163,12 +158,9 @@ function Overview(props, { setHumidityValue }) {
 
       return acc;
     }, []);
-    console.table(OnTimePerDay);
 
     const totalOnTime = OnTimePerDay.reduce((acc, curr) => acc + curr.on_time, 0);
     const averageOnTime = totalOnTime / OnTimePerDay.length;
-
-    console.log(averageOnTime);
 
     setAvgON(parseFloat(averageOnTime).toFixed(2))
   }

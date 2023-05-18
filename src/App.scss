@@ -402,7 +402,7 @@ body {
     padding: 20px;
     border-radius: 20px;
     width: 100%;
-    //text-align: center;
+    text-align: center;
     height: 180px;
     align-items: center;
     display: flex;
@@ -542,45 +542,54 @@ body {
   .anomaly-report-containter {
     font-family: "Gotham Medium";
     color: #090f1e;
-    table {
-      // border-collapse: collapse;
+    .report-table-container {
+      overflow: auto;
+      height: 500px;
       width: 60%;
+      // border: 5px solid red;
       margin: 0 auto;
-      // max-width: 800px;
-    }
-
-    td {
-      text-align: left;
-      padding: 5px 0 5px 20px;
-      border: 1px solid black;
-    }
-
-    th {
-      background-color: #232a23;
-      color: #f9a73e;
-      text-align: center;
-      padding: 5px;
-    }
-
-    tr {
-      td:nth-child(2) {
-        text-align: center;
-        padding: 5px 0;
+      thead th {
+        position: sticky;
+        top: 0;
       }
     }
+    .anomaly-report-table {
+      width: 100%;
+      margin: 0 auto;
 
-    tr:nth-child(even) {
-      background-color: #c3c2c2;
-      // color: #fff;
-    }
+      td {
+        text-align: left;
+        padding: 5px 0 5px 20px;
+        border: 1px solid black;
+      }
 
-    tr:nth-child(odd) {
-      background-color: #fff;
-    }
+      th {
+        background-color: #232a23;
+        color: #f9a73e;
+        text-align: center;
+        padding: 5px;
+      }
 
-    tr:hover {
-      background-color: #f9a73e;
-      // color: #f5cf45;
+      tr {
+        td:nth-child(2) {
+          text-align: center;
+          padding: 5px 0;
+        }
+      }
+
+      tr:nth-child(even) {
+        background-color: #c3c2c2;
+        // color: #fff;
+      }
+
+      tr:nth-child(odd) {
+        background-color: #fff;
+      }
+
+      tr:hover {
+        background-color: #f9a73e;
+        // color: #f5cf45;
+      }
     }
   }
 }
@@ -694,7 +703,7 @@ body {
     padding-bottom: 2%;
     background-color: #dfe9f6; //#f2f2f2;
     .fd-title {
-      color: #f5cf45;
+      color: #13213f;
       text-align: center;
       font-weight: bold;
       font-size: 42pt;
@@ -844,6 +853,7 @@ body {
     p {
       margin: 0;
       color: #e7edf5;
+      text-align: center;
     }
 
     .devs-section-header {
@@ -861,15 +871,10 @@ body {
     .dev-card-section {
       margin-top: 50px;
       margin: 50px 0% 20px 0%;
-
-      // border: 1px solid #bf212f;
     }
     .dev-image {
       height: 200px;
       width: 200px;
-
-      // border-radius: 100px;
-      // border: 1px solid #bf212f;
     }
   }
 
@@ -882,7 +887,7 @@ body {
     flex-direction: column;
     align-items: center;
     .t-title {
-      color: #f5cf45;
+      color: #13213f;
       text-align: center;
       font-weight: bold;
       font-size: 42pt;
