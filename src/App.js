@@ -117,8 +117,6 @@ function App() {
     return (sameDateItem.date === lastData.date);
   });
 
-  console.log('Render ', Math.random(), 'SLV: ', selectedValue);
-
   const openPDF = () => {
     window.open(usermanual);
   };

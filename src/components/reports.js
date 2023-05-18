@@ -83,23 +83,27 @@ function Reports() {
                 }
             </div>
 
-            <div className='anomaly-report-containter mt-3'>
+            <div className='anomaly-report-containter mt-5'>
                 <h3 className='w-100 my-0 text-center'>Anomaly Report of {reportFrom}</h3>
 
                 {loading ? <ReactLoading type={'spokes'} color={'#0f1b2a'} height={300} width={275} className='loading-component' /> : ''}
                 <Suspense fallback={<ReactLoading type={'spokes'} color={'#0f1b2a'} height={300} width={275} className='loading-component' />}>
-                    <table className='anomaly-report-table mt-3'>
-                        <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Time</th>
-                                <th>Anomaly</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {formattedData.length > 0 ? AnomalyTable : <h5 className='w-100 mt-3 text-align-center'>No data available.</h5>}
-                        </tbody>
-                    </table>
+                    <div className='report-table-container mt-3'>
+                        <table className='anomaly-report-table'>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Anomaly</th>
+                                </tr>
+                            </thead>
+                            {loading ? <h4 className='mt-3'>Loading...</h4> :
+                                <tbody>
+                                    {formattedData.length > 0 ? AnomalyTable : <h5 className='w-100 mt-3 text-align-center'>No data available.</h5>}
+                                </tbody>
+                            }
+                        </table>
+                    </div>
                 </Suspense>
             </div>
         </div >
