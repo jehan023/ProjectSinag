@@ -20,10 +20,6 @@ import arduinoLogo from '../images/arduino-logo.png';
 import gsheetsLogo from '../images/gsheets-logo.jpg';
 import vscodeLogo from '../images/vscode-logo.png';
 
-
-
-
-
 function Home(props) {
     const {page, handlePage} = props; 
 

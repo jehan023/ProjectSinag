@@ -32,7 +32,6 @@ function Status(props) {
   }, [data]);
 
   const callWeatherAPI = () => {
-    console.log('Fetching Weather Data');
     try {
       fetch(`https://api.openweathermap.org/data/2.5/weather?lat=14.4506&lon=120.9828&appid=a09978101e59b60cb76ea444b36760cc&units=metric`)
         .then(response => response.json())

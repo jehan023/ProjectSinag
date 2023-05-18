@@ -34,8 +34,6 @@ const ProductionChart = (props) => {
     const sysData = props.data;
     const view = props.viewMode;
 
-    // console.table(sysData);
-
     const [label, setLabel] = useState([]);
     const [generate, setGenerate] = useState([]);
     const [temp, setTemp] = useState([]);
@@ -79,7 +77,6 @@ const ProductionChart = (props) => {
                         setTemp(prevList => [...prevList, row.sys_temp / row.count]);
                         setLight(prevList => [...prevList, row.sys_lux / row.count]);
                     });
-                    console.table(byMonthFilter);
 
                     break
 
@@ -152,11 +149,11 @@ const ProductionChart = (props) => {
         },
         plugins: {
             legend: {
-                position: 'bottom'
+                position: 'right'
             },
             title: {
                 display: true,
-                text: "Solar Panel's Production",
+                text: view === 'day' ? "Solar Panel's Production" : "Average Solar Panel's Production",
                 font: {
                     size: 24,
                 }
@@ -221,7 +218,7 @@ const ProductionChart = (props) => {
             },
             {
                 // fill: true,
-                type: 'line',
+                type: view === 'day' ? 'line' : 'bar',
                 label: view === 'day' ? 'Power (W)' : 'Energy (Wh)',
                 data: generate,
                 backgroundColor: 'rgb(207, 0, 15, 1)',

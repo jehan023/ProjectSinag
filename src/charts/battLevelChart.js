@@ -141,23 +141,23 @@ const BattLevelChart = (props) => {
             y2: {
                 type: 'linear',
                 position: 'left',
-                stack: 'batt',
+                min: 0,
+                max: 100,
             },
             y1: {
                 type: 'linear',
                 offset: true,
                 position: 'right',
-                stack: 'batt',
                 min: 0,
                 max: 1,
                 ticks: {
-                    stepSize: 1
+                    stepSize: 1,
                 }
             }
         },
         plugins: {
             legend: {
-                position: 'bottom',
+                position: 'right',
                 display: true,
                 labels: {
                     filter: function (legendItem, chartData) {
@@ -208,9 +208,9 @@ const BattLevelChart = (props) => {
                 data: lamp,
                 backgroundColor: 'rgb(243, 156, 18, 0.8)',
                 borderColor: 'rgb(243, 156, 18, 0.8)',
-                borderWidth: 4,
                 yAxisID: 'y1',
                 stepped: true,
+                order: 1,
             },
             {
                 type: 'line',
@@ -218,16 +218,19 @@ const BattLevelChart = (props) => {
                 data: status,
                 backgroundColor: 'rgba(28, 164, 63, 0.8)',
                 borderColor: 'rgba(28, 164, 63, 0.8)',
-                borderWidth: 4,
                 yAxisID: 'y1',
                 stepped: true,
+                order: 1,
             },
             {
-                type: 'bar',
+                type: view === 'day' ? 'line' : 'bar',
                 label: 'Level (%)',
                 data: level,
                 backgroundColor: 'rgba(9, 15, 30, 0.8)',
+                borderColor: 'rgba(9, 15, 30, 0.8)',
                 yAxisID: 'y2',
+                order: 2,
+                fill: true
             },
         ],
     };
