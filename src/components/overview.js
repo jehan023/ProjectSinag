@@ -25,6 +25,9 @@ function Overview(props, { setHumidityValue }) {
   const [weather, setWeather] = useState('-');
   const location = 'Las Piñas, PH';
 
+  const [avgCharging, setAvgCharging] = useState(0);
+  const [avgON, setAvgON] = useState(0);
+
   const devices = [
     { list: 'SL1', value: 'SL1', label: 'Streetlight 1' },
     { list: 'SL2', value: 'SL2', label: 'Streetlight 2' },
@@ -35,8 +38,12 @@ function Overview(props, { setHumidityValue }) {
     callWeatherAPI();
   }, []);
 
+  useEffect(() => {
+    AvgCharging();
+    AvgON();
+  }, [allData]);
+
   const callWeatherAPI = () => {
-    console.log('Fetching Weather Data');
     try {
       setLoading(true);
       fetch(`https://api.openweathermap.org/data/2.5/weather?lat=14.4506&lon=120.9828&appid=a09978101e59b60cb76ea444b36760cc&units=metric`)
@@ -67,7 +74,7 @@ function Overview(props, { setHumidityValue }) {
     sameDateData.forEach(same => {
       energy = energy + same.pv_power;
     });
-    totalEnergy = (energy * 0.16667);
+    totalEnergy = (energy * 0.08333);
     return (parseFloat(totalEnergy).toFixed(2));
   }
 
@@ -75,15 +82,87 @@ function Overview(props, { setHumidityValue }) {
     const byDateFilter = allData.reduce((acc, item) => {
       const existingItem = acc.find((el) => el.date === item.date);
       if (existingItem) {
-        existingItem.gen_power += parseFloat(item.pv_power) * 0.16667;
+        existingItem.gen_power += parseFloat(item.pv_power) * 0.08333;
       } else {
-        acc.push({ date: item.date, gen_power: item.pv_power * 0.16667 });
+        acc.push({ date: item.date, gen_power: item.pv_power * 0.08333 });
       }
       return acc;
     }, []);
 
     const highestYield = byDateFilter.reduce((acc, curr) => Math.max(acc, curr.gen_power), Number.NEGATIVE_INFINITY);
     return (parseFloat(highestYield).toFixed(2));
+  }
+
+  const AvgCharging = () => {
+    const chargingTimePerDay = allData.reduce((acc, item, index, array) => {
+      if (item.charging === 1) {
+        const nextItem = array[index + 1];
+        if (nextItem && nextItem.date === item.date && nextItem.charging === 0) {
+          const dateISO = new Date(item.date).toISOString().split('T')[0];
+          const start = new Date(`${dateISO}T${item.time}:00Z`);
+          const end = new Date(`${dateISO}T${nextItem.time}:00Z`);
+          const chargingTime = (end - start) / (1000 * 60 * 60); // convert milliseconds to hours
+          const existingItem = acc.find((el) => el.date === item.date);
+          if (existingItem) {
+            existingItem.charging_time += chargingTime;
+          } else {
+            acc.push({ date: item.date, charging_time: chargingTime });
+          }
+        }
+      }
+      return acc;
+    }, []);
+
+    const totalChargingTime = chargingTimePerDay.reduce((acc, curr) => acc + curr.charging_time, 0);
+    const averageChargingTime = totalChargingTime / chargingTimePerDay.length;
+
+    setAvgCharging(parseFloat(averageChargingTime).toFixed(2));
+  }
+
+  const AvgON = () => {
+    const OnTimePerDay = allData.reduce((acc, item, index, array) => {
+      if (item.led_status === 1) {
+        const nextItem = array[index + 1];
+        if (nextItem && nextItem.date === item.date && (nextItem.led_status === 1 || nextItem.led_status === 0)) {
+          const dateISO = new Date(item.date).toISOString().split('T')[0];
+          const start = new Date(`${dateISO}T${item.time}:00Z`);
+          const end = new Date(`${dateISO}T${nextItem.time}:00Z`);
+          let ONtime = (end - start) / (1000 * 60 * 60); // convert milliseconds to hours
+          if (nextItem.led_status === 0) {
+            ONtime = ONtime - (1/60);
+          }
+          const existingItem = acc.find((el) => el.date === item.date);
+          if (existingItem) {
+            existingItem.on_time += ONtime;
+          } else {
+            acc.push({ date: item.date, on_time: ONtime });
+          }
+        }
+        
+        if (nextItem && nextItem.date !== item.date && (nextItem.led_status === 1 || nextItem.led_status === 0)) {
+          const dateISO = new Date(item.date).toISOString().split('T')[0];
+          const start = new Date(`${dateISO}T${item.time}:00Z`);
+          const end = new Date(`${dateISO}T23:59:59Z`);
+          let ONtime = (end - start) / (1000 * 60 * 60); // convert milliseconds to hours
+          if (nextItem.led_status === 0) {
+            ONtime = ONtime - (1/60);
+          }
+          const existingItem = acc.find((el) => el.date === item.date);
+          if (existingItem) {
+            existingItem.on_time += ONtime;
+          } else {
+            acc.push({ date: item.date, on_time: ONtime });
+          }
+        }
+      }
+
+      return acc;
+    }, []);
+
+    const totalOnTime = OnTimePerDay.reduce((acc, curr) => acc + curr.on_time, 0);
+    const averageOnTime = totalOnTime / OnTimePerDay.length;
+
+    setAvgON(parseFloat(averageOnTime).toFixed(2))
   }
 
   return (
@@ -115,7 +194,7 @@ function Overview(props, { setHumidityValue }) {
             <div className='sl-overview-card'>
               <div className='card-content'>
                 <FaCarBattery className='sl-icon' />
-                <h3>{data.battCapacity}</h3>
+                <h3>{data.battCapacity.split(' ')[1]}</h3>
                 <p>Battery Capacity</p>
               </div>
             </div>
@@ -125,14 +204,14 @@ function Overview(props, { setHumidityValue }) {
             <div className='sl-overview-card'>
               <div className='card-content'>
                 <IoBatteryCharging className='sl-icon' />
-                <h3>{GetHighestYield()}hr</h3>
+                <h3>{avgCharging}hr</h3>
                 <p>Avg. Charging Time</p>
               </div>
             </div>
             <div className='sl-overview-card'>
               <div className='card-content'>
                 <TbBulb className='sl-icon' />
-                <h3>{GetHighestYield()}hr</h3>
+                <h3>{avgON}hr</h3>
                 <p>Avg. ON Time</p>
               </div>
             </div>
@@ -166,7 +245,7 @@ function Overview(props, { setHumidityValue }) {
             </div>
 
             <div className='weather-container'>
-            <div className="content-container sunrise-container">
+            <div className="overview-content-container sunrise-container">
               <div className="content-wrap">
                 <div className="icon-wrapper">
                   <BsSunrise className="s-icon" />
@@ -178,7 +257,7 @@ function Overview(props, { setHumidityValue }) {
                 <p>Sunrise</p>
               </div>
             </div>
-            <div className="content-container sunset-container">
+            <div className="overview-content-container sunset-container">
               <div className="content-wrap">
                 <div className="icon-wrapper">
                   <BsSunset className="s-icon" />

@@ -8,9 +8,6 @@ import LoadDataFromSheet from './loadDataFromSheet';
 import axios from 'axios';
 import usermanual from './files/SinagUserManual.pdf';
 
-
-
-
 // import Select from 'react-select';
 
 const Overview = lazy(() => import('./components/overview.js'));
@@ -19,9 +16,8 @@ const Status = lazy(() => import('./components/status.js'));
 const Analysis = lazy(() => import('./components/analysis.js'));
 const Home = lazy(() => import('./components/home.js'));
 const Reports = lazy(() => import('./components/reports.js'));
-const ProductOverview= lazy(() => import('./components/productOverview.js'));
-const AboutUs= lazy(() => import('./components/aboutus.js'));
-
+const ProductOverview = lazy(() => import('./components/productOverview.js'));
+const AboutUs = lazy(() => import('./components/aboutus.js'));
 
 
 function App() {
@@ -35,16 +31,16 @@ function App() {
 
   const options = [
     {
-      list: 'SL1', value: 'SL1', label: 'Streetlight 1', location: 'Narra St., Brgy BF International Village, Las Piñas City | 1740',
-      battCapacity: '20Ah', pvPanel: '25W 6V', lamp: '250W', status: 'Active'
+      list: 'SL1', value: 'SL1', label: 'Streetlight 1', location: 'Patola St., Brgy BF International Village, Las Piñas City | 1740',
+      battCapacity: '3.2V 20AH LiFePO4', pvPanel: '25W 6V Polycrystalline Silicon', lamp: '250W', status: 'Active'
     },
     {
-      list: 'SL2', value: 'SL2', label: 'Streetlight 2', location: 'Narra St., Brgy BF International Village, Las Piñas City | 1740',
-      battCapacity: '20Ah', pvPanel: '25W 6V', lamp: '250W', status: 'Inactive'
+      list: 'SL2', value: 'SL2', label: 'Streetlight 2', location: 'Patola St., Brgy BF International Village, Las Piñas City | 1740',
+      battCapacity: '3.2V 20AH LiFePO4', pvPanel: '25W 6V Polycrystalline Silicon', lamp: '250W', status: 'Inactive'
     },
     {
       list: 'SL3', value: 'SL3', label: 'Streetlight 3', location: 'Patola St., Brgy BF International Village, Las Piñas City | 1740',
-      battCapacity: '20Ah', pvPanel: '25W 6V', lamp: '250W', status: 'Active'
+      battCapacity: '3.2V 20AH LiFePO4', pvPanel: '25W 6V Polycrystalline Silicon', lamp: '250W', status: 'Active'
     },
   ];
 
@@ -54,11 +50,19 @@ function App() {
   };
   const streetlight = getObjectByValue(selectedValue);
 
+  const refreshInterval = 180000; // Refresh every 5 seconds
   useEffect(() => {
     if (selectedValue) {
-      callAPI();
+      callAPI(); // Initial API call
+
+      const intervalId = setInterval(() => {
+        callAPI(); // Call API at regular intervals
+      }, refreshInterval);
+
+      // Cleanup function to cancel the interval when the component unmounts or dependencies change
+      return () => clearInterval(intervalId);
     }
-  }, [selectedValue, dashboard]);
+  }, [selectedValue, refreshInterval]);
 
   const callAPI = () => {
     try {
@@ -98,22 +102,20 @@ function App() {
     batt_volts: parseFloat(row[4]),
     batt_level: parseFloat(row[5]),
     batt_power: parseFloat(row[6]),
-    led_status: parseFloat(row[7]),
-    lux: parseFloat(row[8]),
-    temp: parseFloat(row[9]),
-    snr: parseFloat(row[10]),
-    rssi: parseFloat(row[11]),
-    charging: parseFloat(row[12])
+    charging: parseFloat(row[7]),
+    led_status: parseFloat(row[8]),
+    lux: parseFloat(row[9]),
+    temp: parseFloat(row[10]),
+    snr: parseFloat(row[11]),
+    rssi: parseFloat(row[12])
   }));
 
-  const lastData = formattedData[formattedData.length-1];
+  const lastData = formattedData[formattedData.length - 1];
 
   // const currentDate = new Date().toLocaleString("en-US", { month: "long", day: 'numeric', year: 'numeric' });
   const sameDateData = formattedData.filter(sameDateItem => {
     return (sameDateItem.date === lastData.date);
   });
-
-  console.log('Render ', Math.random(), 'SLV: ', selectedValue);
 
   const openPDF = () => {
     window.open(usermanual);
@@ -169,7 +171,7 @@ function App() {
 
       {/******* CONTENT SECTION ***************************************************/}
       <div className='content-container h-100'>
-        {loading ? <ReactLoading type={'spokes'} color={'#0f1b2a'} height={300} width={275} className='loading-component' /> : '' }
+        {loading ? <ReactLoading type={'spokes'} color={'#0f1b2a'} height={300} width={275} className='loading-component' /> : ''}
         <Suspense fallback={<ReactLoading type={'spokes'} color={'#0f1b2a'} height={300} width={275} className='loading-component' />}>
           {/* <LoadDataFromSheet slData={formattedData} /> */}
           {page === 'Dashboard' ? (() => {
@@ -181,7 +183,7 @@ function App() {
               case 'status':
                 return <Status data={lastData} sameDate={sameDateData} />
               case 'analysis':
-                return <Analysis data={formattedData}/>
+                return <Analysis data={formattedData} />
               default:
                 return <Status selectedSL={streetlight} />
             }
@@ -189,13 +191,13 @@ function App() {
             (() => {
               switch (page) {
                 case 'Home':
-                  return <Home  handlePage={handlePage} page={page}/>
+                  return <Home handlePage={handlePage} page={page} />
                 case 'Reports':
                   return <Reports />
-                  case 'ProductOverview':
-                    return <ProductOverview />
-                  case 'AboutUs':
-                    return <AboutUs/>
+                case 'ProductOverview':
+                  return <ProductOverview />
+                case 'AboutUs':
+                  return <AboutUs />
                 default:
                   return <Home />
               }
@@ -208,23 +210,20 @@ function App() {
         <div className='links'>
           <div>
             <p>Product</p>
-              <ul>
+            <ul>
               <li><a href="#/" onClick={() => { handlePage('ProductOverview') }}>Overview</a></li>
 
 
-                <li><a href={usermanual} target="_blank" rel="noreferrer">User Manual</a></li>
-              </ul>
+              <li><a href={usermanual} target="_blank" rel="noreferrer">User Manual</a></li>
+            </ul>
           </div>
           <div>
             <p>Developers</p>
-              <ul>
-                <li><a href="#/" onClick={() => { handlePage('AboutUs') }}>About Us</a></li>
-                <li><a href="mailto:sinagproject2023@gmail.com">Contact Us</a></li>
-              </ul>
+            <ul>
+              <li><a href="#/" onClick={() => { handlePage('AboutUs') }}>About Us</a></li>
+              <li><a href="mailto:sinagproject2023@gmail.com">Contact Us</a></li>
+            </ul>
           </div>
-
-          
-
         </div>
       </div>
     </div>

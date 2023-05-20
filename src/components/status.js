@@ -32,7 +32,6 @@ function Status(props) {
   }, [data]);
 
   const callWeatherAPI = () => {
-    console.log('Fetching Weather Data');
     try {
       fetch(`https://api.openweathermap.org/data/2.5/weather?lat=14.4506&lon=120.9828&appid=a09978101e59b60cb76ea444b36760cc&units=metric`)
         .then(response => response.json())
@@ -92,7 +91,7 @@ function Status(props) {
     sameDateData.forEach(same => {
       energy = energy + same.pv_power;
     });
-    totalEnergy = (energy * 0.16667);
+    totalEnergy = (energy * 0.08333);
     return (parseFloat(totalEnergy).toFixed(2));
   }
 
@@ -128,7 +127,7 @@ function Status(props) {
     let active = "Inactive";
     if (currentTime.toLocaleString("en-US", { month: "long", day: 'numeric', year: 'numeric' }) === data.date) {
       if (data.pv_power > 0.0 || data.charging === 1.0 || data.led_status === 1.0) {
-        active = "Active";
+        active = "Active";  
       }
     }
     
@@ -269,7 +268,7 @@ function Status(props) {
             <div className='status-card'>
               <BsThermometerSun className='status-icon' />
               <h2>{parseFloat(data.temp)}°C</h2>
-              <h5>Temperature</h5>
+              <h5>Ambient Temperature</h5>
             </div>
 
             <div className='status-card'>

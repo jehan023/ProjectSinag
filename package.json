@@ -1,9 +1,10 @@
 {
   "name": "sinag-project",
   "version": "0.1.0",
-  "homepage": "https://jehan023.github.io/ProjectSinag/",
+  "homepage": "https://projectsinag.com",
   "private": true,
   "dependencies": {
+    "@react-pdf/renderer": "^3.1.9",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -29,6 +30,7 @@
     "react-router-dom": "^6.8.1",
     "react-scripts": "^5.0.1",
     "react-select": "^5.7.0",
+    "react-to-pdf": "0.0.14",
     "stream-http": "^3.2.0",
     "url": "^0.11.0",
     "util": "^0.12.5",

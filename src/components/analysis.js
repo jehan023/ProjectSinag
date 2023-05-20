@@ -62,8 +62,6 @@ function Analysis(props) {
         return month === fMonth && day === fday && year === fYear;
     }
   });
-  // console.table(filterData);
-  // console.log(formattedDate);
 
   return (
     <div className='analysis-container'>
@@ -103,9 +101,9 @@ function Analysis(props) {
       <div className='analysis-section mt-3'>
         {/******* ENERGY CHART ***************************************************/}
 
-        <div className='chart energy-chart mb-4'>
+        {/* <div className='chart energy-chart mb-4'>
           <EnergyChart data={filterData} viewMode={viewMode} />
-        </div>
+        </div> */}
 
         {/******* CHARGING CHART **************************************************/}
         {/* <div className='chart mb-4'>

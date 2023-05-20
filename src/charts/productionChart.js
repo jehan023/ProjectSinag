@@ -34,8 +34,6 @@ const ProductionChart = (props) => {
     const sysData = props.data;
     const view = props.viewMode;
 
-    // console.table(sysData);
-
     const [label, setLabel] = useState([]);
     const [generate, setGenerate] = useState([]);
     const [temp, setTemp] = useState([]);
@@ -63,12 +61,12 @@ const ProductionChart = (props) => {
                     const byMonthFilter = sysData.reduce((acc, item) => {
                         const existingItem = acc.find((el) => el.date === item.date);
                         if (existingItem) {
-                            existingItem.sys_power += parseFloat(item.pv_power) * 0.16667;
+                            existingItem.sys_power += parseFloat(item.pv_power) * 0.08333;
                             existingItem.sys_temp += parseFloat(item.temp);
                             existingItem.sys_lux += parseFloat(item.lux);
                             existingItem.count += 1;
                         } else {
-                            acc.push({ date: item.date, sys_power: item.pv_power * 0.16667, sys_temp: item.temp, sys_lux: item.lux, count: 1 });
+                            acc.push({ date: item.date, sys_power: item.pv_power * 0.08333, sys_temp: item.temp, sys_lux: item.lux, count: 1 });
                         }
                         return acc;
                     }, []);
@@ -76,10 +74,9 @@ const ProductionChart = (props) => {
                     byMonthFilter.map(row => {
                         setLabel(prevList => [...prevList, row.date]);
                         setGenerate(prevList => [...prevList, row.sys_power]);
-                        setTemp(prevList => [...prevList, row.sys_temp/row.count]);
-                        setLight(prevList => [...prevList, row.sys_lux/row.count]);
+                        setTemp(prevList => [...prevList, row.sys_temp / row.count]);
+                        setLight(prevList => [...prevList, row.sys_lux / row.count]);
                     });
-                    console.table(byMonthFilter);
 
                     break
 
@@ -145,13 +142,18 @@ const ProductionChart = (props) => {
 
     const options = {
         responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+            intersect: false,
+            mode: 'index',
+        },
         plugins: {
             legend: {
-                position: 'bottom'
+                position: 'right'
             },
             title: {
                 display: true,
-                text: 'Energy Production',
+                text: view === 'day' ? "Solar Panel's Production" : "Average Solar Panel's Production",
                 font: {
                     size: 24,
                 }
@@ -172,6 +174,23 @@ const ProductionChart = (props) => {
                 }
             }
         },
+        scales: {
+            x: {
+                type: 'category',
+                ticks: {
+                    maxRotation: 0,
+                    autoSkipPadding: 50,
+                },
+            },
+            y: {
+                type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
+                position: 'right',
+            },
+            y1: {
+                type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
+                position: 'left',
+            },
+        }
     };
 
     const labels = label;
@@ -186,22 +205,25 @@ const ProductionChart = (props) => {
                 backgroundColor: 'rgb(4, 59, 92, 1)',
                 data: temp,
                 borderColor: 'rgb(4, 59, 92, 1)',
+                yAxisID: 'y1',
             },
             {
                 // fill: true,
                 type: 'line',
-                label: 'Ambient Light (Lux)',
+                label: 'Ambient Light (lux)',
                 backgroundColor: 'rgb(22, 160, 133, 1)',
                 data: light,
                 borderColor: 'rgb(22, 160, 133, 1)',
+                yAxisID: 'y',
             },
             {
                 // fill: true,
-                type: 'line',
-                label: 'Generation (Wh)',
+                type: view === 'day' ? 'line' : 'bar',
+                label: view === 'day' ? 'Power (W)' : 'Energy (Wh)',
                 data: generate,
                 backgroundColor: 'rgb(207, 0, 15, 1)',
                 borderColor: 'rgb(207, 0, 15, 1)',
+                yAxisID: 'y1',
             },
         ],
     };

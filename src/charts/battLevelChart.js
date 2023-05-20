@@ -35,17 +35,23 @@ const BattLevelChart = (props) => {
 
     const [label, setLabel] = useState([]);
     const [level, setLevel] = useState([]);
+    const [lamp, setLamp] = useState([]);
+    const [status, setStatus] = useState([]);
 
     useEffect(() => {
         try {
             setLabel([]);
             setLevel([]);
+            setLamp([]);
+            setStatus([]);
 
             switch (view) {
                 case 'day':
                     sysData.map(row => {
                         setLevel(prevList => [...prevList, row.batt_level]);
                         setLabel(prevList => [...prevList, row.time]);
+                        setLamp(prevList => [...prevList, row.led_status]);
+                        setStatus(prevList => [...prevList, row.charging]);
                     });
 
                     break;
@@ -56,7 +62,7 @@ const BattLevelChart = (props) => {
                         if (existingItem) {
                             existingItem.level = Math.max(existingItem.level, parseFloat(item.batt_level));
                         } else {
-                            acc.push({ date: item.date, level: item.batt_level});
+                            acc.push({ date: item.date, level: item.batt_level });
                         }
                         return acc;
                     }, []);
@@ -95,7 +101,7 @@ const BattLevelChart = (props) => {
                         const [monthName, year] = yearMonth.split('-');
                         const month = monthNames.indexOf(monthName) + 1;
                         const level = levelByMonth[yearMonth] / countByMonth[yearMonth];
-                        resultArray.push({ month: monthNames[month - 1], level: level});
+                        resultArray.push({ month: monthNames[month - 1], level: level });
                     }
 
                     resultArray.map(row => {
@@ -118,13 +124,53 @@ const BattLevelChart = (props) => {
 
     const options = {
         responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+            intersect: false,
+            mode: 'index',
+        },
+
+        scales: {
+            x: {
+                type: 'category',
+                ticks: {
+                    maxRotation: 0,
+                    autoSkipPadding: 50,
+                },
+            },
+            y2: {
+                type: 'linear',
+                position: 'left',
+                min: 0,
+                max: 100,
+            },
+            y1: {
+                type: 'linear',
+                offset: true,
+                position: 'right',
+                min: 0,
+                max: 1,
+                ticks: {
+                    stepSize: 1,
+                }
+            }
+        },
         plugins: {
             legend: {
-                display: false,
+                position: 'right',
+                display: true,
+                labels: {
+                    filter: function (legendItem, chartData) {
+                        if (view !== 'day' && (legendItem.text === 'Lamp' || legendItem.text === 'Charging')) {
+                            return false; // Hide Lamp and Charge legends when view is not 'day'
+                        }
+                        return true; // Display other legends
+                    },
+                },
             },
             title: {
                 display: true,
-                text: 'Battery Level',
+                text: view === 'day' ? 'Battery Level, Charging & LED Status' : 'Average Battery Level',
                 font: {
                     size: 24,
                 }
@@ -134,16 +180,20 @@ const BattLevelChart = (props) => {
                     enabled: true,
                     mode: 'x'
                 },
-                // zoom: {
-                //     pinch: {
-                //         enabled: true       // Enable pinch zooming
-                //     },
-                //     wheel: {
-                //         enabled: true       // Enable wheel zooming
-                //     },
-                //     mode: 'x',
-                // }
-            }
+                zoom: {
+                    pinch: {
+                        enabled: true       // Enable pinch zooming
+                    },
+                    wheel: {
+                        enabled: true       // Enable wheel zooming
+                    },
+                    mode: 'x',
+                }
+            },
+            clip: {
+                left: 25, // Adjust the number of initially visible data points
+                right: 25, // Adjust the number of initially visible data points
+            },
         },
     };
 
@@ -153,11 +203,34 @@ const BattLevelChart = (props) => {
         labels,
         datasets: [
             {
-                type: 'bar',
+                type: 'line',
+                label: 'Lamp',
+                data: lamp,
+                backgroundColor: 'rgb(243, 156, 18, 0.8)',
+                borderColor: 'rgb(243, 156, 18, 0.8)',
+                yAxisID: 'y1',
+                stepped: true,
+                order: 1,
+            },
+            {
+                type: 'line',
                 label: 'Charging',
+                data: status,
+                backgroundColor: 'rgba(28, 164, 63, 0.8)',
+                borderColor: 'rgba(28, 164, 63, 0.8)',
+                yAxisID: 'y1',
+                stepped: true,
+                order: 1,
+            },
+            {
+                type: view === 'day' ? 'line' : 'bar',
+                label: 'Level (%)',
                 data: level,
-                backgroundColor: 'rgba(22, 160, 133, 0.5)',
-                borderColor: 'rgba(22, 160, 133, 1)',
+                backgroundColor: 'rgba(9, 15, 30, 0.8)',
+                borderColor: 'rgba(9, 15, 30, 0.8)',
+                yAxisID: 'y2',
+                order: 2,
+                fill: true
             },
         ],
     };
