@@ -149,7 +149,7 @@ const ProductionChart = (props) => {
         },
         plugins: {
             legend: {
-                position: 'right'
+                position: 'bottom'
             },
             title: {
                 display: true,

@@ -32,15 +32,15 @@ function App() {
   const options = [
     {
       list: 'SL1', value: 'SL1', label: 'Streetlight 1', location: 'Patola St., Brgy BF International Village, Las Piñas City | 1740',
-      battCapacity: '3.2V 20AH LiFePO4', pvPanel: '25W 6V Polycrystalline Silicon', lamp: '250W', status: 'Active'
+      battCapacity: '3.2V 20AH LiFePO4', pvPanel: '25W 6V Polycrystalline Silicon', lamp: '250W', 
     },
     {
       list: 'SL2', value: 'SL2', label: 'Streetlight 2', location: 'Patola St., Brgy BF International Village, Las Piñas City | 1740',
-      battCapacity: '3.2V 20AH LiFePO4', pvPanel: '25W 6V Polycrystalline Silicon', lamp: '250W', status: 'Inactive'
+      battCapacity: '3.2V 20AH LiFePO4', pvPanel: '25W 6V Polycrystalline Silicon', lamp: '250W', 
     },
     {
       list: 'SL3', value: 'SL3', label: 'Streetlight 3', location: 'Patola St., Brgy BF International Village, Las Piñas City | 1740',
-      battCapacity: '3.2V 20AH LiFePO4', pvPanel: '25W 6V Polycrystalline Silicon', lamp: '250W', status: 'Active'
+      battCapacity: '3.2V 20AH LiFePO4', pvPanel: '25W 6V Polycrystalline Silicon', lamp: '250W', 
     },
   ];
 

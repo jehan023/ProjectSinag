@@ -157,7 +157,7 @@ const BattLevelChart = (props) => {
         },
         plugins: {
             legend: {
-                position: 'right',
+                position: 'bottom',
                 display: true,
                 labels: {
                     filter: function (legendItem, chartData) {
