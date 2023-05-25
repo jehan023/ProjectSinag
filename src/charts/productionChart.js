@@ -114,7 +114,7 @@ const ProductionChart = (props) => {
                     for (const yearMonth in genByMonth) {
                         const [monthName, year] = yearMonth.split('-');
                         const month = monthNames.indexOf(monthName) + 1;
-                        const generate = genByMonth[yearMonth] / countByMonth[yearMonth];
+                        const generate = genByMonth[yearMonth] * 0.08333;
                         const temp = tempByMonth[yearMonth] / countByMonth[yearMonth];
                         const light = luxByMonth[yearMonth] / countByMonth[yearMonth];
                         resultArray.push({ month: monthNames[month - 1], generate: generate, temp: temp, lux: light });
