@@ -89,7 +89,7 @@ function Overview(props, { setHumidityValue }) {
       return acc;
     }, []);
 
-    const highestYield = byDateFilter.reduce((acc, curr) => Math.max(acc, curr.gen_power), Number.NEGATIVE_INFINITY);
+    const highestYield = byDateFilter.reduce((acc, curr) => Math.max(acc, curr.gen_power), 0);
     return (parseFloat(highestYield).toFixed(2));
   }
 
@@ -204,14 +204,14 @@ function Overview(props, { setHumidityValue }) {
             <div className='sl-overview-card'>
               <div className='card-content'>
                 <IoBatteryCharging className='sl-icon' />
-                <h3>{avgCharging}hr</h3>
+                <h3>{isNaN(avgCharging) ? 0.00 : avgCharging}hr</h3>
                 <p>Avg. Charging Time</p>
               </div>
             </div>
             <div className='sl-overview-card'>
               <div className='card-content'>
                 <TbBulb className='sl-icon' />
-                <h3>{avgON}hr</h3>
+                <h3>{isNaN(avgON) ? 0.00 : avgON}hr</h3>
                 <p>Avg. ON Time</p>
               </div>
             </div>

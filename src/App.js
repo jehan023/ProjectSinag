@@ -94,6 +94,10 @@ function App() {
     setDashboard(Dash);
   };
 
+  if (fetchData.length === 1) {
+    fetchData.push(['0', '00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+  }
+
   const formattedData = fetchData.slice(1).map(row => ({
     date: row[0],
     time: row[1],
