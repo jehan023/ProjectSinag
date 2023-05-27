@@ -18,7 +18,7 @@ function Reports() {
     const callAnomalyAPI = () => {
         try {
             setLoading(true);
-            axios.get(`https://script.google.com/macros/s/AKfycbwpeVblPl-BktxtxjY_F05PQd_1oRL0fkUjpQ4RKlZIcYOo7YX0NpqYbAd2l1_jLZY5/exec?node=${reportFrom}`)
+            axios.get(`https://script.google.com/macros/s/AKfycbxYrmz38u3vKaLcyKeKLS_aNjaFZDdPlwYNNROxYXGkCGv-eUWPXx--90SkWkSow-3f/exec?node=${reportFrom}`)
                 .then(response => {
                     setReportData(response.data);
                 }).catch(error => {
