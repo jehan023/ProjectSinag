@@ -71,7 +71,7 @@ function Home(props) {
           img: fd3img,
           title: 'Anomaly Reports',
           desc: 'Shows any anomaly or issues detected within the system. This can be accessed on the Reports Page.',
-          descDetailed: 'The anoomaly report feature in our monitoring portal empowers users to respond promptly to any issues that may affect their solar street lights, minimizing downtime and ensuring optimal performance.',
+          descDetailed: 'The anomaly report feature in our monitoring portal empowers users to respond promptly to any issues that may affect their solar street lights, minimizing downtime and ensuring optimal performance.',
           showDetailed: false
         },
         {

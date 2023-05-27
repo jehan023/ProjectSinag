@@ -99,7 +99,7 @@ function Reports() {
                             </thead>
                             {loading ? <h4 className='mt-3'>Loading...</h4> :
                                 <tbody>
-                                    {formattedData.length > 0 ? AnomalyTable : <h5 className='w-100 mt-3 text-align-center'>No data available.</h5>}
+                                    {formattedData.length !== 0 ? AnomalyTable : <h5 className='w-100 mt-3 text-align-center'>No anomaly detected.</h5>}
                                 </tbody>
                             }
                         </table>

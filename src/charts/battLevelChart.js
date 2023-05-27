@@ -38,12 +38,18 @@ const BattLevelChart = (props) => {
     const [lamp, setLamp] = useState([]);
     const [status, setStatus] = useState([]);
 
+    const [maxlevel, setMaxLevel] = useState([]);
+    const [minlevel, setMinLevel] = useState([]);
+
     useEffect(() => {
         try {
             setLabel([]);
             setLevel([]);
             setLamp([]);
             setStatus([]);
+
+            setMaxLevel([]);
+            setMinLevel([]);
 
             switch (view) {
                 case 'day':
@@ -57,55 +63,134 @@ const BattLevelChart = (props) => {
                     break;
 
                 case 'month':
-                    const byMonthFilter = sysData.reduce((acc, item) => {
+                    // const byMonthFilter = sysData.reduce((acc, item) => {
+                    //     const existingItem = acc.find((el) => el.date === item.date);
+                    //     if (existingItem) {
+                    //         existingItem.level = Math.max(existingItem.level, parseFloat(item.batt_level));
+                    //     } else {
+                    //         acc.push({ date: item.date, level: item.batt_level });
+                    //     }
+                    //     return acc;
+                    // }, []);
+
+                    // byMonthFilter.map(row => {
+                    //     setLevel(prevList => [...prevList, row.level]);
+                    //     setLabel(prevList => [...prevList, row.date]);
+                    // });
+
+                    const byDayFilter = sysData.reduce((acc, item) => {
                         const existingItem = acc.find((el) => el.date === item.date);
                         if (existingItem) {
-                            existingItem.level = Math.max(existingItem.level, parseFloat(item.batt_level));
+                            existingItem.maxLevel = Math.max(existingItem.maxLevel, parseFloat(item.batt_level));
+                            existingItem.minLevel = Math.min(existingItem.minLevel, parseFloat(item.batt_level));
                         } else {
-                            acc.push({ date: item.date, level: item.batt_level });
+                            acc.push({ date: item.date, maxLevel: parseFloat(item.batt_level), minLevel: parseFloat(item.batt_level) });
                         }
                         return acc;
                     }, []);
 
-                    byMonthFilter.map(row => {
-                        setLevel(prevList => [...prevList, row.level]);
+                    byDayFilter.map(row => {
+                        setMaxLevel(prevList => [...prevList, row.maxLevel]);
+                        setMinLevel(prevList => [...prevList, row.minLevel]);
                         setLabel(prevList => [...prevList, row.date]);
                     });
+
 
                     break
 
                 case 'year':
+                    // const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+                    // const levelByMonth = {};
+                    // const countByMonth = {};
+
+                    // for (let i = 0; i < sysData.length; i++) {
+                    //     const dateParts = sysData[i].date.split(' ');
+                    //     const monthIndex = monthNames.indexOf(dateParts[0]);
+                    //     const year = dateParts[2];
+                    //     const yearMonth = `${monthNames[monthIndex]}-${year}`;
+                    //     const level = sysData[i].batt_level;
+
+                    //     if (levelByMonth[yearMonth]) {
+                    //         levelByMonth[yearMonth] += level;
+                    //         countByMonth[yearMonth]++;
+                    //     } else {
+                    //         levelByMonth[yearMonth] = level;
+                    //         countByMonth[yearMonth] = 1;
+                    //     }
+                    // }
+
+                    // const resultArray = [];
+                    // for (const yearMonth in levelByMonth) {
+                    //     const [monthName, year] = yearMonth.split('-');
+                    //     const month = monthNames.indexOf(monthName) + 1;
+                    //     const level = levelByMonth[yearMonth] / countByMonth[yearMonth];
+                    //     resultArray.push({ month: monthNames[month - 1], level: level });
+                    // }
+
+                    // resultArray.map(row => {
+                    //     setLevel(prevList => [...prevList, row.level]);
+                    //     setLabel(prevList => [...prevList, row.month]);
+                    // });
+
                     const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-                    const levelByMonth = {};
+                    const levelsByMonth = {};
                     const countByMonth = {};
+                    const sumMaxByMonth = {};
+                    const sumMinByMonth = {};
 
                     for (let i = 0; i < sysData.length; i++) {
                         const dateParts = sysData[i].date.split(' ');
                         const monthIndex = monthNames.indexOf(dateParts[0]);
                         const year = dateParts[2];
                         const yearMonth = `${monthNames[monthIndex]}-${year}`;
-                        const level = sysData[i].batt_level;
+                        const day = parseInt(dateParts[1]);
+                        const level = parseFloat(sysData[i].batt_level);
 
-                        if (levelByMonth[yearMonth]) {
-                            levelByMonth[yearMonth] += level;
-                            countByMonth[yearMonth]++;
-                        } else {
-                            levelByMonth[yearMonth] = level;
-                            countByMonth[yearMonth] = 1;
+                        if (!levelsByMonth[yearMonth]) {
+                            levelsByMonth[yearMonth] = {};
+                            countByMonth[yearMonth] = {};
+                            sumMaxByMonth[yearMonth] = {};
+                            sumMinByMonth[yearMonth] = {};
                         }
+
+                        if (!levelsByMonth[yearMonth][day]) {
+                            levelsByMonth[yearMonth][day] = [];
+                            countByMonth[yearMonth][day] = 0;
+                            sumMaxByMonth[yearMonth][day] = 0;
+                            sumMinByMonth[yearMonth][day] = 0;
+                        }
+
+                        levelsByMonth[yearMonth][day].push(level);
+                        countByMonth[yearMonth][day]++;
+                        sumMaxByMonth[yearMonth][day] += level;
+                        sumMinByMonth[yearMonth][day] += level;
                     }
 
                     const resultArray = [];
-                    for (const yearMonth in levelByMonth) {
+                    for (const yearMonth in levelsByMonth) {
                         const [monthName, year] = yearMonth.split('-');
                         const month = monthNames.indexOf(monthName) + 1;
-                        const level = levelByMonth[yearMonth] / countByMonth[yearMonth];
-                        resultArray.push({ month: monthNames[month - 1], level: level });
+                        const maxLevels = [];
+                        const minLevels = [];
+
+                        for (const day in levelsByMonth[yearMonth]) {
+                            const maxLevel = Math.max(...levelsByMonth[yearMonth][day]);
+                            const minLevel = Math.min(...levelsByMonth[yearMonth][day]);
+                            maxLevels.push(maxLevel);
+                            minLevels.push(minLevel);
+                        }
+
+                        const averageMaxLevel = maxLevels.reduce((acc, val) => acc + val, 0) / maxLevels.length;
+                        const averageMinLevel = minLevels.reduce((acc, val) => acc + val, 0) / minLevels.length;
+
+                        resultArray.push({ month: monthNames[month - 1], averageMaxLevel, averageMinLevel });
                     }
 
                     resultArray.map(row => {
-                        setLevel(prevList => [...prevList, row.level]);
+                        setMaxLevel(prevList => [...prevList, row.averageMaxLevel]);
+                        setMinLevel(prevList => [...prevList, row.averageMinLevel]);
                         setLabel(prevList => [...prevList, row.month]);
                     });
 
@@ -120,8 +205,6 @@ const BattLevelChart = (props) => {
         }
     }, [sysData, view])
 
-
-
     const options = {
         responsive: true,
         maintainAspectRatio: false,
@@ -130,34 +213,43 @@ const BattLevelChart = (props) => {
             mode: 'index',
         },
 
-        scales: {
+        scales: view !== 'day' ? {
             x: {
-                type: 'category',
-                ticks: {
-                    maxRotation: 0,
-                    autoSkipPadding: 50,
-                },
+                stacked: true,
             },
-            y2: {
-                type: 'linear',
-                position: 'left',
+            y: {
                 min: 0,
                 max: 100,
-            },
-            y1: {
-                type: 'linear',
-                offset: true,
-                position: 'right',
-                min: 0,
-                max: 1,
-                ticks: {
-                    stepSize: 1,
-                }
             }
-        },
+        }
+            : {
+                x: {
+                    type: 'category',
+                    ticks: {
+                        maxRotation: 0,
+                        autoSkipPadding: 50,
+                    },
+                },
+                y2: {
+                    type: 'linear',
+                    position: 'left',
+                    min: 0,
+                    max: 100,
+                },
+                y1: {
+                    type: 'linear',
+                    offset: true,
+                    position: 'right',
+                    min: 0,
+                    max: 1,
+                    ticks: {
+                        stepSize: 1,
+                    }
+                }
+            },
         plugins: {
             legend: {
-                position: 'right',
+                position: 'bottom',
                 display: true,
                 labels: {
                     filter: function (legendItem, chartData) {
@@ -170,7 +262,7 @@ const BattLevelChart = (props) => {
             },
             title: {
                 display: true,
-                text: view === 'day' ? 'Battery Level, Charging & LED Status' : 'Average Battery Level',
+                text: view === 'day' ? 'Battery Level, Charging & LED Status' : view === 'month' ? 'Battery Level' : 'Average Battery Level',
                 font: {
                     size: 24,
                 }
@@ -201,38 +293,59 @@ const BattLevelChart = (props) => {
 
     const data = {
         labels,
-        datasets: [
-            {
-                type: 'line',
-                label: 'Lamp',
-                data: lamp,
-                backgroundColor: 'rgb(243, 156, 18, 0.8)',
-                borderColor: 'rgb(243, 156, 18, 0.8)',
-                yAxisID: 'y1',
-                stepped: true,
-                order: 1,
-            },
-            {
-                type: 'line',
-                label: 'Charging',
-                data: status,
-                backgroundColor: 'rgba(28, 164, 63, 0.8)',
-                borderColor: 'rgba(28, 164, 63, 0.8)',
-                yAxisID: 'y1',
-                stepped: true,
-                order: 1,
-            },
-            {
-                type: view === 'day' ? 'line' : 'bar',
-                label: 'Level (%)',
-                data: level,
-                backgroundColor: 'rgba(9, 15, 30, 0.8)',
-                borderColor: 'rgba(9, 15, 30, 0.8)',
-                yAxisID: 'y2',
-                order: 2,
-                fill: true
-            },
-        ],
+        datasets: view !== 'day' ?
+            [
+                {
+                    type: 'bar',
+                    label: 'Maximum',
+                    data: maxlevel,
+                    backgroundColor: 'rgba(9, 15, 30, 0.5)',
+                    borderColor: 'rgba(9, 15, 30, 1)',
+                    yAxisID: 'y',
+                    // fill: true
+                },
+                {
+                    type: 'bar',
+                    label: 'Minimum',
+                    data: minlevel,
+                    backgroundColor: 'rgba(28, 164, 63, 1)',
+                    borderColor: 'rgba(28, 164, 63, 1)',
+                    yAxisID: 'y',
+                    // fill: true
+                },
+            ]
+            : [
+                {
+                    type: 'line',
+                    label: 'Lamp',
+                    data: lamp,
+                    backgroundColor: 'rgb(243, 156, 18, 0.8)',
+                    borderColor: 'rgb(243, 156, 18, 0.8)',
+                    yAxisID: 'y1',
+                    stepped: true,
+                    order: 1,
+                },
+                {
+                    type: 'line',
+                    label: 'Charging',
+                    data: status,
+                    backgroundColor: 'rgba(28, 164, 63, 0.8)',
+                    borderColor: 'rgba(28, 164, 63, 0.8)',
+                    yAxisID: 'y1',
+                    stepped: true,
+                    order: 1,
+                },
+                {
+                    type: view === 'day' ? 'line' : 'bar',
+                    label: 'Level (%)',
+                    data: level,
+                    backgroundColor: 'rgba(9, 15, 30, 0.8)',
+                    borderColor: 'rgba(9, 15, 30, 0.8)',
+                    yAxisID: 'y2',
+                    order: 2,
+                    fill: true
+                },
+            ],
     };
 
     return <Chart options={options} data={data} />;
