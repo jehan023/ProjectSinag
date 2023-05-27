@@ -6,7 +6,7 @@ import Clock from 'react-live-clock';
 import ReactLoading from 'react-loading';
 import LoadDataFromSheet from './loadDataFromSheet';
 import axios from 'axios';
-import usermanual from './files/SinagUserManual.pdf';
+import usermanual from './files/SINAG_UserManual.pdf';
 
 // import Select from 'react-select';
 
