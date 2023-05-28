@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.9491cd6a.css",
-    "main.js": "/static/js/main.75baa5d2.js",
+    "main.js": "/static/js/main.d2220403.js",
     "static/js/758.062a4059.chunk.js": "/static/js/758.062a4059.chunk.js",
     "static/js/395.7761c48f.chunk.js": "/static/js/395.7761c48f.chunk.js",
     "static/js/67.cd73aaaa.chunk.js": "/static/js/67.cd73aaaa.chunk.js",
@@ -17,6 +17,7 @@
     "static/js/172.d2ead294.chunk.js": "/static/js/172.d2ead294.chunk.js",
     "static/js/402.a927d5f0.chunk.js": "/static/js/402.a927d5f0.chunk.js",
     "static/js/968.3ddaa1ae.chunk.js": "/static/js/968.3ddaa1ae.chunk.js",
+    "static/media/SINAG_UserManual.pdf": "/static/media/SINAG_UserManual.ff7f470799424a38e1c4.pdf",
     "static/media/Sinag-Logo.png": "/static/media/Sinag-Logo.d19646c9e4fb943e5f75.png",
     "static/media/hp-image-1.gif": "/static/media/hp-image-1.cbc6d2214e4dd436242f.gif",
     "static/media/JCPpic.png": "/static/media/JCPpic.fe388fa4e49b1f57c994.png",
@@ -34,7 +35,6 @@
     "static/media/GothamBook.ttf": "/static/media/GothamBook.58fb9151c57e59668f17.ttf",
     "static/media/EFNApic.png": "/static/media/EFNApic.78c14b66abf352f4620a.png",
     "static/media/arduino-logo.png": "/static/media/arduino-logo.27d13a40e2d139d92813.png",
-    "static/media/SinagUserManual.pdf": "/static/media/SinagUserManual.8ba0e4745c4989e5585f.pdf",
     "static/media/ciimg2.png": "/static/media/ciimg2.e7e608c253cae167541b.png",
     "static/media/GothamBookRegular.otf": "/static/media/GothamBookRegular.d946fc4006181ac4e1c7.otf",
     "static/media/goalimg.png": "/static/media/goalimg.a98a1f07e31426a01dea.png",
@@ -57,7 +57,7 @@
     "static/media/overviewbg.svg": "/static/media/overviewbg.1b37c41b15946e558041.svg",
     "index.html": "/index.html",
     "main.9491cd6a.css.map": "/static/css/main.9491cd6a.css.map",
-    "main.75baa5d2.js.map": "/static/js/main.75baa5d2.js.map",
+    "main.d2220403.js.map": "/static/js/main.d2220403.js.map",
     "758.062a4059.chunk.js.map": "/static/js/758.062a4059.chunk.js.map",
     "395.7761c48f.chunk.js.map": "/static/js/395.7761c48f.chunk.js.map",
     "67.cd73aaaa.chunk.js.map": "/static/js/67.cd73aaaa.chunk.js.map",
@@ -76,6 +76,6 @@
   },
   "entrypoints": [
     "static/css/main.9491cd6a.css",
-    "static/js/main.75baa5d2.js"
+    "static/js/main.d2220403.js"
   ]
 }
