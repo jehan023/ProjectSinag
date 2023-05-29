@@ -40,7 +40,7 @@ function Profile(props) {
           <p><b>Location:</b> {streetlight.location}</p>
           <p><b>Transceiver:</b> LoRa SX1278 433MHz</p>
           <p><b>Gateway:</b> NodeMCU ESP8266 WiFi</p>
-          <p><b>Installation Date:</b> TBA</p>
+          <p><b>Installation Date:</b> May 28, 2023</p>
           <p><b>Last Maintenance:</b> TBA</p>
           <div className='line-break mb-3'></div>
           <p><b>Solar Panel:</b> {streetlight.pvPanel}</p>

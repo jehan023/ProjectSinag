@@ -97,7 +97,7 @@ function Overview(props, { setHumidityValue }) {
     const chargingTimePerDay = allData.reduce((acc, item, index, array) => {
       if (item.charging === 1) {
         const nextItem = array[index + 1];
-        if (nextItem && nextItem.date === item.date && nextItem.charging === 0) {
+        if (nextItem && nextItem.date === item.date && (nextItem.charging === 1 || nextItem.charging === 0)) {
           const dateISO = new Date(item.date).toISOString().split('T')[0];
           const start = new Date(`${dateISO}T${item.time}:00Z`);
           const end = new Date(`${dateISO}T${nextItem.time}:00Z`);
@@ -123,35 +123,61 @@ function Overview(props, { setHumidityValue }) {
     const OnTimePerDay = allData.reduce((acc, item, index, array) => {
       if (item.led_status === 1) {
         const nextItem = array[index + 1];
+        //check the item.time if 6PM onwards
+        let timeParts = item.time.split(":");
+        let hours = parseInt(timeParts[0]);
+
         if (nextItem && nextItem.date === item.date && (nextItem.led_status === 1 || nextItem.led_status === 0)) {
           const dateISO = new Date(item.date).toISOString().split('T')[0];
           const start = new Date(`${dateISO}T${item.time}:00Z`);
           const end = new Date(`${dateISO}T${nextItem.time}:00Z`);
           let ONtime = (end - start) / (1000 * 60 * 60); // convert milliseconds to hours
           if (nextItem.led_status === 0) {
-            ONtime = ONtime - (1/60);
+            ONtime = ONtime - (1 / 60);
           }
-          const existingItem = acc.find((el) => el.date === item.date);
-          if (existingItem) {
-            existingItem.on_time += ONtime;
-          } else {
-            acc.push({ date: item.date, on_time: ONtime });
+
+          if (hours >= 18) {
+            const existingItem = acc.find((el) => el.date === 'A-' + item.date);
+            if (existingItem) {
+              existingItem.on_time += ONtime;
+            } else {
+              acc.push({ date: 'A-' + item.date, on_time: ONtime });
+            }
+          }
+          if (hours <= 6) {
+            const existingItem = acc.find((el) => el.date === 'B-' + item.date);
+            if (existingItem) {
+              existingItem.on_time += ONtime;
+            } else {
+              acc.push({ date: 'B-' + item.date, on_time: ONtime });
+            }
           }
         }
-        
+
         if (nextItem && nextItem.date !== item.date && (nextItem.led_status === 1 || nextItem.led_status === 0)) {
           const dateISO = new Date(item.date).toISOString().split('T')[0];
           const start = new Date(`${dateISO}T${item.time}:00Z`);
           const end = new Date(`${dateISO}T23:59:59Z`);
           let ONtime = (end - start) / (1000 * 60 * 60); // convert milliseconds to hours
           if (nextItem.led_status === 0) {
-            ONtime = ONtime - (1/60);
+            ONtime = ONtime - (1 / 60);
           }
-          const existingItem = acc.find((el) => el.date === item.date);
-          if (existingItem) {
-            existingItem.on_time += ONtime;
-          } else {
-            acc.push({ date: item.date, on_time: ONtime });
+
+          if (hours >= 18) {
+            const existingItem = acc.find((el) => el.date === 'A-' + item.date);
+            if (existingItem) {
+              existingItem.on_time += ONtime;
+            } else {
+              acc.push({ date: 'A-' + item.date, on_time: ONtime });
+            }
+          }
+          if (hours <= 6) {
+            const existingItem = acc.find((el) => el.date === 'B-' + item.date);
+            if (existingItem) {
+              existingItem.on_time += ONtime;
+            } else {
+              acc.push({ date: 'B-' + item.date, on_time: ONtime });
+            }
           }
         }
       }
@@ -159,10 +185,48 @@ function Overview(props, { setHumidityValue }) {
       return acc;
     }, []);
 
-    const totalOnTime = OnTimePerDay.reduce((acc, curr) => acc + curr.on_time, 0);
-    const averageOnTime = totalOnTime / OnTimePerDay.length;
+    // const totalOnTime = OnTimePerDay.reduce((acc, curr) => acc + curr.on_time, 0);
+    // const averageOnTime = totalOnTime / OnTimePerDay.length;
 
-    setAvgON(parseFloat(averageOnTime).toFixed(2))
+    // console.table(OnTimePerDay);
+
+    // setAvgON(parseFloat(averageOnTime).toFixed(2))
+
+    // Filter A and B dates and calculate the sum
+    const sumABDates = OnTimePerDay.reduce((acc, item, index, array) => {
+      let sumDate = item.date;
+      if (sumDate.startsWith("A")) {
+        let nextSumDate = array[index + 1];
+        let nextDate = nextSumDate.date;
+        if (nextDate.startsWith("B")) {
+          const existingItem = acc.find((el) => el.date === item.date);
+          if (existingItem) {
+            existingItem.on_time = item.on_time + nextSumDate.on_time;
+          } else {
+            acc.push({ date: sumDate, on_time: item.on_time + nextSumDate.on_time });
+          }
+        } else {
+          const existingItem = acc.find((el) => el.date === item.date);
+          if (existingItem) {
+            existingItem.on_time = item.on_time;
+          } else {
+            acc.push({ date: sumDate, on_time: item.on_time });
+          }
+        }
+      }
+      return acc;
+    }, []);
+
+    const totalOnTime = sumABDates.reduce((acc, curr) => acc + curr.on_time, 0);
+
+    // Calculate the average
+    const averageABDates = totalOnTime / sumABDates.length;
+
+    // console.table(sumABDates);
+    // console.log("Sum of A and B dates:", sumABDates);
+    // console.log("Average of A and B dates:", averageABDates);
+
+    setAvgON(parseFloat(averageABDates).toFixed(2));
   }
 
   return (
@@ -235,7 +299,7 @@ function Overview(props, { setHumidityValue }) {
                 <BiCloud className='weather-icon' />
               </div>
 
-              
+
               <div className='temp-container'>
                 <h2 className='temp-value'>{temp}°C</h2>
                 <h2 className='device-title'>{location}</h2>
@@ -245,30 +309,30 @@ function Overview(props, { setHumidityValue }) {
             </div>
 
             <div className='weather-container'>
-            <div className="overview-content-container sunrise-container">
-              <div className="content-wrap">
-                <div className="icon-wrapper">
-                  <BsSunrise className="s-icon" />
+              <div className="overview-content-container sunrise-container">
+                <div className="content-wrap">
+                  <div className="icon-wrapper">
+                    <BsSunrise className="s-icon" />
+                  </div>
+                </div>
+                <div className="content-wrap">
+                  <h2 className="sunrise-value">{sunrise}</h2>
+                  <h6>(GMT+8)</h6>
+                  <p>Sunrise</p>
                 </div>
               </div>
-              <div className="content-wrap">
-                <h2 className="sunrise-value">{sunrise}</h2>
-                <h6>(GMT+8)</h6>
-                <p>Sunrise</p>
-              </div>
-            </div>
-            <div className="overview-content-container sunset-container">
-              <div className="content-wrap">
-                <div className="icon-wrapper">
-                  <BsSunset className="s-icon" />
+              <div className="overview-content-container sunset-container">
+                <div className="content-wrap">
+                  <div className="icon-wrapper">
+                    <BsSunset className="s-icon" />
+                  </div>
+                </div>
+                <div className="content-wrap">
+                  <h2 className="sunset-value">{sunset}</h2>
+                  <h6>(GMT+8)</h6>
+                  <p>Sunset</p>
                 </div>
               </div>
-              <div className="content-wrap">
-                <h2 className="sunset-value">{sunset}</h2>
-                <h6>(GMT+8)</h6>
-                <p>Sunset</p>
-              </div>
-            </div>
             </div>
           </div>
 
@@ -279,10 +343,10 @@ function Overview(props, { setHumidityValue }) {
               <p className='location-txt'>{data.location}</p>
             </div>
 
-          </div> 
+          </div>
+        </div>
       </div>
     </div>
-  </div>
   )
 }
 
