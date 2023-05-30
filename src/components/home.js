@@ -37,7 +37,7 @@ function Home(props) {
             <Image src={dev.dp} alt='img-dev' className='dev-image mb-2' roundedCircle></Image>
             <p>{dev.name}</p>
             <p>{dev.email}</p>
-            <p>{dev.role}</p>
+            <p className='dev-role'>{dev.role}</p>
         </div>
     );
 

@@ -29,25 +29,22 @@ function Profile(props) {
     setSelectedValue(event.target.value);
   };*/
   return (
-    <div className='profile-container'>
-      <div className='d-flex align-items-center justify-content-center my-0'>
-        <h3 className='my-0'>System Profile</h3>
-      </div>
+    <div className='profile-container d-flex flex-column align-items-center justify-content-center'>
 
-      <div className='d-flex align-items-center justify-content-center mt-4'>
-        <div className='profile-card p-4'>
-          <p><b>Name:</b> {streetlight.label} ({streetlight.value})</p>
-          <p><b>Location:</b> {streetlight.location}</p>
-          <p><b>Transceiver:</b> LoRa SX1278 433MHz</p>
-          <p><b>Gateway:</b> NodeMCU ESP8266 WiFi</p>
-          <p><b>Installation Date:</b> May 28, 2023</p>
-          <p><b>Last Maintenance:</b> TBA</p>
-          <div className='line-break mb-3'></div>
-          <p><b>Solar Panel:</b> {streetlight.pvPanel}</p>
-          <p><b>Battery:</b> {streetlight.battCapacity}</p>
-          <p><b>LED Lamp:</b> {streetlight.lamp}</p>
+      <h3 className='my-0'>System Profile</h3>
 
-        </div>
+      <div className='profile-card p-4 mt-4'>
+        <p><b>Name:</b> {streetlight.label} ({streetlight.value})</p>
+        <p><b>Location:</b> {streetlight.location}</p>
+        <p><b>Transceiver:</b> LoRa SX1278 433MHz</p>
+        <p><b>Gateway:</b> NodeMCU ESP8266 WiFi</p>
+        <p><b>Installation Date:</b> May 28, 2023</p>
+        <p><b>Last Maintenance:</b> TBA</p>
+        <div className='line-break mb-3'></div>
+        <p><b>Solar Panel:</b> {streetlight.pvPanel}</p>
+        <p><b>Battery:</b> {streetlight.battCapacity}</p>
+        <p><b>LED Lamp:</b> {streetlight.lamp}</p>
+
       </div>
     </div>
   )

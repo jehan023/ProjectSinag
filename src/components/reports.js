@@ -71,9 +71,9 @@ function Reports() {
     return (
         <div className='reports-container'>
             <div className='report-btn-section'>
-                <button className={reportFrom === 'SL1' ? 'btn report-from-btn-active btn report-from-btn' : 'btn report-from-btn'} onClick={() => handleReportChange('SL1')}>SL1</button>
-                <button className={reportFrom === 'SL2' ? 'btn report-from-btn-active btn report-from-btn' : 'btn report-from-btn'} onClick={() => handleReportChange('SL2')}>SL2</button>
-                <button className={reportFrom === 'SL3' ? 'btn report-from-btn-active btn report-from-btn' : 'btn report-from-btn'} onClick={() => handleReportChange('SL3')}>SL3</button>
+                <button className={reportFrom === 'SL1' ? 'report-from-btn-active btn report-from-btn' : 'report-from-btn'} onClick={() => handleReportChange('SL1')}>SL1</button>
+                <button className={reportFrom === 'SL2' ? 'report-from-btn-active btn report-from-btn' : 'report-from-btn'} onClick={() => handleReportChange('SL2')}>SL2</button>
+                <button className={reportFrom === 'SL3' ? 'report-from-btn-active btn report-from-btn' : 'report-from-btn'} onClick={() => handleReportChange('SL3')}>SL3</button>
 
                 {loading ? <button className='report-download-btn'>Loading Document...</button> :
                     reportData.length > 0 ?
