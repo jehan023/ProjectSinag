@@ -32,15 +32,15 @@ function App() {
   const options = [
     {
       list: 'SL1', value: 'SL1', label: 'Streetlight 1', location: 'Patola St., Brgy BF International Village, Las Piñas City | 1740',
-      battCapacity: '3.2V 20AH LiFePO4', pvPanel: '25W 6V Polycrystalline Silicon', lamp: '250W', 
+      battCapacity: '3.2V 20AH LiFePO4', pvPanel: '25W 6V Polycrystalline Silicon', lamp: '250W',
     },
     {
       list: 'SL2', value: 'SL2', label: 'Streetlight 2', location: 'Patola St., Brgy BF International Village, Las Piñas City | 1740',
-      battCapacity: '3.2V 20AH LiFePO4', pvPanel: '25W 6V Polycrystalline Silicon', lamp: '250W', 
+      battCapacity: '3.2V 20AH LiFePO4', pvPanel: '25W 6V Polycrystalline Silicon', lamp: '250W',
     },
     {
       list: 'SL3', value: 'SL3', label: 'Streetlight 3', location: 'Patola St., Brgy BF International Village, Las Piñas City | 1740',
-      battCapacity: '3.2V 20AH LiFePO4', pvPanel: '25W 6V Polycrystalline Silicon', lamp: '250W', 
+      battCapacity: '3.2V 20AH LiFePO4', pvPanel: '25W 6V Polycrystalline Silicon', lamp: '250W',
     },
   ];
 
@@ -125,11 +125,15 @@ function App() {
     window.open(usermanual);
   };
 
+  
+
 
   return (
     <div className="App">
       {/******* NAVIGATION BAR ***************************************************/}
       <div className='top-navbar d-flex'>
+        <input id="nav-toggle" type="checkbox"></input>
+        
         <div className='title-nav-container d-flex align-items-center'>
           <img className='sinag-logo' src={Logo} alt='Logo' />
           <h3 className='my-0 mx-2'></h3>
@@ -140,6 +144,12 @@ function App() {
           <button className={page === 'Dashboard' ? 'link-btn link-active' : 'link-btn'} onClick={() => { handlePage('Dashboard') }}>Dashboard</button>
           <button className={page === 'Reports' ? 'link-btn link-active' : 'link-btn'} onClick={() => { handlePage('Reports') }}>Reports</button>
         </div>
+
+        <label for="nav-toggle" class="icon-burger">
+          <div class="line"></div>
+          <div class="line"></div>
+          <div class="line"></div>
+        </label>
       </div>
 
       <div className={page === 'Dashboard' ? 'bottom-navbar' : 'hidden'}>

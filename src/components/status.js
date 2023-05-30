@@ -126,18 +126,21 @@ function Status(props) {
   const GetLastUpdate = () => {
     let active = "Inactive";
     if (currentTime.toLocaleString("en-US", { month: "long", day: 'numeric', year: 'numeric' }) === data.date) {
-      if (data.pv_power > 0.0 || data.charging === 1.0 || data.led_status === 1.0) {
-        active = "Active";  
+      if (!hoursDifference >= 1) {
+        active = "Active";
       }
+      // if (data.pv_power > 0.0 || data.charging === 1.0 || data.led_status === 1.0) {
+      //   active = "Active";  
+      // }
     }
-    
+
     return <div className='d-flex align-items-center gap-2 my-2'>
       <div className={active === "Active" ? 'sl-status sl-active' : 'sl-status sl-inactive'}> - </div>
       {currentTime.toLocaleString("en-US", { month: "long", day: 'numeric', year: 'numeric' }) === data.date ?
         timeDifference > 60 ?
-          <h6 className='my-0'>{active + " | Last update " + hoursDifference + HRlabel + minutesDifference + MINlabel}</h6> :
-          <h6 className='my-0'>{active + " | Last update " + timeDifference + MINlabel}</h6>
-        : <h6 className='my-0'>{active + " | Last update " + data.date}</h6>
+          <h6 className='status-time my-0'>{active + " | Last update " + hoursDifference + HRlabel + minutesDifference + MINlabel}</h6> :
+          <h6 className='status-time my-0'>{active + " | Last update " + timeDifference + MINlabel}</h6>
+        : <h6 className='status-time my-0'>{active + " | Last update " + data.date}</h6>
       }
     </div>
   }
@@ -238,53 +241,42 @@ function Status(props) {
       <GetLastUpdate />
 
       {/**Status Cards Section */}
-      <div className='status-section'>
-        <div className='status-cards-container'>
-          {/**1st row cards */}
-          <div className='cards-row d-flex justify-content-center gap-4 my-4'>
-            <div className='status-card'>
-              <FaSolarPanel className='status-icon' />
-              <h2>{parseFloat(data.pv_power)}W</h2>
-              <h5>Current Power</h5>
-            </div>
-
-            <div className='status-card'>
-              <BsLightningChargeFill className='status-icon' />
-              <h2>{GetEnergyYield()}Wh</h2>
-              <h5>Energy Yield</h5>
-            </div>
-
-            <div className={battColor}>
-              {/* <FaBatteryThreeQuarters className='status-icon'/> */}
-              <BattStatusIcon />
-              <h2>{battPercent}%</h2>
-              <h5>Battery</h5>
-            </div>
-            <LampStatusIcon />
-          </div>
-
-          {/**2nd row cards */}
-          <div className='cards-row d-flex justify-content-between gap-4'>
-            <div className='status-card'>
-              <BsThermometerSun className='status-icon' />
-              <h2>{parseFloat(data.temp)}°C</h2>
-              <h5>Ambient Temperature</h5>
-            </div>
-
-            <div className='status-card'>
-              <WiHumidity className='status-icon' />
-              <h2>{humidity}%</h2>
-              <h5>Humidity</h5>
-            </div>
-
-            <AmbientLight />
-
-            <SignalStrength />
-          </div>
+      <div className='status-cards-container my-4'>
+        <div className='status-card'>
+          <FaSolarPanel className='status-icon' />
+          <h2>{parseFloat(data.pv_power)}W</h2>
+          <h5>Current Power</h5>
         </div>
 
-      </div>
+        <div className='status-card'>
+          <BsLightningChargeFill className='status-icon' />
+          <h2>{GetEnergyYield()}Wh</h2>
+          <h5>Energy Yield</h5>
+        </div>
 
+        <div className={battColor}>
+          {/* <FaBatteryThreeQuarters className='status-icon'/> */}
+          <BattStatusIcon />
+          <h2>{battPercent}%</h2>
+          <h5>Battery</h5>
+        </div>
+        <LampStatusIcon />
+        <div className='status-card'>
+          <BsThermometerSun className='status-icon' />
+          <h2>{parseFloat(data.temp)}°C</h2>
+          <h5>Ambient Temperature</h5>
+        </div>
+
+        <div className='status-card'>
+          <WiHumidity className='status-icon' />
+          <h2>{humidity}%</h2>
+          <h5>Humidity</h5>
+        </div>
+
+        <AmbientLight />
+
+        <SignalStrength />
+      </div>
     </div>
   )
 }

@@ -68,7 +68,7 @@ function Analysis(props) {
       <div className='d-flex align-items-center my-0'>
         <h3 className='my-0'>System Analysis</h3>
       </div>
-      <div className='d-flex align-items-center'>
+      <div className='date-view-wrapper d-flex align-items-center'>
         <div className='analysis-date-picker w-50 py-1'>
           <div className='date-picker-container d-flex justify-content-start align-items-center gap-2'>
             <CustomInput onClick={toggleDatePicker} />
