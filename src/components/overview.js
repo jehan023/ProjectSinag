@@ -262,9 +262,6 @@ function Overview(props, { setHumidityValue }) {
                 <p>Battery Capacity</p>
               </div>
             </div>
-          </div>
-
-          <div className='sl-wrapper'>
             <div className='sl-overview-card'>
               <div className='card-content'>
                 <IoBatteryCharging className='sl-icon' />
@@ -299,7 +296,6 @@ function Overview(props, { setHumidityValue }) {
                 <BiCloud className='weather-icon' />
               </div>
 
-
               <div className='temp-container'>
                 <h2 className='temp-value'>{temp}°C</h2>
                 <h2 className='device-title'>{location}</h2>
@@ -317,7 +313,7 @@ function Overview(props, { setHumidityValue }) {
                 </div>
                 <div className="content-wrap">
                   <h2 className="sunrise-value">{sunrise}</h2>
-                  <h6>(GMT+8)</h6>
+                  <h6 className='gmt'>(GMT+8)</h6>
                   <p>Sunrise</p>
                 </div>
               </div>
@@ -329,7 +325,7 @@ function Overview(props, { setHumidityValue }) {
                 </div>
                 <div className="content-wrap">
                   <h2 className="sunset-value">{sunset}</h2>
-                  <h6>(GMT+8)</h6>
+                  <h6 className='gmt'>(GMT+8)</h6>
                   <p>Sunset</p>
                 </div>
               </div>
