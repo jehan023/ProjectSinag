@@ -210,10 +210,10 @@ function Status(props) {
       luxDesc = "Direct Sunlight";
       luxIcon = <IoMdSunny className='status-icon' />;
     } else if (parseFloat(data.lux) >= 10000) {
-      luxDesc = "Ambient Sunlight";
+      luxDesc = "Cloudy";
       luxIcon = <WiDaySunny className='status-icon' />;
     } else if (parseFloat(data.lux) >= 1000) {
-      luxDesc = "Overcast Sunlight";
+      luxDesc = "Overcast Clouds";
       luxIcon = <WiDayCloudy className='status-icon' />;
     } else if (parseFloat(data.lux) >= 400) {
       luxDesc = "Twilight";

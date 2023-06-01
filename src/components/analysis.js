@@ -10,7 +10,7 @@ import ProductionChart from '../charts/productionChart';
 function Analysis(props) {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
-  const minDate = new Date(2022, 10, 1);
+  const minDate = new Date(2023, 4, 28);
   const [viewMode, setViewMode] = useState('day');
   const [dateFormat, setDateFormat] = useState({ month: 'long', day: 'numeric', year: 'numeric' });
 
