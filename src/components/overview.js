@@ -188,7 +188,7 @@ function Overview(props, { setHumidityValue }) {
     // const totalOnTime = OnTimePerDay.reduce((acc, curr) => acc + curr.on_time, 0);
     // const averageOnTime = totalOnTime / OnTimePerDay.length;
 
-    // console.table(OnTimePerDay);
+    console.table(OnTimePerDay);
 
     // setAvgON(parseFloat(averageOnTime).toFixed(2))
 
@@ -197,8 +197,8 @@ function Overview(props, { setHumidityValue }) {
       let sumDate = item.date;
       if (sumDate.startsWith("A")) {
         let nextSumDate = array[index + 1];
-        let nextDate = nextSumDate.date;
-        if (nextDate.startsWith("B")) {
+        // let nextDate = nextSumDate.date;
+        if (nextSumDate && nextSumDate.date.startsWith("B")) {
           const existingItem = acc.find((el) => el.date === item.date);
           if (existingItem) {
             existingItem.on_time = item.on_time + nextSumDate.on_time;
@@ -206,12 +206,12 @@ function Overview(props, { setHumidityValue }) {
             acc.push({ date: sumDate, on_time: item.on_time + nextSumDate.on_time });
           }
         } else {
-          const existingItem = acc.find((el) => el.date === item.date);
-          if (existingItem) {
-            existingItem.on_time = item.on_time;
-          } else {
-            acc.push({ date: sumDate, on_time: item.on_time });
-          }
+          // const existingItem = acc.find((el) => el.date === item.date);
+          // if (existingItem) {
+          //   existingItem.on_time = item.on_time;
+          // } else {
+          //   acc.push({ date: sumDate, on_time: item.on_time });
+          // }
         }
       }
       return acc;
@@ -222,7 +222,7 @@ function Overview(props, { setHumidityValue }) {
     // Calculate the average
     const averageABDates = totalOnTime / sumABDates.length;
 
-    // console.table(sumABDates);
+    console.table(sumABDates);
     // console.log("Sum of A and B dates:", sumABDates);
     // console.log("Average of A and B dates:", averageABDates);
 

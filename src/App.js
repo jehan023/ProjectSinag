@@ -50,7 +50,7 @@ function App() {
   };
   const streetlight = getObjectByValue(selectedValue);
 
-  const refreshInterval = 180000; // Refresh every 5 seconds
+  const refreshInterval = 150000; // Refresh every 3mins
   useEffect(() => {
     if (selectedValue) {
       callAPI(); // Initial API call

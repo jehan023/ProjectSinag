@@ -1,0 +1,47 @@
+{
+    "coord": {
+        "lon": 120.9828,
+        "lat": 14.4506
+    },
+    "weather": [
+        {
+            "id": 500,
+            "main": "Rain",
+            "description": "light rain",
+            "icon": "10n"
+        }
+    ],
+    "base": "stations",
+    "main": {
+        "temp": 28.33,
+        "feels_like": 34.81,
+        "temp_min": 27.8,
+        "temp_max": 30.03,
+        "pressure": 1005,
+        "humidity": 90
+    },
+    "visibility": 10000,
+    "wind": {
+        "speed": 3.58,
+        "deg": 252,
+        "gust": 5.36
+    },
+    "rain": {
+        "1h": 0.19
+    },
+    "clouds": {
+        "all": 100
+    },
+    "dt": 1685534569,
+    "sys": {
+        "type": 2,
+        "id": 2005706,
+        "country": "PH",
+        "sunrise": 1685481985,
+        "sunset": 1685528474
+    },
+    "timezone": 28800,
+    "id": 1707174,
+    "name": "Las Piñas",
+    "cod": 200
+}
