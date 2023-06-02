@@ -24,7 +24,7 @@ function Status(props) {
   const data = props.data;
   const sameDateData = props.sameDate;
   const battPercent = data.batt_level;
-  const [battColor, setBattColor] = useState('');
+  const [battColor, setBattColor] = useState('status-card battMid');
   const [humidity, setHumidity] = useState('-');
 
   useEffect(() => {
@@ -105,7 +105,7 @@ function Status(props) {
   // Split the lastTime string into hour and minute components
   const [lastHour, lastMinute] = data.time.split(':').map(Number);
 
-  // Calculate the time difference in minutes
+  // Calculate the time difference in minutes 
   const timeDifference = (currentHour - lastHour) * 60 + (currentMinute - lastMinute);
 
   const hoursDifference = Math.floor(timeDifference / 60);
