@@ -125,30 +125,37 @@ function App() {
     window.open(usermanual);
   };
 
-  
+  const [isChecked, setIsChecked] = useState(false);
 
+  const handleButtonClick = () => {
+    setIsChecked(!isChecked);
+  };
+
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+  };
 
   return (
     <div className="App">
       {/******* NAVIGATION BAR ***************************************************/}
       <div className='top-navbar d-flex'>
-        <input id="nav-toggle" type="checkbox"></input>
-        
+        <input id="nav-toggle" type="checkbox" checked={isChecked} onChange={handleCheckboxChange}></input>
+
         <div className='title-nav-container d-flex align-items-center'>
           <img className='sinag-logo' src={Logo} alt='Logo' />
           <h3 className='my-0 mx-2'></h3>
         </div>
 
         <div className='links-nav-container d-flex'>
-          <button className={page === 'Home' ? 'link-btn link-active' : 'link-btn'} onClick={() => { handlePage('Home') }}>Home</button>
-          <button className={page === 'Dashboard' ? 'link-btn link-active' : 'link-btn'} onClick={() => { handlePage('Dashboard') }}>Dashboard</button>
-          <button className={page === 'Reports' ? 'link-btn link-active' : 'link-btn'} onClick={() => { handlePage('Reports') }}>Reports</button>
+          <button className={page === 'Home' ? 'link-btn link-active' : 'link-btn'} onClick={() => { handlePage('Home'); handleButtonClick() }}>Home</button>
+          <button className={page === 'Dashboard' ? 'link-btn link-active' : 'link-btn'} onClick={() => { handlePage('Dashboard'); handleButtonClick() }}>Dashboard</button>
+          <button className={page === 'Reports' ? 'link-btn link-active' : 'link-btn'} onClick={() => { handlePage('Reports'); handleButtonClick() }}>Reports</button>
         </div>
 
-        <label for="nav-toggle" class="icon-burger">
-          <div class="line"></div>
-          <div class="line"></div>
-          <div class="line"></div>
+        <label htmlFor="nav-toggle" className="icon-burger">
+          <div className="line"></div>
+          <div className="line"></div>
+          <div className="line"></div>
         </label>
       </div>
 

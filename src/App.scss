@@ -76,8 +76,9 @@ body {
     display: none;
     position: fixed;
     right: 5%;
-    top: 5%;
-    transform: translateY(-50%);
+    top: 1.5%;
+    // transform: translateY(-50%);
+    // border: 1px solid red;
   }
   .icon-burger .line {
     width: 30px;
@@ -1209,8 +1210,8 @@ body {
     .header {
       width: 100%;
       min-width: 100%;
-      margin-top: 50px;
-      padding: 50px 5%;
+      margin-top: 0px;
+      padding: 100px 5%;
 
       .header-content {
         display: flex;
@@ -1602,8 +1603,8 @@ body {
 
   /* OVERVIEW SECTION */
   .overview-container {
-    border: 1px solid red;
-    padding-top: 160px;
+    // border: 1px solid red;
+    padding-top: 175px;
     padding-left: 3%;
     padding-right: 3%;
     .overview-container-wrapper {
@@ -1663,7 +1664,7 @@ body {
 
   /* PROFILE SECTION */
   .profile-container {
-    padding: 160px 3% 30px 3%;
+    padding: 175px 3% 30px 3%;
     .profile-card {
       width: 100%;
       border-radius: 20px;
@@ -1676,7 +1677,7 @@ body {
 
   /* STATUS SECTION */
   .status-container {
-    padding-top: 160px;
+    padding-top: 170px;
     padding-left: 4%;
     padding-right: 4%;
     padding-bottom: 10%;
@@ -1692,7 +1693,7 @@ body {
 
   /* ANALYSIS SECTION */
   .analysis-container {
-    padding: 160px 5% 30px 5%;
+    padding: 170px 5% 30px 5%;
     .date-view-wrapper {
       margin-top: 10px;
       flex-direction: column-reverse;
@@ -1736,7 +1737,7 @@ body {
   /* TOP NAVBAR */
   .top-navbar {
     padding: 2% 10% 2% 10%;
-    height: 60px;
+    height: 60px !important;
     min-width: 100%;
     justify-content: space-between;
     z-index: 20;
@@ -1784,9 +1785,10 @@ body {
     display: none;
   }
   .bottom-navbar {
-    transition: all 0.3s ease-in-out;
+    transition: transform  0.3s ease-in-out;
+    transform: translateY(60px);
     border-radius: 0;
-    margin-top: 60px;
+    margin-top: 0px !important;
     z-index: 10;
     .link-btn {
       margin: 0;
