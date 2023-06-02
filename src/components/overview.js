@@ -188,7 +188,7 @@ function Overview(props, { setHumidityValue }) {
     // const totalOnTime = OnTimePerDay.reduce((acc, curr) => acc + curr.on_time, 0);
     // const averageOnTime = totalOnTime / OnTimePerDay.length;
 
-    console.table(OnTimePerDay);
+    // console.table(OnTimePerDay);
 
     // setAvgON(parseFloat(averageOnTime).toFixed(2))
 
@@ -222,7 +222,7 @@ function Overview(props, { setHumidityValue }) {
     // Calculate the average
     const averageABDates = totalOnTime / sumABDates.length;
 
-    console.table(sumABDates);
+    // console.table(sumABDates);
     // console.log("Sum of A and B dates:", sumABDates);
     // console.log("Average of A and B dates:", averageABDates);
 
