@@ -12,6 +12,7 @@ import {
     Filler,
     LineController,
     BarController,
+    ScatterController
 } from 'chart.js';
 import { Chart } from 'react-chartjs-2';
 
@@ -26,6 +27,7 @@ ChartJS.register(
     Filler,
     LineController,
     BarController,
+    ScatterController,
     zoomPlugin
 );
 
