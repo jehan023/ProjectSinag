@@ -163,12 +163,22 @@ function Overview(props, { setHumidityValue }) {
             ONtime = ONtime - (1 / 60);
           }
 
+          const nextEnd = new Date(`${dateISO}T${nextItem.time}:00Z`);
+          const nextStart = new Date(`${dateISO}T00:00:00Z`);
+          let nextONtime = (nextEnd - nextStart) / (1000 * 60 * 60); // convert milliseconds to hours
+
           if (hours >= 18) {
             const existingItem = acc.find((el) => el.date === 'A-' + item.date);
             if (existingItem) {
               existingItem.on_time += ONtime;
             } else {
               acc.push({ date: 'A-' + item.date, on_time: ONtime });
+            }
+            const nextExisting = acc.find((el) => el.date === 'B-' + nextItem.date);
+            if (nextExisting) {
+              existingItem.on_time += nextONtime;
+            } else {
+              acc.push({ date: 'B-' + nextItem.date, on_time: nextONtime });
             }
           }
           if (hours <= 6) {
