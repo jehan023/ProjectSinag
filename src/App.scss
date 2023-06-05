@@ -24,8 +24,14 @@ body {
 
 .loading-component {
   z-index: 1000;
-  position: absolute;
-  margin: 15% 38%;
+  position: fixed;
+  left: 0;
+  right: 0;
+  // margin: 15% 38%;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-top: 20%;
+  height: 100vh !important;
 }
 .sinag-logo {
   height: 45px;
@@ -1202,8 +1208,22 @@ body {
   }
 }
 
+.sinag-container {
+  display: none;
+}
+
+.hidden-btn {
+  background-color: transparent;
+  border: 1px solid red;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 20px;
+  color: transparent;
+  padding: 5px;
+}
+
 /*============= MOBILE RESPONSIVE ===========================*/
-@media (min-width: 320px) and (max-width: 480px) {
+@media (min-width: 320px) and (max-width: 768px) {
   //mobile phone screen
   /* HOME PAGE */
   .home-container {
@@ -1701,9 +1721,6 @@ body {
       align-items: start !important;
       gap: 10px;
     }
-    .analysis-date-type {
-      // border: 1px solid red;
-    }
     .analysis-section {
       .chart {
         padding: 20px 40px 20px 20px;
@@ -1711,10 +1728,24 @@ body {
     }
   }
 
+  .loading-component {
+    z-index: 9;
+    position: fixed;
+    left: 0;
+    right: 0;
+    margin-top: 40% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    overflow-y: hidden !important;
+  }
+
   /* REPORT SECTION */
   .reports-container {
     padding-top: 0px;
     margin-top: 55px;
+    .loading-component {
+      margin-top: 20% !important;
+    }
     .report-btn-section {
       .report-download-btn {
         font-size: 65%;
@@ -1736,7 +1767,7 @@ body {
 
   /* TOP NAVBAR */
   .top-navbar {
-    padding: 2% 10% 2% 10%;
+    padding: 2% 10% 2% 30px;
     height: 60px !important;
     min-width: 100%;
     justify-content: space-between;
@@ -1785,7 +1816,7 @@ body {
     display: none;
   }
   .bottom-navbar {
-    transition: transform  0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out;
     transform: translateY(60px);
     border-radius: 0;
     margin-top: 0px !important;
@@ -1801,16 +1832,33 @@ body {
       justify-content: space-evenly;
     }
   }
-  .loading-component {
-    // border: 1px solid red;
-    z-index: 9;
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    overflow-y: hidden !important;
-    // margin: 15% auto !important;
+
+  .sinag-container {
+    margin: 20% 10%;
+    display: block;
+    .sl-btn-wrapper {
+      border-bottom: 2px solid black;
+      padding: 20px;
+      align-items: center;
+      justify-content: space-evenly;
+    }
+    .led-button {
+      background-color: #090f1e;
+      color: #f5cf45;
+      border-radius: 20px;
+      text-align: center;
+      width: 130px;
+      font-family: "Gotham Bold";
+      animation: 0.3s ease-in-out;
+      height: 100px;
+    }
+    .pressed {
+      background-color: #f5cf45;
+      color: #090f1e;
+    }
   }
+
+
+
   //end
 }
