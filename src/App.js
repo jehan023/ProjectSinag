@@ -18,6 +18,7 @@ const Home = lazy(() => import('./components/home.js'));
 const Reports = lazy(() => import('./components/reports.js'));
 const ProductOverview = lazy(() => import('./components/productOverview.js'));
 const AboutUs = lazy(() => import('./components/aboutus.js'));
+const Sinag = lazy(() => import('./components/sinag.js'));
 
 
 function App() {
@@ -219,6 +220,8 @@ function App() {
                   return <ProductOverview />
                 case 'AboutUs':
                   return <AboutUs />
+                case 'Sinag':
+                  return <Sinag />
                 default:
                   return <Home />
               }
@@ -227,27 +230,27 @@ function App() {
       </div>
 
       {/******* FOOTER BAR ***************************************************/}
-      <div className='footer-container'>
+      <div className='footer-container d-flex flex-column'>
         <div className='links'>
           <div>
-            <p>Product</p>
+            <p className='mb-1'>Product</p>
             <ul>
               <li><a href="#/" onClick={() => { handlePage('ProductOverview') }}>Overview</a></li>
-
-
               <li><a href={usermanual} target="_blank" rel="noreferrer">User Manual</a></li>
             </ul>
           </div>
           <div>
-            <p>Developers</p>
+            <p className='mb-1' onClick={() => { handlePage('Sinag') }}>Developers</p>
             <ul>
               <li><a href="#/" onClick={() => { handlePage('AboutUs') }}>About Us</a></li>
               <li><a href="mailto:sinagproject2023@gmail.com">Contact Us</a></li>
             </ul>
           </div>
         </div>
+
+        <button className='hidden-btn' onClick={() => { handlePage('Sinag') }}>SINAG FORCE BUTTON</button>
       </div>
-    </div>
+    </div >
   );
 }
 

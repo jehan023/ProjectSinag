@@ -255,7 +255,7 @@ function Overview(props, { setHumidityValue }) {
               <div className='card-content'>
                 <FaSolarPanel className='sl-icon' />
                 <h3>{GetEnergyYield()}Wh</h3>
-                <p>Current Yield</p>
+                <p>Today's Yield</p>
               </div>
             </div>
             <div className='sl-overview-card'>
