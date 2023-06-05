@@ -79,6 +79,7 @@ function Analysis(props) {
           <button className={viewMode === 'day' ? 'btn date-type-btn-active btn date-type-btn' : 'btn date-type-btn'} onClick={() => handleViewModeChange('day')}>Day</button>
           <button className={viewMode === 'month' ? 'btn date-type-btn-active btn date-type-btn' : 'btn date-type-btn'} onClick={() => handleViewModeChange('month')}>Month</button>
           <button className={viewMode === 'year' ? 'btn date-type-btn-active btn date-type-btn' : 'btn date-type-btn'} onClick={() => handleViewModeChange('year')}>Year</button>
+          <button className={viewMode === 'all' ? 'btn date-type-btn-active btn date-type-btn' : 'btn date-type-btn'} onClick={() => handleViewModeChange('all')}>All</button>
         </div>
       </div>
 
@@ -113,7 +114,7 @@ function Analysis(props) {
 
         {/******* ENERGY ANALYSIS CHART COMBINED **********************************/}
         <div className='chart mb-4'>
-          <ProductionChart data={filterData} viewMode={viewMode} className='chart' />
+          <ProductionChart data={viewMode === 'all' ? allData : filterData} viewMode={viewMode} className='chart' />
         </div>
 
         {/******* BATTERY LEVEL ANALYSIS CHART ************************************/}

@@ -12,6 +12,7 @@ import {
     Filler,
     LineController,
     BarController,
+    ScatterController
 } from 'chart.js';
 import { Chart } from 'react-chartjs-2';
 
@@ -26,6 +27,7 @@ ChartJS.register(
     Filler,
     LineController,
     BarController,
+    ScatterController,
     zoomPlugin
 );
 
@@ -47,6 +49,29 @@ const ProductionChart = (props) => {
             setLight([]);
 
             switch (view) {
+                case 'all':
+                    const uniqueLabels = Array.from(new Set(sysData.map(row => row.time)));
+
+                    // Sort the unique labels in a 24-hour format
+                    uniqueLabels.sort((a, b) => {
+                        const timeA = new Date(`1970-01-01T${a}`);
+                        const timeB = new Date(`1970-01-01T${b}`);
+                        return timeA.getTime() - timeB.getTime();
+                    });
+
+                    // Use the filtered and sorted labels to populate the state variables
+                    uniqueLabels.forEach(label => {
+                        const matchingRow = sysData.find(row => row.time === label);
+                        if (matchingRow) {
+                            setLabel(prevList => [...prevList, label]);
+                            setGenerate(prevList => [...prevList, matchingRow.pv_power]);
+                            setTemp(prevList => [...prevList, matchingRow.temp]);
+                            setLight(prevList => [...prevList, matchingRow.lux]);
+                        }
+                    });
+
+                    break;
+
                 case 'day':
                     sysData.map(row => {
                         setLabel(prevList => [...prevList, row.time]);
@@ -153,7 +178,7 @@ const ProductionChart = (props) => {
             },
             title: {
                 display: true,
-                text: view === 'day' ? "Solar Panel's Production" : "Average Solar Panel's Production",
+                text: view === 'day' ? "Solar PV Panel Output" : "Average Solar PV Panel Output",
                 font: {
                     size: 24,
                 }
@@ -200,27 +225,36 @@ const ProductionChart = (props) => {
         datasets: [
             {
                 // fill: true,
-                type: 'line',
+                type: view === 'all' ? 'scatter' : 'line',
                 label: 'Temperature (°C)',
                 backgroundColor: 'rgb(4, 59, 92, 1)',
-                data: temp,
+                data: view === 'all' ? sysData.map(point => ({
+                    x: point.time,
+                    y: point.temp
+                })) : temp,
                 borderColor: 'rgb(4, 59, 92, 1)',
                 yAxisID: 'y1',
             },
             {
                 // fill: true,
-                type: 'line',
+                type: view === 'all' ? 'scatter' : 'line',
                 label: 'Ambient Light (lux)',
                 backgroundColor: 'rgb(22, 160, 133, 1)',
-                data: light,
+                data: view === 'all' ? sysData.map(point => ({
+                    x: point.time,
+                    y: point.lux
+                })) : light,
                 borderColor: 'rgb(22, 160, 133, 1)',
                 yAxisID: 'y',
             },
             {
                 // fill: true,
-                type: view === 'day' ? 'line' : 'bar',
+                type: view === 'all' ? 'scatter' : view === 'day' ? 'line' : 'bar',
                 label: view === 'day' ? 'Power (W)' : 'Energy (Wh)',
-                data: generate,
+                data: view === 'all' ? sysData.map(point => ({
+                    x: point.time,
+                    y: point.pv_power
+                })) : generate,
                 backgroundColor: 'rgb(207, 0, 15, 1)',
                 borderColor: 'rgb(207, 0, 15, 1)',
                 yAxisID: 'y1',
