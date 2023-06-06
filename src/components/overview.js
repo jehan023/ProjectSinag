@@ -97,7 +97,7 @@ function Overview(props, { setHumidityValue }) {
     const chargingTimePerDay = allData.reduce((acc, item, index, array) => {
       if (item.charging === 1) {
         const nextItem = array[index + 1];
-        if (nextItem && nextItem.date === item.date && (nextItem.charging === 1 || nextItem.charging === 0)) {
+        if (nextItem && nextItem.date === item.date && (nextItem.charging === 1 || nextItem.charging === 0) && (item.batt_level <= 100 && nextItem.batt_level < 100)) {
           const dateISO = new Date(item.date).toISOString().split('T')[0];
           const start = new Date(`${dateISO}T${item.time}:00Z`);
           const end = new Date(`${dateISO}T${nextItem.time}:00Z`);
@@ -112,6 +112,8 @@ function Overview(props, { setHumidityValue }) {
       }
       return acc;
     }, []);
+
+    // console.table(chargingTimePerDay);
 
     const totalChargingTime = chargingTimePerDay.reduce((acc, curr) => acc + curr.charging_time, 0);
     const averageChargingTime = totalChargingTime / chargingTimePerDay.length;
