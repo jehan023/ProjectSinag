@@ -183,21 +183,21 @@ const ProductionChart = (props) => {
                     size: 24,
                 }
             },
-            zoom: {
-                pan: {
-                    enabled: true,
-                    mode: 'x'
-                },
-                zoom: {
-                    pinch: {
-                        enabled: true       // Enable pinch zooming
-                    },
-                    wheel: {
-                        enabled: true       // Enable wheel zooming
-                    },
-                    mode: 'x',
-                }
-            }
+            // zoom: {
+            //     pan: {
+            //         enabled: true,
+            //         mode: 'x'
+            //     },
+            //     zoom: {
+            //         pinch: {
+            //             enabled: true       // Enable pinch zooming
+            //         },
+            //         wheel: {
+            //             enabled: true       // Enable wheel zooming
+            //         },
+            //         mode: 'x',
+            //     }
+            // }
         },
         scales: {
             x: {
@@ -234,6 +234,7 @@ const ProductionChart = (props) => {
                 })) : temp,
                 borderColor: 'rgb(4, 59, 92, 1)',
                 yAxisID: 'y1',
+                pointRadius: view !== 'all' ? 0 : 3,  
             },
             {
                 // fill: true,
@@ -246,6 +247,7 @@ const ProductionChart = (props) => {
                 })) : light,
                 borderColor: 'rgb(22, 160, 133, 1)',
                 yAxisID: 'y',
+                pointRadius: view !== 'all' ? 0 : 3,  
             },
             {
                 // fill: true,
@@ -258,6 +260,7 @@ const ProductionChart = (props) => {
                 backgroundColor: 'rgb(207, 0, 15, 1)',
                 borderColor: 'rgb(207, 0, 15, 1)',
                 yAxisID: 'y1',
+                pointRadius: view !== 'all' ? 0 : 3,  
             },
         ],
     };
