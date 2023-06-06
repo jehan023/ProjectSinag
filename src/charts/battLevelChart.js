@@ -267,21 +267,21 @@ const BattLevelChart = (props) => {
                     size: 24,
                 }
             },
-            zoom: {
-                pan: {
-                    enabled: true,
-                    mode: 'x'
-                },
-                zoom: {
-                    pinch: {
-                        enabled: true       // Enable pinch zooming
-                    },
-                    wheel: {
-                        enabled: true       // Enable wheel zooming
-                    },
-                    mode: 'x',
-                }
-            },
+            // zoom: {
+            //     pan: {
+            //         enabled: true,
+            //         mode: 'x'
+            //     },
+            //     zoom: {
+            //         pinch: {
+            //             enabled: true       // Enable pinch zooming
+            //         },
+            //         wheel: {
+            //             enabled: true       // Enable wheel zooming
+            //         },
+            //         mode: 'x',
+            //     }
+            // },
             clip: {
                 left: 25, // Adjust the number of initially visible data points
                 right: 25, // Adjust the number of initially visible data points
@@ -302,6 +302,7 @@ const BattLevelChart = (props) => {
                     backgroundColor: 'rgba(9, 15, 30, 0.5)',
                     borderColor: 'rgba(9, 15, 30, 1)',
                     yAxisID: 'y',
+                    pointRadius: 0,  
                     // fill: true
                 },
                 {
@@ -311,6 +312,7 @@ const BattLevelChart = (props) => {
                     backgroundColor: 'rgba(28, 164, 63, 1)',
                     borderColor: 'rgba(28, 164, 63, 1)',
                     yAxisID: 'y',
+                    pointRadius: 0,  
                     // fill: true
                 },
             ]
@@ -324,6 +326,7 @@ const BattLevelChart = (props) => {
                     yAxisID: 'y1',
                     stepped: true,
                     order: 1,
+                    pointRadius: 0,  
                 },
                 {
                     type: 'line',
@@ -334,6 +337,7 @@ const BattLevelChart = (props) => {
                     yAxisID: 'y1',
                     stepped: true,
                     order: 1,
+                    pointRadius: 0,  
                 },
                 {
                     type: view === 'day' ? 'line' : 'bar',
@@ -343,6 +347,7 @@ const BattLevelChart = (props) => {
                     borderColor: 'rgba(9, 15, 30, 0.8)',
                     yAxisID: 'y2',
                     order: 2,
+                    pointRadius: 0,  
                     fill: true
                 },
             ],

@@ -118,9 +118,10 @@ function Analysis(props) {
         </div>
 
         {/******* BATTERY LEVEL ANALYSIS CHART ************************************/}
-        <div className='chart'>
+        {viewMode !== 'all' ? <div className='chart'>
           <BattLevelChart data={filterData} viewMode={viewMode} className='chart' />
-        </div>
+        </div> : ''}
+
       </div>
     </div>
   )
