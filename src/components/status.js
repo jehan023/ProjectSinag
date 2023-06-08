@@ -206,10 +206,10 @@ function Status(props) {
   const AmbientLight = () => {
     let luxDesc;
     let luxIcon;
-    if (parseFloat(data.lux) >= 32000) {
+    if (parseFloat(data.lux) >= 45000) {
       luxDesc = "Sunlight";
       luxIcon = <IoMdSunny className='status-icon' />;
-    } else if (parseFloat(data.lux) >= 10000) {
+    } else if (parseFloat(data.lux) > 20000) {
       luxDesc = "Cloudy";
       luxIcon = <WiDaySunny className='status-icon' />;
     } else if (parseFloat(data.lux) >= 1000) {
