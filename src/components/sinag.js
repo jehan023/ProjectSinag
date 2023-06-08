@@ -47,7 +47,7 @@ function Sinag() {
         <button className={(node === 'SL1' && status === 0) ? 'led-button pressed' : 'led-button'} onClick={() => { handleToggleButton('SL1', 0) }}>OFF</button>
       </div>
       SL2
-      <div className='sl-btn-wrapper d-flex flex-row my-3'>
+      <div className='sl-btn-wrapper d-flex flex-row'>
         <button className={(node === 'SL2' && status === 1) ? 'led-button pressed' : 'led-button'} onClick={() => { handleToggleButton('SL2', 1) }}>ON</button>
         <button className={(node === 'SL2' && status === 0) ? 'led-button pressed' : 'led-button'} onClick={() => { handleToggleButton('SL2', 0) }}>OFF</button>
       </div>
@@ -57,7 +57,7 @@ function Sinag() {
         <button className={(node === 'SL3' && status === 0) ? 'led-button pressed' : 'led-button'} onClick={() => { handleToggleButton('SL3', 0) }}>OFF</button>
       </div>
       <div>
-        <p>{reply}</p>
+        <p className='mt-3'>{reply}</p>
       </div>
     </div>
   )
