@@ -1837,6 +1837,10 @@ body {
   .sinag-container {
     margin: 20% 10%;
     display: block;
+    p {
+      color: black;
+      font-weight: bold;
+    }
     .sl-btn-wrapper {
       border-bottom: 2px solid black;
       padding: 20px;
@@ -1849,6 +1853,7 @@ body {
       border-radius: 20px;
       text-align: center;
       width: 130px;
+      height: 50px !important;
       font-family: "Gotham Bold";
       animation: 0.3s ease-in-out;
       height: 100px;
