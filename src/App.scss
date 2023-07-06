@@ -537,6 +537,7 @@ body {
       font-family: "Gotham Bold";
       font-size: 1rem;
       width: 100%;
+      // width: 200px !important;
       height: 40px;
     }
     .report-from-btn-active {
@@ -550,6 +551,7 @@ body {
     .generate {
       background-color: #006f3c;
       color: white;
+      width: 200px !important;
     }
     .generate:hover {
       background-color: #bf212f;
@@ -1750,6 +1752,7 @@ body {
     .report-btn-section {
       .report-download-btn {
         font-size: 65%;
+        width: 100px !important;
       }
     }
     .anomaly-report-containter {
