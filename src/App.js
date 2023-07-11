@@ -92,7 +92,9 @@ function App() {
     setPage(Page);
   };
   const handleDash = (Dash) => {
-    setDashboard(Dash);
+    if (!loading){
+      setDashboard(Dash);
+    }
   };
 
   if (fetchData.length === 1) {
@@ -182,7 +184,6 @@ function App() {
             <button className={dashboard === 'profile' ? 'link-btn link-active' : 'link-btn'} onClick={() => { handleDash('profile') }}>Profile</button>
             <button className={dashboard === 'status' ? 'link-btn link-active' : 'link-btn'} onClick={() => { handleDash('status') }}>Status</button>
             <button className={dashboard === 'analysis' ? 'link-btn link-active' : 'link-btn'} onClick={() => { handleDash('analysis') }}>Analysis</button>
-
           </div>
           <Clock
             className='clock-text'
