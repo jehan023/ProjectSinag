@@ -40,15 +40,15 @@ function Reports() {
     const AnomalyType = (type) => {
         switch (type) {
             case 1:
-                return 'LED is on during daytime';
+                return 'LED is ON during daytime';
             case 2:
                 return 'Auto switch mode not working';
             case 3:
                 return 'Solar panel no output during daytime';
             case 4:
-                return 'Empty battery at night-time';
+                return 'Empty battery';
             case 5:
-                return 'LED is off during night-time';
+                return 'LED is OFF during night-time';
             case 6:
                 return 'Auto switch mode not working; LED is off';
             default:

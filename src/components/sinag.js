@@ -20,7 +20,7 @@ function Sinag() {
     const node = receiver; // Replace with the value you want to send
     const status = state; // Replace with the value you want to send
 
-    const url = `https://script.google.com/macros/s/AKfycbwe7GLMVh2T0qo4xOJz-cIvsL7GrW4szyFI7WCyb6BAzrTJr-8ALHALjVHRXCiPdEnz/exec`;
+    const url = `https://script.google.com/macros/s/AKfycbzXBBvYEBML4imYCT_Q2WBUNZB6G5LbivqAF6JVdCD_xarVsfglnTZ64foGqhjQHVRp/exec`;
 
     axios
       .get(url, {
