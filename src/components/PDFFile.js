@@ -157,7 +157,7 @@ const PDFFile = (props) => {
       case 3:
         return 'Solar panel no output during daytime';
       case 4:
-        return 'Battery is drained fast; empty battery at night-time';
+        return 'Empty battery';
       case 5:
         return 'LED is OFF during night-time';
       default:
@@ -318,7 +318,7 @@ const PDFFile = (props) => {
             <Text style={styles.li}>Seek professional assistance: If the issue persists or if there are complex technical problems, consult a professional technician or contact the manufacturer for further guidance.</Text>
           </View>
 
-          <Text style={styles.ulHeader}>Suggested actions for the 'Battery is drained fast; empty battery at night-time':</Text>
+          <Text style={styles.ulHeader}>Suggested actions for the 'Empty battery':</Text>
           <View style={styles.ul}>
             <Text style={styles.text}>1.</Text>
             <Text style={styles.li}>Check power supply: Ensure that the solar panel is receiving sufficient sunlight during the day to charge the battery effectively.</Text>
