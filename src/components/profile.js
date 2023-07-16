@@ -38,7 +38,7 @@ function Profile(props) {
         <p><b>Location:</b> {streetlight.location}</p>
         <p><b>Transceiver:</b> {streetlight.transceiver}</p>
         <p><b>Gateway:</b> {streetlight.gateway}</p>
-        <p><b>Installation Date:</b> {streetlight.isntallation_date}</p>
+        <p><b>Installation Date:</b> {streetlight.installation_date}</p>
         <p><b>Last Maintenance:</b> {streetlight.last_maintenance}</p>
         <div className='line-break mb-3'></div>
         <p><b>Solar Panel:</b> {streetlight.pvPanel}</p>
