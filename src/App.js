@@ -4,7 +4,7 @@ import './App.scss';
 import Logo from './images/Sinag-Logo.png';
 import Clock from 'react-live-clock';
 import ReactLoading from 'react-loading';
-import LoadDataFromSheet from './loadDataFromSheet';
+// import LoadDataFromSheet from './loadDataFromSheet';
 import axios from 'axios';
 import usermanual from './files/SINAG_UserManual.pdf';
 
@@ -29,32 +29,60 @@ function App() {
   const [error, setError] = useState(null);
 
   const [fetchData, setFetchData] = useState([]);
+  const [fetchProfile, setFetchProfile] = useState([]);
 
-  const options = [
-    {
-      list: 'SL1', value: 'SL1', label: 'Streetlight 1', location: 'Patola St., Brgy BF International Village, Las Piñas City | 1740',
-      battCapacity: '3.2V 20AH LiFePO4', pvPanel: '25W 6V Polycrystalline Silicon', lamp: '250W',
-    },
-    {
-      list: 'SL2', value: 'SL2', label: 'Streetlight 2', location: 'Patola St., Brgy BF International Village, Las Piñas City | 1740',
-      battCapacity: '3.2V 20AH LiFePO4', pvPanel: '25W 6V Polycrystalline Silicon', lamp: '250W',
-    },
-    {
-      list: 'SL3', value: 'SL3', label: 'Streetlight 3', location: 'Patola St., Brgy BF International Village, Las Piñas City | 1740',
-      battCapacity: '3.2V 20AH LiFePO4', pvPanel: '25W 6V Polycrystalline Silicon', lamp: '250W',
-    },
+  // const options = [
+  //   {
+  //     list: 'SL1', value: 'SL1', label: 'Streetlight 1', location: 'Patola St., Brgy BF International Village, Las Piñas City | 1740',
+  //     battCapacity: '3.2V 20AH LiFePO4', pvPanel: '25W 6V Polycrystalline Silicon', lamp: '250W',
+  //   },
+  //   {
+  //     list: 'SL2', value: 'SL2', label: 'Streetlight 2', location: 'Patola St., Brgy BF International Village, Las Piñas City | 1740',
+  //     battCapacity: '3.2V 20AH LiFePO4', pvPanel: '25W 6V Polycrystalline Silicon', lamp: '250W',
+  //   },
+  //   {
+  //     list: 'SL3', value: 'SL3', label: 'Streetlight 3', location: 'Patola St., Brgy BF International Village, Las Piñas City | 1740',
+  //     battCapacity: '3.2V 20AH LiFePO4', pvPanel: '25W 6V Polycrystalline Silicon', lamp: '250W',
+  //   },
+  // ];
+
+  const devices = [
+    { list: 'SL1', value: 'SL1', label: 'Streetlight 1' },
+    { list: 'SL2', value: 'SL2', label: 'Streetlight 2' },
+    { list: 'SL3', value: 'SL3', label: 'Streetlight 3' },
   ];
 
-  const [selectedValue, setSelectedValue] = useState(options[0].value);
+  const options = fetchProfile.slice(1).map(row => ({
+    list: row[0],
+    value: row[1],
+    label: row[2],
+    location: row[3],
+    transceiver: row[4],
+    gateway: row[5],
+    installation_date: row[6],
+    last_maintenance: row[7],
+    pvPanel: row[8],
+    battCapacity: row[9],
+    lamp: row[10]
+  }));
+
+  const [selectedValue, setSelectedValue] = useState(devices[0].value);
   const getObjectByValue = (value) => {
     return options.find((obj) => obj.value === value);
   };
   const streetlight = getObjectByValue(selectedValue);
 
+  useEffect(() => {
+    if (selectedValue) {
+      callProfile();
+    }
+  }, [selectedValue]);
+
   const refreshInterval = 150000; // Refresh every 3mins
   useEffect(() => {
     if (selectedValue) {
       callAPI(); // Initial API call
+      // callProfile();
 
       const intervalId = setInterval(() => {
         callAPI(); // Call API at regular intervals
@@ -85,6 +113,26 @@ function App() {
     }
   };
 
+  const callProfile = () => {
+    try {
+      setLoading(true);
+      axios.get(`https://sheets.googleapis.com/v4/spreadsheets/1yg8ET-05HTyTipGyvNVDZ1T3WuOBc1vNwwz4N8ifPRA/values/Profile!A1:K`,
+        {
+          params: {
+            key: 'AIzaSyDfmsbf3ilW3D0fXotyabO1pFLX8CrsKws'
+          }
+        }).then(response => {
+          setFetchProfile(response.data.values);
+        }).catch(error => {
+          setError(error);
+        }).finally(() => {
+          // setLoading(false);
+        });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handleChange = (e) => {
     setSelectedValue(e.target.value);
   };
@@ -92,7 +140,7 @@ function App() {
     setPage(Page);
   };
   const handleDash = (Dash) => {
-    if (!loading){
+    if (!loading) {
       setDashboard(Dash);
     }
   };
