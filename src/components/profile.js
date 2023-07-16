@@ -36,10 +36,10 @@ function Profile(props) {
       <div className='profile-card p-4 mt-4'>
         <p><b>Name:</b> {streetlight.label} ({streetlight.value})</p>
         <p><b>Location:</b> {streetlight.location}</p>
-        <p><b>Transceiver:</b> LoRa SX1278 433MHz</p>
-        <p><b>Gateway:</b> NodeMCU ESP8266 WiFi</p>
-        <p><b>Installation Date:</b> May 28, 2023</p>
-        <p><b>Last Maintenance:</b> TBA</p>
+        <p><b>Transceiver:</b> {streetlight.transceiver}</p>
+        <p><b>Gateway:</b> {streetlight.gateway}</p>
+        <p><b>Installation Date:</b> {streetlight.isntallation_date}</p>
+        <p><b>Last Maintenance:</b> {streetlight.last_maintenance}</p>
         <div className='line-break mb-3'></div>
         <p><b>Solar Panel:</b> {streetlight.pvPanel}</p>
         <p><b>Battery:</b> {streetlight.battCapacity}</p>
