@@ -248,112 +248,113 @@ function Overview(props, { setHumidityValue }) {
         <h3 className='my-0'>System Overview</h3>
       </div>
 
-      <div className='overview-container-wrapper'>
-        {/** Left side of the screen section*/}
-        <div className='sl-overview-container'>
+      {data ?
+        <div className='overview-container-wrapper'>
+          {/** Left side of the screen section*/}
+          <div className='sl-overview-container'>
 
-          <div className='sl-wrapper mb-3'>
-            <div className='sl-overview-card'>
-              <div className='card-content'>
-                <FaSolarPanel className='sl-icon' />
-                <h3>{GetEnergyYield()}Wh</h3>
-                <p>Today's Yield</p>
+            <div className='sl-wrapper mb-3'>
+              <div className='sl-overview-card'>
+                <div className='card-content'>
+                  <FaSolarPanel className='sl-icon' />
+                  <h3>{GetEnergyYield()}Wh</h3>
+                  <p>Today's Yield</p>
+                </div>
               </div>
-            </div>
-            <div className='sl-overview-card'>
-              <div className='card-content'>
-                <GiSolarPower className='sl-icon' />
-                <h3>{GetHighestYield()}Wh</h3>
-                <p>Highest Yield</p>
+              <div className='sl-overview-card'>
+                <div className='card-content'>
+                  <GiSolarPower className='sl-icon' />
+                  <h3>{GetHighestYield()}Wh</h3>
+                  <p>Highest Yield</p>
+                </div>
               </div>
-            </div>
-            <div className='sl-overview-card'>
-              <div className='card-content'>
-                <FaCarBattery className='sl-icon' />
-                {data ? <h3>{data.battCapacity.split(' ')[1]}</h3> : <h3>20AH</h3>}
-                <p>Battery Capacity</p>
+              <div className='sl-overview-card'>
+                <div className='card-content'>
+                  <FaCarBattery className='sl-icon' />
+                  {data ? <h3>{data.battCapacity.split(' ')[1]}</h3> : <h3>20AH</h3>}
+                  <p>Battery Capacity</p>
+                </div>
               </div>
-            </div>
-            <div className='sl-overview-card'>
-              <div className='card-content'>
-                <IoBatteryCharging className='sl-icon' />
-                <h3>{isNaN(avgCharging) ? 0.00 : avgCharging}hr</h3>
-                <p>Avg. Charging Time</p>
+              <div className='sl-overview-card'>
+                <div className='card-content'>
+                  <IoBatteryCharging className='sl-icon' />
+                  <h3>{isNaN(avgCharging) ? 0.00 : avgCharging}hr</h3>
+                  <p>Avg. Charging Time</p>
+                </div>
               </div>
-            </div>
-            <div className='sl-overview-card'>
-              <div className='card-content'>
-                <TbBulb className='sl-icon' />
-                <h3>{isNaN(avgON) ? 0.00 : avgON}hr</h3>
-                <p>Avg. ON Time</p>
+              <div className='sl-overview-card'>
+                <div className='card-content'>
+                  <TbBulb className='sl-icon' />
+                  <h3>{isNaN(avgON) ? 0.00 : avgON}hr</h3>
+                  <p>Avg. ON Time</p>
+                </div>
               </div>
-            </div>
-            <div className='sl-overview-card'>
-              <div className='card-content'>
-                <IoIosBulb className='sl-icon' />
-                <h3>{data.lamp}</h3>
-                <p>LED Lamp</p>
+              <div className='sl-overview-card'>
+                <div className='card-content'>
+                  <IoIosBulb className='sl-icon' />
+                  {data ? <h3>{data.lamp}</h3> : <h3>250W</h3>}
+                  <p>LED Lamp</p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        {/** Right side of the screen section*/}
+          {/** Right side of the screen section*/}
 
-        <div className='sl-temp-container'>
-          {/** Details for temp and time section*/}
-          <div className='sl-wrapper'>
-            <div className='weather-wrapper'>
-              <div className='icon-wrapper'>
-                <BiCloud className='weather-icon' />
+          <div className='sl-temp-container'>
+            {/** Details for temp and time section*/}
+            <div className='sl-wrapper'>
+              <div className='weather-wrapper'>
+                <div className='icon-wrapper'>
+                  <BiCloud className='weather-icon' />
+                </div>
+
+                <div className='temp-container'>
+                  <h2 className='temp-value'>{temp}°C</h2>
+                  <h2 className='device-title'>{location}</h2>
+                  <h6><i>{weather}</i></h6>
+                  {/* <p>{location}</p> */}
+                </div>
               </div>
 
-              <div className='temp-container'>
-                <h2 className='temp-value'>{temp}°C</h2>
-                <h2 className='device-title'>{location}</h2>
-                <h6><i>{weather}</i></h6>
-                {/* <p>{location}</p> */}
-              </div>
-            </div>
-
-            <div className='weather-container'>
-              <div className="overview-content-container sunrise-container">
-                <div className="content-wrap">
-                  <div className="icon-wrapper">
-                    <BsSunrise className="s-icon" />
+              <div className='weather-container'>
+                <div className="overview-content-container sunrise-container">
+                  <div className="content-wrap">
+                    <div className="icon-wrapper">
+                      <BsSunrise className="s-icon" />
+                    </div>
+                  </div>
+                  <div className="content-wrap">
+                    <h2 className="sunrise-value">{sunrise}</h2>
+                    <h6 className='gmt'>(GMT+8)</h6>
+                    <p>Sunrise</p>
                   </div>
                 </div>
-                <div className="content-wrap">
-                  <h2 className="sunrise-value">{sunrise}</h2>
-                  <h6 className='gmt'>(GMT+8)</h6>
-                  <p>Sunrise</p>
-                </div>
-              </div>
-              <div className="overview-content-container sunset-container">
-                <div className="content-wrap">
-                  <div className="icon-wrapper">
-                    <BsSunset className="s-icon" />
+                <div className="overview-content-container sunset-container">
+                  <div className="content-wrap">
+                    <div className="icon-wrapper">
+                      <BsSunset className="s-icon" />
+                    </div>
+                  </div>
+                  <div className="content-wrap">
+                    <h2 className="sunset-value">{sunset}</h2>
+                    <h6 className='gmt'>(GMT+8)</h6>
+                    <p>Sunset</p>
                   </div>
                 </div>
-                <div className="content-wrap">
-                  <h2 className="sunset-value">{sunset}</h2>
-                  <h6 className='gmt'>(GMT+8)</h6>
-                  <p>Sunset</p>
-                </div>
               </div>
             </div>
-          </div>
 
-          {/** Details for devices and location section*/}
-          <div className='dv-container'>
-            <div>
-              <h2 className='device-title'>Location</h2>
-              <p className='location-txt'>{data.location}</p>
+            {/** Details for devices and location section*/}
+            <div className='dv-container'>
+              <div>
+                <h2 className='device-title'>Location</h2>
+                <p className='location-txt'>{data.location}</p>
+              </div>
+
             </div>
-
           </div>
-        </div>
-      </div>
+        </div> : ''}
     </div>
   )
 }
